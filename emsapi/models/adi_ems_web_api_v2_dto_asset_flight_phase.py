@@ -24,7 +24,7 @@ class AdiEmsWebApiV2DtoAssetFlightPhase(Model):
         'description': {'key': 'description', 'type': 'str'},
     }
 
-    def __init__(self, id=None, description=None):
-        super(AdiEmsWebApiV2DtoAssetFlightPhase, self).__init__()
-        self.id = id
-        self.description = description
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAssetFlightPhase, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.description = kwargs.get('description', None)

@@ -19,6 +19,6 @@ class AdiEmsWebSharedTableauRestViews(Model):
         'view': {'key': 'view', 'type': '[AdiEmsWebSharedTableauRestView]'},
     }
 
-    def __init__(self, view=None):
-        super(AdiEmsWebSharedTableauRestViews, self).__init__()
-        self.view = view
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestViews, self).__init__(**kwargs)
+        self.view = kwargs.get('view', None)

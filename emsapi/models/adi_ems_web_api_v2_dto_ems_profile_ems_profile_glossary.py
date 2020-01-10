@@ -37,11 +37,11 @@ class AdiEmsWebApiV2DtoEmsProfileEmsProfileGlossary(Model):
         'glossary_items': {'key': 'glossaryItems', 'type': '[AdiEmsWebApiV2DtoEmsProfileGlossaryItem]'},
     }
 
-    def __init__(self, glossary_version=None, profile_id=None, profile_guid=None, current_version=None, current_version_guid=None, glossary_items=None):
-        super(AdiEmsWebApiV2DtoEmsProfileEmsProfileGlossary, self).__init__()
-        self.glossary_version = glossary_version
-        self.profile_id = profile_id
-        self.profile_guid = profile_guid
-        self.current_version = current_version
-        self.current_version_guid = current_version_guid
-        self.glossary_items = glossary_items
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoEmsProfileEmsProfileGlossary, self).__init__(**kwargs)
+        self.glossary_version = kwargs.get('glossary_version', None)
+        self.profile_id = kwargs.get('profile_id', None)
+        self.profile_guid = kwargs.get('profile_guid', None)
+        self.current_version = kwargs.get('current_version', None)
+        self.current_version_guid = kwargs.get('current_version_guid', None)
+        self.glossary_items = kwargs.get('glossary_items', None)

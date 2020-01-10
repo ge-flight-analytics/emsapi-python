@@ -25,8 +25,8 @@ class AdiEmsWebApiV2DtoNavigationNavigationProcedureSegmentNavaid(Model):
         'distance': {'key': 'distance', 'type': 'float'},
     }
 
-    def __init__(self, navaid_id=None, bearing=None, distance=None):
-        super(AdiEmsWebApiV2DtoNavigationNavigationProcedureSegmentNavaid, self).__init__()
-        self.navaid_id = navaid_id
-        self.bearing = bearing
-        self.distance = distance
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoNavigationNavigationProcedureSegmentNavaid, self).__init__(**kwargs)
+        self.navaid_id = kwargs.get('navaid_id', None)
+        self.bearing = kwargs.get('bearing', None)
+        self.distance = kwargs.get('distance', None)

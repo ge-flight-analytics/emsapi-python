@@ -11,8 +11,10 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaSelectColumn(Model):
     """Represents a column of data that can be selected in a data source query.
 
-    :param field_id: The unique string identifier of the field to select in a
-     query
+    All required parameters must be populated in order to send to Azure.
+
+    :param field_id: Required. The unique string identifier of the field to
+     select in a query
     :type field_id: str
     :param aggregate: An optional aggregate operation to perform on the
      column. Omission of this property results in no aggregate
@@ -36,8 +38,8 @@ class AdiEmsWebApiV2DtoSchemaSelectColumn(Model):
         'format': {'key': 'format', 'type': 'str'},
     }
 
-    def __init__(self, field_id, aggregate=None, format=None):
-        super(AdiEmsWebApiV2DtoSchemaSelectColumn, self).__init__()
-        self.field_id = field_id
-        self.aggregate = aggregate
-        self.format = format
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaSelectColumn, self).__init__(**kwargs)
+        self.field_id = kwargs.get('field_id', None)
+        self.aggregate = kwargs.get('aggregate', None)
+        self.format = kwargs.get('format', None)

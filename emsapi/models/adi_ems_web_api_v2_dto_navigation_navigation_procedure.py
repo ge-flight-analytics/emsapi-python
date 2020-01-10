@@ -39,12 +39,12 @@ class AdiEmsWebApiV2DtoNavigationNavigationProcedure(Model):
         'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self, id=None, cycle_date=None, emergency_safe_altitude=None, string=None, transitional_altitude=None, transitional_level=None, type=None):
-        super(AdiEmsWebApiV2DtoNavigationNavigationProcedure, self).__init__()
-        self.id = id
-        self.cycle_date = cycle_date
-        self.emergency_safe_altitude = emergency_safe_altitude
-        self.string = string
-        self.transitional_altitude = transitional_altitude
-        self.transitional_level = transitional_level
-        self.type = type
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoNavigationNavigationProcedure, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.cycle_date = kwargs.get('cycle_date', None)
+        self.emergency_safe_altitude = kwargs.get('emergency_safe_altitude', None)
+        self.string = kwargs.get('string', None)
+        self.transitional_altitude = kwargs.get('transitional_altitude', None)
+        self.transitional_level = kwargs.get('transitional_level', None)
+        self.type = kwargs.get('type', None)

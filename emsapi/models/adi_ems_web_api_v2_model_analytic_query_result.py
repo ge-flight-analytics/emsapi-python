@@ -11,11 +11,13 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2ModelAnalyticQueryResult(Model):
     """Represents the time-series data result of an analytic query.
 
-    :param offsets: An array of query result offsets, each representing
-     seconds from the start of the data
+    All required parameters must be populated in order to send to Azure.
+
+    :param offsets: Required. An array of query result offsets, each
+     representing seconds from the start of the data
     :type offsets: list[float]
-    :param results: An array of analytic result values for each of the
-     analytics selected in the query containing values for
+    :param results: Required. An array of analytic result values for each of
+     the analytics selected in the query containing values for
      each offset
     :type results:
      list[~emsapi.models.AdiEmsWebApiV2ModelAnalyticAnalyticResult]
@@ -31,7 +33,7 @@ class AdiEmsWebApiV2ModelAnalyticQueryResult(Model):
         'results': {'key': 'results', 'type': '[AdiEmsWebApiV2ModelAnalyticAnalyticResult]'},
     }
 
-    def __init__(self, offsets, results):
-        super(AdiEmsWebApiV2ModelAnalyticQueryResult, self).__init__()
-        self.offsets = offsets
-        self.results = results
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelAnalyticQueryResult, self).__init__(**kwargs)
+        self.offsets = kwargs.get('offsets', None)
+        self.results = kwargs.get('results', None)

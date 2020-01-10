@@ -11,11 +11,13 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaQueryResultHeader(Model):
     """Represents a header column in data source query result.
 
-    :param id: The unique string identifier of the field associated with this
-     column
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The unique string identifier of the field associated
+     with this column
     :type id: str
-    :param name: The user-friendly display name of the field associated with
-     this column
+    :param name: Required. The user-friendly display name of the field
+     associated with this column
     :type name: str
     :param units: The units of values of the field associated with this
      column. This value may be empty if not applicable
@@ -33,8 +35,8 @@ class AdiEmsWebApiV2DtoSchemaQueryResultHeader(Model):
         'units': {'key': 'units', 'type': 'str'},
     }
 
-    def __init__(self, id, name, units=None):
-        super(AdiEmsWebApiV2DtoSchemaQueryResultHeader, self).__init__()
-        self.id = id
-        self.name = name
-        self.units = units
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaQueryResultHeader, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.units = kwargs.get('units', None)

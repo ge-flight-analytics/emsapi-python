@@ -11,10 +11,14 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherWeatherReport(Model):
     """Represents TAF and METAR weather reports collected by an EMS system.
 
-    :param taf_reports: A list of collected TAF reports from an EMS system
+    All required parameters must be populated in order to send to Azure.
+
+    :param taf_reports: Required. A list of collected TAF reports from an EMS
+     system
     :type taf_reports:
      list[~emsapi.models.AdiEmsWebApiV2DtoWeatherTafTafReport]
-    :param metar_reports: A list of collected METAR reports from an EMS system
+    :param metar_reports: Required. A list of collected METAR reports from an
+     EMS system
     :type metar_reports:
      list[~emsapi.models.AdiEmsWebApiV2DtoWeatherMetarMetarReport]
     """
@@ -29,7 +33,7 @@ class AdiEmsWebApiV2DtoWeatherWeatherReport(Model):
         'metar_reports': {'key': 'metarReports', 'type': '[AdiEmsWebApiV2DtoWeatherMetarMetarReport]'},
     }
 
-    def __init__(self, taf_reports, metar_reports):
-        super(AdiEmsWebApiV2DtoWeatherWeatherReport, self).__init__()
-        self.taf_reports = taf_reports
-        self.metar_reports = metar_reports
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherWeatherReport, self).__init__(**kwargs)
+        self.taf_reports = kwargs.get('taf_reports', None)
+        self.metar_reports = kwargs.get('metar_reports', None)

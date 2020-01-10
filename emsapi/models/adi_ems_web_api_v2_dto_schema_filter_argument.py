@@ -11,10 +11,13 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaFilterArgument(Model):
     """Represents an argument in a filter.
 
-    :param type: The type of the filter argument, describing the role of the
-     argument. Possible values include: 'none', 'filter', 'field', 'constant'
+    All required parameters must be populated in order to send to Azure.
+
+    :param type: Required. The type of the filter argument, describing the
+     role of the argument. Possible values include: 'none', 'filter', 'field',
+     'constant'
     :type type: str or ~emsapi.models.enum
-    :param value: The value represented by the filter argument.
+    :param value: Required. The value represented by the filter argument.
     :type value: object
     """
 
@@ -28,7 +31,7 @@ class AdiEmsWebApiV2DtoSchemaFilterArgument(Model):
         'value': {'key': 'value', 'type': 'object'},
     }
 
-    def __init__(self, type, value):
-        super(AdiEmsWebApiV2DtoSchemaFilterArgument, self).__init__()
-        self.type = type
-        self.value = value
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaFilterArgument, self).__init__(**kwargs)
+        self.type = kwargs.get('type', None)
+        self.value = kwargs.get('value', None)

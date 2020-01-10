@@ -13,7 +13,10 @@ class AdiEmsWebApiV2DtoWeatherMetarRunwayVisualRange(Model):
     the distance over which a pilot
     can see the runway surface markings.
 
-    :param runway: The name/number/approach direction identifying the runway
+    All required parameters must be populated in order to send to Azure.
+
+    :param runway: Required. The name/number/approach direction identifying
+     the runway
     :type runway: str
     :param visibility_primary: The primary runway visibility distance in feet.
      If a variable range is set, this value describes the
@@ -49,11 +52,11 @@ class AdiEmsWebApiV2DtoWeatherMetarRunwayVisualRange(Model):
         'trend': {'key': 'trend', 'type': 'str'},
     }
 
-    def __init__(self, runway, visibility_primary=None, visibility_primary_qualifier=None, visibility_variable=None, visibility_variable_qualifier=None, trend=None):
-        super(AdiEmsWebApiV2DtoWeatherMetarRunwayVisualRange, self).__init__()
-        self.runway = runway
-        self.visibility_primary = visibility_primary
-        self.visibility_primary_qualifier = visibility_primary_qualifier
-        self.visibility_variable = visibility_variable
-        self.visibility_variable_qualifier = visibility_variable_qualifier
-        self.trend = trend
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherMetarRunwayVisualRange, self).__init__(**kwargs)
+        self.runway = kwargs.get('runway', None)
+        self.visibility_primary = kwargs.get('visibility_primary', None)
+        self.visibility_primary_qualifier = kwargs.get('visibility_primary_qualifier', None)
+        self.visibility_variable = kwargs.get('visibility_variable', None)
+        self.visibility_variable_qualifier = kwargs.get('visibility_variable_qualifier', None)
+        self.trend = kwargs.get('trend', None)

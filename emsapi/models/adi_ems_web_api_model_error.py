@@ -11,11 +11,13 @@ from msrest.serialization import Model
 class AdiEmsWebApiModelError(Model):
     """AdiEmsWebApiModelError.
 
-    :param message:
+    All required parameters must be populated in order to send to Azure.
+
+    :param message: Required.
     :type message: str
-    :param message_detail:
+    :param message_detail: Required.
     :type message_detail: str
-    :param unexpected:
+    :param unexpected: Required.
     :type unexpected: bool
     """
 
@@ -31,8 +33,8 @@ class AdiEmsWebApiModelError(Model):
         'unexpected': {'key': 'unexpected', 'type': 'bool'},
     }
 
-    def __init__(self, message, message_detail, unexpected):
-        super(AdiEmsWebApiModelError, self).__init__()
-        self.message = message
-        self.message_detail = message_detail
-        self.unexpected = unexpected
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiModelError, self).__init__(**kwargs)
+        self.message = kwargs.get('message', None)
+        self.message_detail = kwargs.get('message_detail', None)
+        self.unexpected = kwargs.get('unexpected', None)

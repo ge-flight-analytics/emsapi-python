@@ -25,7 +25,7 @@ class AdiEmsWebApiV2DtoTrajectoryConfiguration(Model):
         'description': {'key': 'description', 'type': 'str'},
     }
 
-    def __init__(self, trajectory_id=None, description=None):
-        super(AdiEmsWebApiV2DtoTrajectoryConfiguration, self).__init__()
-        self.trajectory_id = trajectory_id
-        self.description = description
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoTrajectoryConfiguration, self).__init__(**kwargs)
+        self.trajectory_id = kwargs.get('trajectory_id', None)
+        self.description = kwargs.get('description', None)

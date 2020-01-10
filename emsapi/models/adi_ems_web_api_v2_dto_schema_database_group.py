@@ -11,9 +11,11 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaDatabaseGroup(Model):
     """Represents a folder in the database tree of an EMS installation.
 
-    :param id: The unique string identifier for the database group
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The unique string identifier for the database group
     :type id: str
-    :param name: The display name for the database group
+    :param name: Required. The display name for the database group
     :type name: str
     :param groups: An ordered listing of child database groups contained in
      this group
@@ -35,9 +37,9 @@ class AdiEmsWebApiV2DtoSchemaDatabaseGroup(Model):
         'databases': {'key': 'databases', 'type': '[AdiEmsWebApiV2DtoSchemaDatabase]'},
     }
 
-    def __init__(self, id, name, groups=None, databases=None):
-        super(AdiEmsWebApiV2DtoSchemaDatabaseGroup, self).__init__()
-        self.id = id
-        self.name = name
-        self.groups = groups
-        self.databases = databases
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaDatabaseGroup, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.groups = kwargs.get('groups', None)
+        self.databases = kwargs.get('databases', None)

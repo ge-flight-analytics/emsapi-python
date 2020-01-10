@@ -11,17 +11,19 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaQueryResult(Model):
     """Represents the tabular results of a data source query.
 
-    :param header: An ordered list of header column information, describing
-     the fields included in the results and matching
+    All required parameters must be populated in order to send to Azure.
+
+    :param header: Required. An ordered list of header column information,
+     describing the fields included in the results and matching
      the order of columns in the resulting data rows
     :type header:
      list[~emsapi.models.AdiEmsWebApiV2DtoSchemaQueryResultHeader]
-    :param rows: An array of arrays representing the resulting data rows of a
-     query. Each inner array represents a single
+    :param rows: Required. An array of arrays representing the resulting data
+     rows of a query. Each inner array represents a single
      results row
     :type rows: list[list[object]]
-    :param is_partial_result: Indicates whether the rows returned are a
-     partial query result because the maximum amount of rows that can
+    :param is_partial_result: Required. Indicates whether the rows returned
+     are a partial query result because the maximum amount of rows that can
      be returned has been reached.
     :type is_partial_result: bool
     """
@@ -38,8 +40,8 @@ class AdiEmsWebApiV2DtoSchemaQueryResult(Model):
         'is_partial_result': {'key': 'isPartialResult', 'type': 'bool'},
     }
 
-    def __init__(self, header, rows, is_partial_result):
-        super(AdiEmsWebApiV2DtoSchemaQueryResult, self).__init__()
-        self.header = header
-        self.rows = rows
-        self.is_partial_result = is_partial_result
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaQueryResult, self).__init__(**kwargs)
+        self.header = kwargs.get('header', None)
+        self.rows = kwargs.get('rows', None)
+        self.is_partial_result = kwargs.get('is_partial_result', None)

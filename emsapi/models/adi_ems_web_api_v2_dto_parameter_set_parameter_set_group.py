@@ -29,9 +29,9 @@ class AdiEmsWebApiV2DtoParameterSetParameterSetGroup(Model):
         'sets': {'key': 'sets', 'type': '[AdiEmsWebApiV2DtoParameterSetParameterSet]'},
     }
 
-    def __init__(self, name=None, group_id=None, groups=None, sets=None):
-        super(AdiEmsWebApiV2DtoParameterSetParameterSetGroup, self).__init__()
-        self.name = name
-        self.group_id = group_id
-        self.groups = groups
-        self.sets = sets
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoParameterSetParameterSetGroup, self).__init__(**kwargs)
+        self.name = kwargs.get('name', None)
+        self.group_id = kwargs.get('group_id', None)
+        self.groups = kwargs.get('groups', None)
+        self.sets = kwargs.get('sets', None)

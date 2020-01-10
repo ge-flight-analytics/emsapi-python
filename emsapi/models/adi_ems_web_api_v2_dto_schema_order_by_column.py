@@ -12,8 +12,10 @@ class AdiEmsWebApiV2DtoSchemaOrderByColumn(Model):
     """Represents a column of data that can be used in a order-by clause of a data
     source query.
 
-    :param field_id: The unique string identifier of the field to use in a
-     order-by clause of a query
+    All required parameters must be populated in order to send to Azure.
+
+    :param field_id: Required. The unique string identifier of the field to
+     use in a order-by clause of a query
     :type field_id: str
     :param aggregate: An optional aggregate operation to perform on the
      column. Omission of this property results in no aggregate
@@ -36,8 +38,8 @@ class AdiEmsWebApiV2DtoSchemaOrderByColumn(Model):
         'order': {'key': 'order', 'type': 'str'},
     }
 
-    def __init__(self, field_id, aggregate=None, order=None):
-        super(AdiEmsWebApiV2DtoSchemaOrderByColumn, self).__init__()
-        self.field_id = field_id
-        self.aggregate = aggregate
-        self.order = order
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaOrderByColumn, self).__init__(**kwargs)
+        self.field_id = kwargs.get('field_id', None)
+        self.aggregate = kwargs.get('aggregate', None)
+        self.order = kwargs.get('order', None)

@@ -11,11 +11,14 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoProfileProfileResultComment(Model):
     """Encapsulates information about a comment.
 
-    :param user: The user associated with the comment
+    All required parameters must be populated in order to send to Azure.
+
+    :param user: Required. The user associated with the comment
     :type user: str
-    :param date_property: The date and time the comment was added (UTC)
+    :param date_property: Required. The date and time the comment was added
+     (UTC)
     :type date_property: datetime
-    :param comment: The text of the comment
+    :param comment: Required. The text of the comment
     :type comment: str
     """
 
@@ -31,8 +34,8 @@ class AdiEmsWebApiV2DtoProfileProfileResultComment(Model):
         'comment': {'key': 'comment', 'type': 'str'},
     }
 
-    def __init__(self, user, date_property, comment):
-        super(AdiEmsWebApiV2DtoProfileProfileResultComment, self).__init__()
-        self.user = user
-        self.date_property = date_property
-        self.comment = comment
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfileResultComment, self).__init__(**kwargs)
+        self.user = kwargs.get('user', None)
+        self.date_property = kwargs.get('date_property', None)
+        self.comment = kwargs.get('comment', None)

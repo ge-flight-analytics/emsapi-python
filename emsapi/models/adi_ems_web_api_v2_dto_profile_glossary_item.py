@@ -11,14 +11,16 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
     """Represents a single entry for an item in a profile glossary.
 
-    :param record_type: A value representing a profile glossary entries record
-     type. Possible values include: 'measurement', 'timepoint', 'event',
-     'interval'
+    All required parameters must be populated in order to send to Azure.
+
+    :param record_type: Required. A value representing a profile glossary
+     entries record type. Possible values include: 'measurement', 'timepoint',
+     'event', 'interval'
     :type record_type: str or ~emsapi.models.enum
-    :param scope: A value representing the scope of the item. Possible values
-     include: 'default', 'eventSpecific', 'eventGlobal'
+    :param scope: Required. A value representing the scope of the item.
+     Possible values include: 'default', 'eventSpecific', 'eventGlobal'
     :type scope: str or ~emsapi.models.enum
-    :param item_id: A unique integer ID for the item
+    :param item_id: Required. A unique integer ID for the item
     :type item_id: int
     :param event_type_id: The event type ID of the item - this is only
      available for valid event types
@@ -26,9 +28,9 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
     :param data_type: A value representing the data type of the entry.
      Possible values include: 'floatingPoint'
     :type data_type: str or ~emsapi.models.enum
-    :param logical_id: A unique ID defining the item's logical ID
+    :param logical_id: Required. A unique ID defining the item's logical ID
     :type logical_id: str
-    :param name: The display name of the item
+    :param name: Required. The display name of the item
     :type name: str
     :param units: An optional unit describing how the type of data represented
      by the item
@@ -79,19 +81,19 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         'second_associated_item_id': {'key': 'secondAssociatedItemId', 'type': 'int'},
     }
 
-    def __init__(self, record_type, scope, item_id, logical_id, name, event_type_id=None, data_type=None, units=None, first_associated_item_type=None, first_associated_item_scope=None, first_associated_item_id=None, second_associated_item_type=None, second_associated_item_scope=None, second_associated_item_id=None):
-        super(AdiEmsWebApiV2DtoProfileGlossaryItem, self).__init__()
-        self.record_type = record_type
-        self.scope = scope
-        self.item_id = item_id
-        self.event_type_id = event_type_id
-        self.data_type = data_type
-        self.logical_id = logical_id
-        self.name = name
-        self.units = units
-        self.first_associated_item_type = first_associated_item_type
-        self.first_associated_item_scope = first_associated_item_scope
-        self.first_associated_item_id = first_associated_item_id
-        self.second_associated_item_type = second_associated_item_type
-        self.second_associated_item_scope = second_associated_item_scope
-        self.second_associated_item_id = second_associated_item_id
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileGlossaryItem, self).__init__(**kwargs)
+        self.record_type = kwargs.get('record_type', None)
+        self.scope = kwargs.get('scope', None)
+        self.item_id = kwargs.get('item_id', None)
+        self.event_type_id = kwargs.get('event_type_id', None)
+        self.data_type = kwargs.get('data_type', None)
+        self.logical_id = kwargs.get('logical_id', None)
+        self.name = kwargs.get('name', None)
+        self.units = kwargs.get('units', None)
+        self.first_associated_item_type = kwargs.get('first_associated_item_type', None)
+        self.first_associated_item_scope = kwargs.get('first_associated_item_scope', None)
+        self.first_associated_item_id = kwargs.get('first_associated_item_id', None)
+        self.second_associated_item_type = kwargs.get('second_associated_item_type', None)
+        self.second_associated_item_scope = kwargs.get('second_associated_item_scope', None)
+        self.second_associated_item_id = kwargs.get('second_associated_item_id', None)

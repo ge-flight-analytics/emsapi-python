@@ -11,11 +11,13 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoProfileEvent(Model):
     """Represents an APM event definition.
 
-    :param id: The definition ID of this event
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The definition ID of this event
     :type id: int
-    :param name: The name of the event
+    :param name: Required. The name of the event
     :type name: str
-    :param comments: Comments associated with this event
+    :param comments: Required. Comments associated with this event
     :type comments: str
     :param parameter_set: The parameter set associated with the event if any
     :type parameter_set:
@@ -35,9 +37,9 @@ class AdiEmsWebApiV2DtoProfileEvent(Model):
         'parameter_set': {'key': 'parameterSet', 'type': 'AdiEmsWebApiV2DtoParameterSetParameterSet'},
     }
 
-    def __init__(self, id, name, comments, parameter_set=None):
-        super(AdiEmsWebApiV2DtoProfileEvent, self).__init__()
-        self.id = id
-        self.name = name
-        self.comments = comments
-        self.parameter_set = parameter_set
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileEvent, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.comments = kwargs.get('comments', None)
+        self.parameter_set = kwargs.get('parameter_set', None)

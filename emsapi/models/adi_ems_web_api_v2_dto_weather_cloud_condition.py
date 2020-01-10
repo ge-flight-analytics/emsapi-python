@@ -31,8 +31,8 @@ class AdiEmsWebApiV2DtoWeatherCloudCondition(Model):
         'cloud_coverage': {'key': 'cloudCoverage', 'type': 'str'},
     }
 
-    def __init__(self, cloud_base=None, cloud_type=None, cloud_coverage=None):
-        super(AdiEmsWebApiV2DtoWeatherCloudCondition, self).__init__()
-        self.cloud_base = cloud_base
-        self.cloud_type = cloud_type
-        self.cloud_coverage = cloud_coverage
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherCloudCondition, self).__init__(**kwargs)
+        self.cloud_base = kwargs.get('cloud_base', None)
+        self.cloud_type = kwargs.get('cloud_type', None)
+        self.cloud_coverage = kwargs.get('cloud_coverage', None)

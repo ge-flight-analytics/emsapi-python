@@ -11,10 +11,12 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherTafPrediction(Model):
     """Represents a forecast prediction originally included in a TAF.
 
+    All required parameters must be populated in order to send to Azure.
+
     :param id: The ID used to uniquely identify this prediction on an EMS
      system
     :type id: int
-    :param unparsed: The original, unparsed prediction string
+    :param unparsed: Required. The original, unparsed prediction string
     :type unparsed: str
     :param time_from: The predicted start time for the weather in this
      prediction
@@ -28,8 +30,8 @@ class AdiEmsWebApiV2DtoWeatherTafPrediction(Model):
      occur. This is only used with the "Becoming" change
      indicator
     :type time_becoming: datetime
-    :param weather_change: The type of conditions change indicator specified.
-     When weather conditions are reported as changing this
+    :param weather_change: Required. The type of conditions change indicator
+     specified. When weather conditions are reported as changing this
      is "None". Possible values include: 'none', 'from', 'becoming',
      'temporary', 'probability', 'intermediate'
     :type weather_change: str or ~emsapi.models.enum
@@ -116,27 +118,27 @@ class AdiEmsWebApiV2DtoWeatherTafPrediction(Model):
         'temperatures': {'key': 'temperatures', 'type': '[AdiEmsWebApiV2DtoWeatherTafTemperature]'},
     }
 
-    def __init__(self, unparsed, weather_change, id=None, time_from=None, time_to=None, time_becoming=None, probability=None, wind_direction=None, wind_speed=None, wind_gust_speed=None, wind_shear_height=None, wind_shear_direction=None, wind_shear_speed=None, visibility_horizontal=None, visibility_vertical=None, pressure=None, portion_not_decoded=None, ceiling=None, cloud_conditions=None, icing_conditions=None, turbulence_conditions=None, temperatures=None):
-        super(AdiEmsWebApiV2DtoWeatherTafPrediction, self).__init__()
-        self.id = id
-        self.unparsed = unparsed
-        self.time_from = time_from
-        self.time_to = time_to
-        self.time_becoming = time_becoming
-        self.weather_change = weather_change
-        self.probability = probability
-        self.wind_direction = wind_direction
-        self.wind_speed = wind_speed
-        self.wind_gust_speed = wind_gust_speed
-        self.wind_shear_height = wind_shear_height
-        self.wind_shear_direction = wind_shear_direction
-        self.wind_shear_speed = wind_shear_speed
-        self.visibility_horizontal = visibility_horizontal
-        self.visibility_vertical = visibility_vertical
-        self.pressure = pressure
-        self.portion_not_decoded = portion_not_decoded
-        self.ceiling = ceiling
-        self.cloud_conditions = cloud_conditions
-        self.icing_conditions = icing_conditions
-        self.turbulence_conditions = turbulence_conditions
-        self.temperatures = temperatures
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherTafPrediction, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.unparsed = kwargs.get('unparsed', None)
+        self.time_from = kwargs.get('time_from', None)
+        self.time_to = kwargs.get('time_to', None)
+        self.time_becoming = kwargs.get('time_becoming', None)
+        self.weather_change = kwargs.get('weather_change', None)
+        self.probability = kwargs.get('probability', None)
+        self.wind_direction = kwargs.get('wind_direction', None)
+        self.wind_speed = kwargs.get('wind_speed', None)
+        self.wind_gust_speed = kwargs.get('wind_gust_speed', None)
+        self.wind_shear_height = kwargs.get('wind_shear_height', None)
+        self.wind_shear_direction = kwargs.get('wind_shear_direction', None)
+        self.wind_shear_speed = kwargs.get('wind_shear_speed', None)
+        self.visibility_horizontal = kwargs.get('visibility_horizontal', None)
+        self.visibility_vertical = kwargs.get('visibility_vertical', None)
+        self.pressure = kwargs.get('pressure', None)
+        self.portion_not_decoded = kwargs.get('portion_not_decoded', None)
+        self.ceiling = kwargs.get('ceiling', None)
+        self.cloud_conditions = kwargs.get('cloud_conditions', None)
+        self.icing_conditions = kwargs.get('icing_conditions', None)
+        self.turbulence_conditions = kwargs.get('turbulence_conditions', None)
+        self.temperatures = kwargs.get('temperatures', None)

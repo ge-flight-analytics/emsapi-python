@@ -54,17 +54,17 @@ class AdiEmsWebApiV2DtoNavigationNavigationAirport(Model):
         'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, ata_code=None, city=None, country=None, ems_code=None, icao_code=None, latitude=None, longitude=None, altitude=None, magnetic_variation=None, type=None):
-        super(AdiEmsWebApiV2DtoNavigationNavigationAirport, self).__init__()
-        self.id = id
-        self.name = name
-        self.ata_code = ata_code
-        self.city = city
-        self.country = country
-        self.ems_code = ems_code
-        self.icao_code = icao_code
-        self.latitude = latitude
-        self.longitude = longitude
-        self.altitude = altitude
-        self.magnetic_variation = magnetic_variation
-        self.type = type
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoNavigationNavigationAirport, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.ata_code = kwargs.get('ata_code', None)
+        self.city = kwargs.get('city', None)
+        self.country = kwargs.get('country', None)
+        self.ems_code = kwargs.get('ems_code', None)
+        self.icao_code = kwargs.get('icao_code', None)
+        self.latitude = kwargs.get('latitude', None)
+        self.longitude = kwargs.get('longitude', None)
+        self.altitude = kwargs.get('altitude', None)
+        self.magnetic_variation = kwargs.get('magnetic_variation', None)
+        self.type = kwargs.get('type', None)

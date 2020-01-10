@@ -33,8 +33,8 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryInfo(Model):
         'header': {'key': 'header', 'type': '[AdiEmsWebApiV2DtoSchemaQueryResultHeader]'},
     }
 
-    def __init__(self, id=None, inactivity_timeout=None, header=None):
-        super(AdiEmsWebApiV2DtoSchemaAsyncQueryInfo, self).__init__()
-        self.id = id
-        self.inactivity_timeout = inactivity_timeout
-        self.header = header
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaAsyncQueryInfo, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.inactivity_timeout = kwargs.get('inactivity_timeout', None)
+        self.header = kwargs.get('header', None)

@@ -11,21 +11,25 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoProfileProfileResults(Model):
     """Encapsulates all the profile results for a flight.
 
-    :param profile_version: The integer version of the profile that was
-     processed to generate the results,
+    All required parameters must be populated in order to send to Azure.
+
+    :param profile_version: Required. The integer version of the profile that
+     was processed to generate the results,
      corresponding to an index in the array of version history entries for the
      profile
     :type profile_version: int
-    :param parameter_filtering: Indicates whether automatic parameter
-     filtering was enabled when the profile was processed
+    :param parameter_filtering: Required. Indicates whether automatic
+     parameter filtering was enabled when the profile was processed
     :type parameter_filtering: bool
-    :param measurements: The top-level, non-event-based, measurement results
+    :param measurements: Required. The top-level, non-event-based, measurement
+     results
     :type measurements:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultValue]
-    :param timepoints: The top-level, non-event-based, timepoint results
+    :param timepoints: Required. The top-level, non-event-based, timepoint
+     results
     :type timepoints:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultValue]
-    :param events: The event results detected in the flight
+    :param events: Required. The event results detected in the flight
     :type events:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultsEventRecord]
     """
@@ -46,10 +50,10 @@ class AdiEmsWebApiV2DtoProfileProfileResults(Model):
         'events': {'key': 'events', 'type': '[AdiEmsWebApiV2DtoProfileProfileResultsEventRecord]'},
     }
 
-    def __init__(self, profile_version, parameter_filtering, measurements, timepoints, events):
-        super(AdiEmsWebApiV2DtoProfileProfileResults, self).__init__()
-        self.profile_version = profile_version
-        self.parameter_filtering = parameter_filtering
-        self.measurements = measurements
-        self.timepoints = timepoints
-        self.events = events
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfileResults, self).__init__(**kwargs)
+        self.profile_version = kwargs.get('profile_version', None)
+        self.parameter_filtering = kwargs.get('parameter_filtering', None)
+        self.measurements = kwargs.get('measurements', None)
+        self.timepoints = kwargs.get('timepoints', None)
+        self.events = kwargs.get('events', None)

@@ -11,7 +11,9 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherMetarMetarParseOptions(Model):
     """Specifies options to use when calling the METAR parse API.
 
-    :param metar: The raw METAR string to parse
+    All required parameters must be populated in order to send to Azure.
+
+    :param metar: Required. The raw METAR string to parse
     :type metar: str
     :param issue_date: Optional date information (in ISO 8601 format) the
      METAR was issued, since the METAR format only includes
@@ -28,7 +30,7 @@ class AdiEmsWebApiV2DtoWeatherMetarMetarParseOptions(Model):
         'issue_date': {'key': 'issueDate', 'type': 'iso-8601'},
     }
 
-    def __init__(self, metar, issue_date=None):
-        super(AdiEmsWebApiV2DtoWeatherMetarMetarParseOptions, self).__init__()
-        self.metar = metar
-        self.issue_date = issue_date
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherMetarMetarParseOptions, self).__init__(**kwargs)
+        self.metar = kwargs.get('metar', None)
+        self.issue_date = kwargs.get('issue_date', None)

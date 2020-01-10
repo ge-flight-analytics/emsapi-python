@@ -12,20 +12,24 @@ class AdiEmsWebApiV2DtoProfileProfileGlossary(Model):
     """A glossary for a specific profile. This describes the type of items found
     in a profile.
 
-    :param glossary_version: The integer version of the glossary
+    All required parameters must be populated in order to send to Azure.
+
+    :param glossary_version: Required. The integer version of the glossary
     :type glossary_version: int
-    :param profile_local_id: The local integer identifier of the associated
-     profile
+    :param profile_local_id: Required. The local integer identifier of the
+     associated profile
     :type profile_local_id: int
-    :param profile_id: The globally unique identifier of the associated
-     profile
+    :param profile_id: Required. The globally unique identifier of the
+     associated profile
     :type profile_id: str
-    :param current_version: The integer version of the associated profile
+    :param current_version: Required. The integer version of the associated
+     profile
     :type current_version: int
-    :param current_version_guid: The globally unique identifier for the
-     version of the associated profile
+    :param current_version_guid: Required. The globally unique identifier for
+     the version of the associated profile
     :type current_version_guid: str
-    :param glossary_items: A list of all entries contained in the glossary
+    :param glossary_items: Required. A list of all entries contained in the
+     glossary
     :type glossary_items:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileGlossaryItem]
     """
@@ -48,11 +52,11 @@ class AdiEmsWebApiV2DtoProfileProfileGlossary(Model):
         'glossary_items': {'key': 'glossaryItems', 'type': '[AdiEmsWebApiV2DtoProfileGlossaryItem]'},
     }
 
-    def __init__(self, glossary_version, profile_local_id, profile_id, current_version, current_version_guid, glossary_items):
-        super(AdiEmsWebApiV2DtoProfileProfileGlossary, self).__init__()
-        self.glossary_version = glossary_version
-        self.profile_local_id = profile_local_id
-        self.profile_id = profile_id
-        self.current_version = current_version
-        self.current_version_guid = current_version_guid
-        self.glossary_items = glossary_items
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfileGlossary, self).__init__(**kwargs)
+        self.glossary_version = kwargs.get('glossary_version', None)
+        self.profile_local_id = kwargs.get('profile_local_id', None)
+        self.profile_id = kwargs.get('profile_id', None)
+        self.current_version = kwargs.get('current_version', None)
+        self.current_version_guid = kwargs.get('current_version_guid', None)
+        self.glossary_items = kwargs.get('glossary_items', None)

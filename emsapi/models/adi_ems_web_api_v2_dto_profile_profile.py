@@ -12,15 +12,19 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
     """Represents an APM (Automated Parameter Measurement) profile in an EMS
     system.
 
-    :param local_id: The local integer identifier for the profile
+    All required parameters must be populated in order to send to Azure.
+
+    :param local_id: Required. The local integer identifier for the profile
     :type local_id: int
-    :param id: The globally unique identifier of the profile
+    :param id: Required. The globally unique identifier of the profile
     :type id: str
-    :param name: The display name of the profile
+    :param name: Required. The display name of the profile
     :type name: str
-    :param library: Indicates whether the profile is a "library" profile
+    :param library: Required. Indicates whether the profile is a "library"
+     profile
     :type library: bool
-    :param current_version: The current integer version of the profile
+    :param current_version: Required. The current integer version of the
+     profile
     :type current_version: int
     """
 
@@ -40,10 +44,10 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
         'current_version': {'key': 'currentVersion', 'type': 'int'},
     }
 
-    def __init__(self, local_id, id, name, library, current_version):
-        super(AdiEmsWebApiV2DtoProfileProfile, self).__init__()
-        self.local_id = local_id
-        self.id = id
-        self.name = name
-        self.library = library
-        self.current_version = current_version
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfile, self).__init__(**kwargs)
+        self.local_id = kwargs.get('local_id', None)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.library = kwargs.get('library', None)
+        self.current_version = kwargs.get('current_version', None)

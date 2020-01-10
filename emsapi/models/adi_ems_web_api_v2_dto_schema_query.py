@@ -11,8 +11,10 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaQuery(Model):
     """Represents the options used to make up a data source query.
 
-    :param select: An array specifying the fields to select and return as
-     columns in the query results
+    All required parameters must be populated in order to send to Azure.
+
+    :param select: Required. An array specifying the fields to select and
+     return as columns in the query results
     :type select: list[~emsapi.models.AdiEmsWebApiV2DtoSchemaSelectColumn]
     :param group_by: An array specifying the fields by which to group
      aggregate operations. If not specified, no grouping
@@ -59,12 +61,12 @@ class AdiEmsWebApiV2DtoSchemaQuery(Model):
         'top': {'key': 'top', 'type': 'int'},
     }
 
-    def __init__(self, select, group_by=None, order_by=None, filter=None, format=None, distinct=None, top=None):
-        super(AdiEmsWebApiV2DtoSchemaQuery, self).__init__()
-        self.select = select
-        self.group_by = group_by
-        self.order_by = order_by
-        self.filter = filter
-        self.format = format
-        self.distinct = distinct
-        self.top = top
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaQuery, self).__init__(**kwargs)
+        self.select = kwargs.get('select', None)
+        self.group_by = kwargs.get('group_by', None)
+        self.order_by = kwargs.get('order_by', None)
+        self.filter = kwargs.get('filter', None)
+        self.format = kwargs.get('format', None)
+        self.distinct = kwargs.get('distinct', None)
+        self.top = kwargs.get('top', None)

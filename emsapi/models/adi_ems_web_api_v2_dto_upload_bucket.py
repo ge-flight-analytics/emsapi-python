@@ -27,8 +27,8 @@ class AdiEmsWebApiV2DtoUploadBucket(Model):
         'associated_ems_system': {'key': 'associatedEmsSystem', 'type': 'AdiEmsWebDataModelEmsSystem'},
     }
 
-    def __init__(self, name=None, description=None, associated_ems_system=None):
-        super(AdiEmsWebApiV2DtoUploadBucket, self).__init__()
-        self.name = name
-        self.description = description
-        self.associated_ems_system = associated_ems_system
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadBucket, self).__init__(**kwargs)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
+        self.associated_ems_system = kwargs.get('associated_ems_system', None)

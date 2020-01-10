@@ -11,13 +11,15 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaField(Model):
     """Represents an individual field that can be accessed within a data source.
 
-    :param id: The unique string identifier for the field
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The unique string identifier for the field
     :type id: str
-    :param type: The data type of the underlying data stored for the field.
-     Possible values include: 'boolean', 'dateTime', 'discrete', 'number',
-     'string'
+    :param type: Required. The data type of the underlying data stored for the
+     field. Possible values include: 'boolean', 'dateTime', 'discrete',
+     'number', 'string'
     :type type: str or ~emsapi.models.enum
-    :param name: The display name for the field
+    :param name: Required. The display name for the field
     :type name: str
     """
 
@@ -33,8 +35,8 @@ class AdiEmsWebApiV2DtoSchemaField(Model):
         'name': {'key': 'name', 'type': 'str'},
     }
 
-    def __init__(self, id, type, name):
-        super(AdiEmsWebApiV2DtoSchemaField, self).__init__()
-        self.id = id
-        self.type = type
-        self.name = name
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaField, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.type = kwargs.get('type', None)
+        self.name = kwargs.get('name', None)

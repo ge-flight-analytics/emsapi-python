@@ -28,9 +28,9 @@ class AdiEmsWebApiV2DtoAnalyticInfo(Model):
         'units': {'key': 'units', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, description=None, units=None):
-        super(AdiEmsWebApiV2DtoAnalyticInfo, self).__init__()
-        self.id = id
-        self.name = name
-        self.description = description
-        self.units = units
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAnalyticInfo, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
+        self.units = kwargs.get('units', None)

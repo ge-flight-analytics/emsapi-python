@@ -50,16 +50,16 @@ class AdiEmsWebApiV2DtoAssetAirport(Model):
         'elevation': {'key': 'elevation', 'type': 'float'},
     }
 
-    def __init__(self, id=None, code_iata=None, code_icao=None, code_faa=None, code_preferred=None, name=None, city=None, country=None, latitude=None, longitude=None, elevation=None):
-        super(AdiEmsWebApiV2DtoAssetAirport, self).__init__()
-        self.id = id
-        self.code_iata = code_iata
-        self.code_icao = code_icao
-        self.code_faa = code_faa
-        self.code_preferred = code_preferred
-        self.name = name
-        self.city = city
-        self.country = country
-        self.latitude = latitude
-        self.longitude = longitude
-        self.elevation = elevation
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAssetAirport, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.code_iata = kwargs.get('code_iata', None)
+        self.code_icao = kwargs.get('code_icao', None)
+        self.code_faa = kwargs.get('code_faa', None)
+        self.code_preferred = kwargs.get('code_preferred', None)
+        self.name = kwargs.get('name', None)
+        self.city = kwargs.get('city', None)
+        self.country = kwargs.get('country', None)
+        self.latitude = kwargs.get('latitude', None)
+        self.longitude = kwargs.get('longitude', None)
+        self.elevation = kwargs.get('elevation', None)

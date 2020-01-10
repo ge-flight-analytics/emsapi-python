@@ -49,16 +49,16 @@ class AdiEmsWebSharedTableauRestWorkbook(Model):
         'views': {'key': 'views', 'type': 'AdiEmsWebSharedTableauRestViews'},
     }
 
-    def __init__(self, id=None, name=None, content_url=None, show_tabs=None, size=None, created_at=None, updated_at=None, project=None, owner=None, tags=None, views=None):
-        super(AdiEmsWebSharedTableauRestWorkbook, self).__init__()
-        self.id = id
-        self.name = name
-        self.content_url = content_url
-        self.show_tabs = show_tabs
-        self.size = size
-        self.created_at = created_at
-        self.updated_at = updated_at
-        self.project = project
-        self.owner = owner
-        self.tags = tags
-        self.views = views
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestWorkbook, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.content_url = kwargs.get('content_url', None)
+        self.show_tabs = kwargs.get('show_tabs', None)
+        self.size = kwargs.get('size', None)
+        self.created_at = kwargs.get('created_at', None)
+        self.updated_at = kwargs.get('updated_at', None)
+        self.project = kwargs.get('project', None)
+        self.owner = kwargs.get('owner', None)
+        self.tags = kwargs.get('tags', None)
+        self.views = kwargs.get('views', None)

@@ -11,7 +11,10 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherWeatherPhenomenon(Model):
     """Describes an individual weather phenomenon.
 
-    :param unparsed: The original, unparsed weather phenomenon string
+    All required parameters must be populated in order to send to Azure.
+
+    :param unparsed: Required. The original, unparsed weather phenomenon
+     string
     :type unparsed: str
     :param intensity: Describes the intensity of the whether phenomenon.
      Possible values include: 'light', 'moderate', 'heavy', 'vicinity'
@@ -53,12 +56,12 @@ class AdiEmsWebApiV2DtoWeatherWeatherPhenomenon(Model):
         'other': {'key': 'other', 'type': 'str'},
     }
 
-    def __init__(self, unparsed, intensity=None, qualifier=None, precipitation=None, precipitation_secondary=None, obscuration=None, other=None):
-        super(AdiEmsWebApiV2DtoWeatherWeatherPhenomenon, self).__init__()
-        self.unparsed = unparsed
-        self.intensity = intensity
-        self.qualifier = qualifier
-        self.precipitation = precipitation
-        self.precipitation_secondary = precipitation_secondary
-        self.obscuration = obscuration
-        self.other = other
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherWeatherPhenomenon, self).__init__(**kwargs)
+        self.unparsed = kwargs.get('unparsed', None)
+        self.intensity = kwargs.get('intensity', None)
+        self.qualifier = kwargs.get('qualifier', None)
+        self.precipitation = kwargs.get('precipitation', None)
+        self.precipitation_secondary = kwargs.get('precipitation_secondary', None)
+        self.obscuration = kwargs.get('obscuration', None)
+        self.other = kwargs.get('other', None)

@@ -31,10 +31,10 @@ class AdiEmsWebDataModelEmsSystem(Model):
         'dir_collection': {'key': 'dirCollection', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, description=None, dir_adi=None, dir_collection=None):
-        super(AdiEmsWebDataModelEmsSystem, self).__init__()
-        self.id = id
-        self.name = name
-        self.description = description
-        self.dir_adi = dir_adi
-        self.dir_collection = dir_collection
+    def __init__(self, **kwargs):
+        super(AdiEmsWebDataModelEmsSystem, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
+        self.dir_adi = kwargs.get('dir_adi', None)
+        self.dir_collection = kwargs.get('dir_collection', None)

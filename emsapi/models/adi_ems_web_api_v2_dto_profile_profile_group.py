@@ -11,9 +11,11 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoProfileProfileGroup(Model):
     """Represents a folder in the profile tree of an EMS installation.
 
-    :param id: The globally unique ID for the profile group
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The globally unique ID for the profile group
     :type id: str
-    :param name: The display name of the profile group
+    :param name: Required. The display name of the profile group
     :type name: str
     :param description: The optional description that briefly describes the
      profile group
@@ -39,10 +41,10 @@ class AdiEmsWebApiV2DtoProfileProfileGroup(Model):
         'profiles': {'key': 'profiles', 'type': '[AdiEmsWebApiV2DtoProfileProfile]'},
     }
 
-    def __init__(self, id, name, description=None, groups=None, profiles=None):
-        super(AdiEmsWebApiV2DtoProfileProfileGroup, self).__init__()
-        self.id = id
-        self.name = name
-        self.description = description
-        self.groups = groups
-        self.profiles = profiles
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfileGroup, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
+        self.groups = kwargs.get('groups', None)
+        self.profiles = kwargs.get('profiles', None)

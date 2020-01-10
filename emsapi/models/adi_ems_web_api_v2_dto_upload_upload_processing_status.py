@@ -33,9 +33,9 @@ class AdiEmsWebApiV2DtoUploadUploadProcessingStatus(Model):
         'error_message': {'key': 'errorMessage', 'type': 'str'},
     }
 
-    def __init__(self, download_record=None, download_state=None, flights=None, error_message=None):
-        super(AdiEmsWebApiV2DtoUploadUploadProcessingStatus, self).__init__()
-        self.download_record = download_record
-        self.download_state = download_state
-        self.flights = flights
-        self.error_message = error_message
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadProcessingStatus, self).__init__(**kwargs)
+        self.download_record = kwargs.get('download_record', None)
+        self.download_state = kwargs.get('download_state', None)
+        self.flights = kwargs.get('flights', None)
+        self.error_message = kwargs.get('error_message', None)

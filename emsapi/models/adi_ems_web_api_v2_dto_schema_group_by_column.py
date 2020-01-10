@@ -12,8 +12,10 @@ class AdiEmsWebApiV2DtoSchemaGroupByColumn(Model):
     """Represents a column of data that can be used in a group-by clause of a data
     source query.
 
-    :param field_id: The unique string identifier of the field to use in a
-     group-by clause of a query
+    All required parameters must be populated in order to send to Azure.
+
+    :param field_id: Required. The unique string identifier of the field to
+     use in a group-by clause of a query
     :type field_id: str
     """
 
@@ -25,6 +27,6 @@ class AdiEmsWebApiV2DtoSchemaGroupByColumn(Model):
         'field_id': {'key': 'fieldId', 'type': 'str'},
     }
 
-    def __init__(self, field_id):
-        super(AdiEmsWebApiV2DtoSchemaGroupByColumn, self).__init__()
-        self.field_id = field_id
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaGroupByColumn, self).__init__(**kwargs)
+        self.field_id = kwargs.get('field_id', None)

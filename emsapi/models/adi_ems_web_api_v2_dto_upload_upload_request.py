@@ -56,10 +56,10 @@ class AdiEmsWebApiV2DtoUploadUploadRequest(Model):
         'metadata': {'key': 'metadata', 'type': '{str}'},
     }
 
-    def __init__(self, name=None, type=None, password=None, total_size=None, metadata=None):
-        super(AdiEmsWebApiV2DtoUploadUploadRequest, self).__init__()
-        self.name = name
-        self.type = type
-        self.password = password
-        self.total_size = total_size
-        self.metadata = metadata
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadRequest, self).__init__(**kwargs)
+        self.name = kwargs.get('name', None)
+        self.type = kwargs.get('type', None)
+        self.password = kwargs.get('password', None)
+        self.total_size = kwargs.get('total_size', None)
+        self.metadata = kwargs.get('metadata', None)

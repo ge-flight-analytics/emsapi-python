@@ -12,11 +12,13 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryData(Model):
     """Represents the tabular results of a data source query obtained from an
     async query.
 
-    :param rows: An array of JSON string arrays, where each entry is a row in
-     the results set
+    All required parameters must be populated in order to send to Azure.
+
+    :param rows: Required. An array of JSON string arrays, where each entry is
+     a row in the results set
     :type rows: list[str]
-    :param has_more_rows: Whether the query has one or more rows in its result
-     set at an index greater than the last row returned
+    :param has_more_rows: Required. Whether the query has one or more rows in
+     its result set at an index greater than the last row returned
     :type has_more_rows: bool
     """
 
@@ -30,7 +32,7 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryData(Model):
         'has_more_rows': {'key': 'hasMoreRows', 'type': 'bool'},
     }
 
-    def __init__(self, rows, has_more_rows):
-        super(AdiEmsWebApiV2DtoSchemaAsyncQueryData, self).__init__()
-        self.rows = rows
-        self.has_more_rows = has_more_rows
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaAsyncQueryData, self).__init__(**kwargs)
+        self.rows = kwargs.get('rows', None)
+        self.has_more_rows = kwargs.get('has_more_rows', None)

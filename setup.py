@@ -21,7 +21,7 @@ setup(name = 'emsapi',
       author = 'GE Flight Analytics',
       author_email = 'AviationAdiSupport@ge.com',
       license = 'MIT',
-      packages = find_packages(exclude=("docs","tests")),
+      packages = find_packages(exclude=("docs","examples")),
       install_requires = requirements(),
       zip_safe = False)
       

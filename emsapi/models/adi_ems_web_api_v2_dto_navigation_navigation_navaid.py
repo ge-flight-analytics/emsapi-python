@@ -84,25 +84,25 @@ class AdiEmsWebApiV2DtoNavigationNavigationNavaid(Model):
         'status': {'key': 'status', 'type': 'str'},
     }
 
-    def __init__(self, id=None, callsign=None, type=None, country_code=None, state_code=None, name=None, frequency=None, usage_code=None, channel=None, radio_class_code=None, range=None, latitude=None, longitude=None, elevation=None, magnetic_variance=None, dme_latitude=None, dme_longitude=None, dme_elevation=None, associated_airport=None, status=None):
-        super(AdiEmsWebApiV2DtoNavigationNavigationNavaid, self).__init__()
-        self.id = id
-        self.callsign = callsign
-        self.type = type
-        self.country_code = country_code
-        self.state_code = state_code
-        self.name = name
-        self.frequency = frequency
-        self.usage_code = usage_code
-        self.channel = channel
-        self.radio_class_code = radio_class_code
-        self.range = range
-        self.latitude = latitude
-        self.longitude = longitude
-        self.elevation = elevation
-        self.magnetic_variance = magnetic_variance
-        self.dme_latitude = dme_latitude
-        self.dme_longitude = dme_longitude
-        self.dme_elevation = dme_elevation
-        self.associated_airport = associated_airport
-        self.status = status
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoNavigationNavigationNavaid, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.callsign = kwargs.get('callsign', None)
+        self.type = kwargs.get('type', None)
+        self.country_code = kwargs.get('country_code', None)
+        self.state_code = kwargs.get('state_code', None)
+        self.name = kwargs.get('name', None)
+        self.frequency = kwargs.get('frequency', None)
+        self.usage_code = kwargs.get('usage_code', None)
+        self.channel = kwargs.get('channel', None)
+        self.radio_class_code = kwargs.get('radio_class_code', None)
+        self.range = kwargs.get('range', None)
+        self.latitude = kwargs.get('latitude', None)
+        self.longitude = kwargs.get('longitude', None)
+        self.elevation = kwargs.get('elevation', None)
+        self.magnetic_variance = kwargs.get('magnetic_variance', None)
+        self.dme_latitude = kwargs.get('dme_latitude', None)
+        self.dme_longitude = kwargs.get('dme_longitude', None)
+        self.dme_elevation = kwargs.get('dme_elevation', None)
+        self.associated_airport = kwargs.get('associated_airport', None)
+        self.status = kwargs.get('status', None)

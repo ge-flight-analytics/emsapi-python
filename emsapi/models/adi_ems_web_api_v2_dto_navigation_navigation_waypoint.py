@@ -64,20 +64,20 @@ class AdiEmsWebApiV2DtoNavigationNavigationWaypoint(Model):
         'dafif_id': {'key': 'dafifId', 'type': 'str'},
     }
 
-    def __init__(self, id=None, airport_id=None, country_code=None, type=None, name=None, icao_code=None, usage_code=None, latitude=None, longitude=None, magnetic_variance=None, navaid_id=None, colocation_flag=None, navaid_bearing=None, navaid_distance=None, dafif_id=None):
-        super(AdiEmsWebApiV2DtoNavigationNavigationWaypoint, self).__init__()
-        self.id = id
-        self.airport_id = airport_id
-        self.country_code = country_code
-        self.type = type
-        self.name = name
-        self.icao_code = icao_code
-        self.usage_code = usage_code
-        self.latitude = latitude
-        self.longitude = longitude
-        self.magnetic_variance = magnetic_variance
-        self.navaid_id = navaid_id
-        self.colocation_flag = colocation_flag
-        self.navaid_bearing = navaid_bearing
-        self.navaid_distance = navaid_distance
-        self.dafif_id = dafif_id
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoNavigationNavigationWaypoint, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.airport_id = kwargs.get('airport_id', None)
+        self.country_code = kwargs.get('country_code', None)
+        self.type = kwargs.get('type', None)
+        self.name = kwargs.get('name', None)
+        self.icao_code = kwargs.get('icao_code', None)
+        self.usage_code = kwargs.get('usage_code', None)
+        self.latitude = kwargs.get('latitude', None)
+        self.longitude = kwargs.get('longitude', None)
+        self.magnetic_variance = kwargs.get('magnetic_variance', None)
+        self.navaid_id = kwargs.get('navaid_id', None)
+        self.colocation_flag = kwargs.get('colocation_flag', None)
+        self.navaid_bearing = kwargs.get('navaid_bearing', None)
+        self.navaid_distance = kwargs.get('navaid_distance', None)
+        self.dafif_id = kwargs.get('dafif_id', None)

@@ -57,18 +57,18 @@ class AdiEmsWebApiV2DtoNavigationNavigationProcedureSegment(Model):
         'altitude2': {'key': 'altitude2', 'type': 'str'},
     }
 
-    def __init__(self, type=None, transition_id=None, sequence_number=None, track_code=None, waypoint_id=None, waypoint_desc_codes=None, waypoint_bearing=None, waypoint_distance=None, navaids=None, turn_direction=None, altitude_description=None, altitude1=None, altitude2=None):
-        super(AdiEmsWebApiV2DtoNavigationNavigationProcedureSegment, self).__init__()
-        self.type = type
-        self.transition_id = transition_id
-        self.sequence_number = sequence_number
-        self.track_code = track_code
-        self.waypoint_id = waypoint_id
-        self.waypoint_desc_codes = waypoint_desc_codes
-        self.waypoint_bearing = waypoint_bearing
-        self.waypoint_distance = waypoint_distance
-        self.navaids = navaids
-        self.turn_direction = turn_direction
-        self.altitude_description = altitude_description
-        self.altitude1 = altitude1
-        self.altitude2 = altitude2
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoNavigationNavigationProcedureSegment, self).__init__(**kwargs)
+        self.type = kwargs.get('type', None)
+        self.transition_id = kwargs.get('transition_id', None)
+        self.sequence_number = kwargs.get('sequence_number', None)
+        self.track_code = kwargs.get('track_code', None)
+        self.waypoint_id = kwargs.get('waypoint_id', None)
+        self.waypoint_desc_codes = kwargs.get('waypoint_desc_codes', None)
+        self.waypoint_bearing = kwargs.get('waypoint_bearing', None)
+        self.waypoint_distance = kwargs.get('waypoint_distance', None)
+        self.navaids = kwargs.get('navaids', None)
+        self.turn_direction = kwargs.get('turn_direction', None)
+        self.altitude_description = kwargs.get('altitude_description', None)
+        self.altitude1 = kwargs.get('altitude1', None)
+        self.altitude2 = kwargs.get('altitude2', None)

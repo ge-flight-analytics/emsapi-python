@@ -13,10 +13,13 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticResult(Model):
     values for the offsets contained
     in the related query result.
 
-    :param analytic_id: The unique string identifier of the analytic queried
+    All required parameters must be populated in order to send to Azure.
+
+    :param analytic_id: Required. The unique string identifier of the analytic
+     queried
     :type analytic_id: str
-    :param values: The array of analytic values corresponding to offsets
-     specified in the query result
+    :param values: Required. The array of analytic values corresponding to
+     offsets specified in the query result
     :type values: list[object]
     :param error: Any error that may have occurred when retrieving or
      attempting to retrieve the values for the analytic.
@@ -35,8 +38,8 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticResult(Model):
         'error': {'key': 'error', 'type': 'str'},
     }
 
-    def __init__(self, analytic_id, values, error=None):
-        super(AdiEmsWebApiV2ModelAnalyticAnalyticResult, self).__init__()
-        self.analytic_id = analytic_id
-        self.values = values
-        self.error = error
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelAnalyticAnalyticResult, self).__init__(**kwargs)
+        self.analytic_id = kwargs.get('analytic_id', None)
+        self.values = kwargs.get('values', None)
+        self.error = kwargs.get('error', None)

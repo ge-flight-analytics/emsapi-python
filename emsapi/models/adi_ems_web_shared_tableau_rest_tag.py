@@ -19,6 +19,6 @@ class AdiEmsWebSharedTableauRestTag(Model):
         'label': {'key': 'label', 'type': 'str'},
     }
 
-    def __init__(self, label=None):
-        super(AdiEmsWebSharedTableauRestTag, self).__init__()
-        self.label = label
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestTag, self).__init__(**kwargs)
+        self.label = kwargs.get('label', None)

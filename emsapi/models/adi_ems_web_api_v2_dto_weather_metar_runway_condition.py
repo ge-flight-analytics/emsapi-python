@@ -11,9 +11,12 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherMetarRunwayCondition(Model):
     """Describes the condition of a runway.
 
-    :param unparsed: The original, unparsed runway conditions string
+    All required parameters must be populated in order to send to Azure.
+
+    :param unparsed: Required. The original, unparsed runway conditions string
     :type unparsed: str
-    :param runway: The name/number/approach direction identifying the runway
+    :param runway: Required. The name/number/approach direction identifying
+     the runway
     :type runway: str
     :param deposit_type: The type of deposits currently on the runway.
      Possible values include: 'dry', 'damp', 'wet', 'frost', 'snowDry',
@@ -34,8 +37,8 @@ class AdiEmsWebApiV2DtoWeatherMetarRunwayCondition(Model):
      describes the current braking conditions of the
      runway
     :type friction: float
-    :param is_clear: Indicating whether the runway conditions are clear of
-     deposits
+    :param is_clear: Required. Indicating whether the runway conditions are
+     clear of deposits
     :type is_clear: bool
     """
 
@@ -56,13 +59,13 @@ class AdiEmsWebApiV2DtoWeatherMetarRunwayCondition(Model):
         'is_clear': {'key': 'isClear', 'type': 'bool'},
     }
 
-    def __init__(self, unparsed, runway, is_clear, deposit_type=None, coverage=None, depth=None, braking=None, friction=None):
-        super(AdiEmsWebApiV2DtoWeatherMetarRunwayCondition, self).__init__()
-        self.unparsed = unparsed
-        self.runway = runway
-        self.deposit_type = deposit_type
-        self.coverage = coverage
-        self.depth = depth
-        self.braking = braking
-        self.friction = friction
-        self.is_clear = is_clear
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherMetarRunwayCondition, self).__init__(**kwargs)
+        self.unparsed = kwargs.get('unparsed', None)
+        self.runway = kwargs.get('runway', None)
+        self.deposit_type = kwargs.get('deposit_type', None)
+        self.coverage = kwargs.get('coverage', None)
+        self.depth = kwargs.get('depth', None)
+        self.braking = kwargs.get('braking', None)
+        self.friction = kwargs.get('friction', None)
+        self.is_clear = kwargs.get('is_clear', None)

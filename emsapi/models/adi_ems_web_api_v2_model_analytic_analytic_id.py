@@ -11,7 +11,9 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2ModelAnalyticAnalyticId(Model):
     """Provides an identifier for an individual analytic.
 
-    :param id: The unique string identifier of the analytic.
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The unique string identifier of the analytic.
     :type id: str
     """
 
@@ -23,6 +25,6 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticId(Model):
         'id': {'key': 'id', 'type': 'str'},
     }
 
-    def __init__(self, id):
-        super(AdiEmsWebApiV2ModelAnalyticAnalyticId, self).__init__()
-        self.id = id
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelAnalyticAnalyticId, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)

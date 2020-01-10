@@ -19,6 +19,6 @@ class AdiEmsWebApiV2DtoMetadata(Model):
         'values': {'key': 'values', 'type': '[AdiEmsWebApiV2DtoMetadataItem]'},
     }
 
-    def __init__(self, values=None):
-        super(AdiEmsWebApiV2DtoMetadata, self).__init__()
-        self.values = values
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoMetadata, self).__init__(**kwargs)
+        self.values = kwargs.get('values', None)

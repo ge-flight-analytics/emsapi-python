@@ -29,8 +29,8 @@ class AdiEmsWebApiV2DtoUploadUploadStatus(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, current_count=None, state=None, message=None):
-        super(AdiEmsWebApiV2DtoUploadUploadStatus, self).__init__()
-        self.current_count = current_count
-        self.state = state
-        self.message = message
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadStatus, self).__init__(**kwargs)
+        self.current_count = kwargs.get('current_count', None)
+        self.state = kwargs.get('state', None)
+        self.message = kwargs.get('message', None)

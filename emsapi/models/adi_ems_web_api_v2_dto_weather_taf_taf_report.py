@@ -11,21 +11,25 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherTafTafReport(Model):
     """Represents an individual TAF report.
 
+    All required parameters must be populated in order to send to Azure.
+
     :param parse_errors: Error messages delimited by newlines if there were
      non-critical issues parsing the raw TAF string
     :type parse_errors: str
-    :param issued: The time point that this TAF report was issued
+    :param issued: Required. The time point that this TAF report was issued
     :type issued: datetime
-    :param airport: The airport that issued the TAF report
+    :param airport: Required. The airport that issued the TAF report
     :type airport: str
-    :param valid_from: The starting time point that this TAF report is valid
+    :param valid_from: Required. The starting time point that this TAF report
+     is valid
     :type valid_from: datetime
-    :param valid_to: The ending time point that this TAF report is valid
+    :param valid_to: Required. The ending time point that this TAF report is
+     valid
     :type valid_to: datetime
     :param predictions: A list of forecast predictions in the TAF
     :type predictions:
      list[~emsapi.models.AdiEmsWebApiV2DtoWeatherTafPrediction]
-    :param header_text: The header text for the TAF
+    :param header_text: Required. The header text for the TAF
     :type header_text: str
     :param flight_match_type: The time and place relative to a specific flight
      that this forecast data would match to. Possible values include: 'none',
@@ -58,14 +62,14 @@ class AdiEmsWebApiV2DtoWeatherTafTafReport(Model):
         'matched_prediction': {'key': 'matchedPrediction', 'type': 'AdiEmsWebApiV2DtoWeatherTafPrediction'},
     }
 
-    def __init__(self, issued, airport, valid_from, valid_to, header_text, parse_errors=None, predictions=None, flight_match_type=None, matched_prediction=None):
-        super(AdiEmsWebApiV2DtoWeatherTafTafReport, self).__init__()
-        self.parse_errors = parse_errors
-        self.issued = issued
-        self.airport = airport
-        self.valid_from = valid_from
-        self.valid_to = valid_to
-        self.predictions = predictions
-        self.header_text = header_text
-        self.flight_match_type = flight_match_type
-        self.matched_prediction = matched_prediction
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherTafTafReport, self).__init__(**kwargs)
+        self.parse_errors = kwargs.get('parse_errors', None)
+        self.issued = kwargs.get('issued', None)
+        self.airport = kwargs.get('airport', None)
+        self.valid_from = kwargs.get('valid_from', None)
+        self.valid_to = kwargs.get('valid_to', None)
+        self.predictions = kwargs.get('predictions', None)
+        self.header_text = kwargs.get('header_text', None)
+        self.flight_match_type = kwargs.get('flight_match_type', None)
+        self.matched_prediction = kwargs.get('matched_prediction', None)

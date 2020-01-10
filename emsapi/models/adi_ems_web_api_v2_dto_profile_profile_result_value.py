@@ -12,7 +12,10 @@ class AdiEmsWebApiV2DtoProfileProfileResultValue(Model):
     """Encapsulates information about a profile results value (measurement or
     timepoint).
 
-    :param item_id: The integer ID of the result value in the profile
+    All required parameters must be populated in order to send to Azure.
+
+    :param item_id: Required. The integer ID of the result value in the
+     profile
     :type item_id: int
     :param data_value: The computed data value for the result
     :type data_value: float
@@ -27,7 +30,7 @@ class AdiEmsWebApiV2DtoProfileProfileResultValue(Model):
         'data_value': {'key': 'dataValue', 'type': 'float'},
     }
 
-    def __init__(self, item_id, data_value=None):
-        super(AdiEmsWebApiV2DtoProfileProfileResultValue, self).__init__()
-        self.item_id = item_id
-        self.data_value = data_value
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfileResultValue, self).__init__(**kwargs)
+        self.item_id = kwargs.get('item_id', None)
+        self.data_value = kwargs.get('data_value', None)

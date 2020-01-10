@@ -29,7 +29,7 @@ class AdiEmsWebApiV2DtoUploadUploadResult(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, transfer_successful=None, message=None):
-        super(AdiEmsWebApiV2DtoUploadUploadResult, self).__init__()
-        self.transfer_successful = transfer_successful
-        self.message = message
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadResult, self).__init__(**kwargs)
+        self.transfer_successful = kwargs.get('transfer_successful', None)
+        self.message = kwargs.get('message', None)

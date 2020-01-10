@@ -28,9 +28,9 @@ class AdiEmsWebSharedTableauRestProject(Model):
         'content_permissions': {'key': 'contentPermissions', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, description=None, content_permissions=None):
-        super(AdiEmsWebSharedTableauRestProject, self).__init__()
-        self.id = id
-        self.name = name
-        self.description = description
-        self.content_permissions = content_permissions
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestProject, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
+        self.content_permissions = kwargs.get('content_permissions', None)

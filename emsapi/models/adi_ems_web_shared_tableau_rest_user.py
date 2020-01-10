@@ -31,10 +31,10 @@ class AdiEmsWebSharedTableauRestUser(Model):
         'external_auth_user_id': {'key': 'externalAuthUserId', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, site_role=None, last_login=None, external_auth_user_id=None):
-        super(AdiEmsWebSharedTableauRestUser, self).__init__()
-        self.id = id
-        self.name = name
-        self.site_role = site_role
-        self.last_login = last_login
-        self.external_auth_user_id = external_auth_user_id
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestUser, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.site_role = kwargs.get('site_role', None)
+        self.last_login = kwargs.get('last_login', None)
+        self.external_auth_user_id = kwargs.get('external_auth_user_id', None)

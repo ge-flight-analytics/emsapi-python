@@ -22,7 +22,7 @@ class AdiEmsWebApiV2ModelTableauTableauServer(Model):
         'site': {'key': 'site', 'type': 'str'},
     }
 
-    def __init__(self, url=None, site=None):
-        super(AdiEmsWebApiV2ModelTableauTableauServer, self).__init__()
-        self.url = url
-        self.site = site
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelTableauTableauServer, self).__init__(**kwargs)
+        self.url = kwargs.get('url', None)
+        self.site = kwargs.get('site', None)

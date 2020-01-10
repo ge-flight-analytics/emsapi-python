@@ -56,15 +56,15 @@ class AdiEmsWebApiV2DtoParameterSetParameterSetItem(Model):
         'line_style': {'key': 'lineStyle', 'type': 'str'},
     }
 
-    def __init__(self, chart_index=None, parameter=None, custom_name=None, color=None, custom_range=None, custom_digits_after_decimal=None, line_width=None, display_sample_marker=None, sample_marker_shape=None, line_style=None):
-        super(AdiEmsWebApiV2DtoParameterSetParameterSetItem, self).__init__()
-        self.chart_index = chart_index
-        self.parameter = parameter
-        self.custom_name = custom_name
-        self.color = color
-        self.custom_range = custom_range
-        self.custom_digits_after_decimal = custom_digits_after_decimal
-        self.line_width = line_width
-        self.display_sample_marker = display_sample_marker
-        self.sample_marker_shape = sample_marker_shape
-        self.line_style = line_style
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoParameterSetParameterSetItem, self).__init__(**kwargs)
+        self.chart_index = kwargs.get('chart_index', None)
+        self.parameter = kwargs.get('parameter', None)
+        self.custom_name = kwargs.get('custom_name', None)
+        self.color = kwargs.get('color', None)
+        self.custom_range = kwargs.get('custom_range', None)
+        self.custom_digits_after_decimal = kwargs.get('custom_digits_after_decimal', None)
+        self.line_width = kwargs.get('line_width', None)
+        self.display_sample_marker = kwargs.get('display_sample_marker', None)
+        self.sample_marker_shape = kwargs.get('sample_marker_shape', None)
+        self.line_style = kwargs.get('line_style', None)

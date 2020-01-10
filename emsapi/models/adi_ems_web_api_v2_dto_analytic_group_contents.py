@@ -24,7 +24,7 @@ class AdiEmsWebApiV2DtoAnalyticGroupContents(Model):
         'analytics': {'key': 'analytics', 'type': '[AdiEmsWebApiV2DtoAnalyticInfo]'},
     }
 
-    def __init__(self, groups=None, analytics=None):
-        super(AdiEmsWebApiV2DtoAnalyticGroupContents, self).__init__()
-        self.groups = groups
-        self.analytics = analytics
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAnalyticGroupContents, self).__init__(**kwargs)
+        self.groups = kwargs.get('groups', None)
+        self.analytics = kwargs.get('analytics', None)

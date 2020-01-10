@@ -84,13 +84,13 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['Accept'] = 'application/json'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+        request = self._client.get(url, query_parameters, header_parameters)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -146,6 +146,7 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
@@ -154,9 +155,8 @@ class AnalyticOperations(object):
         body_content = self._serialize.body(analytic_id, 'AdiEmsWebApiV2ModelAnalyticAnalyticId')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -235,13 +235,13 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['Accept'] = 'application/json'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+        request = self._client.get(url, query_parameters, header_parameters)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -301,6 +301,7 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
@@ -309,9 +310,8 @@ class AnalyticOperations(object):
         body_content = self._serialize.body(analytic_id, 'AdiEmsWebApiV2ModelAnalyticAnalyticId')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -378,13 +378,13 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['Accept'] = 'application/json'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+        request = self._client.get(url, query_parameters, header_parameters)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -460,13 +460,13 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['Accept'] = 'application/json'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+        request = self._client.get(url, query_parameters, header_parameters)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -582,6 +582,7 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
@@ -590,9 +591,8 @@ class AnalyticOperations(object):
         body_content = self._serialize.body(query, 'AdiEmsWebApiV2ModelAnalyticQuery')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 400, 401, 503]:
             raise HttpOperationError(self._deserialize, response)
@@ -629,9 +629,9 @@ class AnalyticOperations(object):
         </ul>
         The list of other properties
         returned are specific to each analytic but may include:
-        <ul><li>Basic\Comments</li><li>Basic\Description</li><li>Information\Comments</li><li>Information\Description</li><li>Information\ UID</li><li>Parameter\Abbreviation</li><li>Parameter\Constant</li><li>Parameter\ID</li><li>Parameter\ Name</li><li>Value\Is
+        <ul><li>Basic\Comments</li><li>Basic\Description</li><li>Information\Comments</li><li>Information\Description</li><li>Information\GUID</li><li>Parameter\Abbreviation</li><li>Parameter\Constant</li><li>Parameter\ID</li><li>Parameter\ZName</li><li>Value\Is
         Discrete</li><li>Value\Operational Rate Max</li><li>Value\Physical
-        Range Min</li><li>Value\ Units</li><li>Value\Wraps</li></ul>.
+        Range Min</li><li>Value\ZUnits</li><li>Value\Wraps</li></ul>.
 
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.
@@ -668,6 +668,7 @@ class AnalyticOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
@@ -676,9 +677,8 @@ class AnalyticOperations(object):
         body_content = self._serialize.body(analytic_id, 'AdiEmsWebApiV2ModelAnalyticAnalyticId')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
 
         if response.status_code not in [200, 401, 503]:
             raise HttpOperationError(self._deserialize, response)

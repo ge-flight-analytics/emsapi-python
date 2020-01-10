@@ -22,7 +22,7 @@ class AdiEmsWebApiCoreDtoDataRange(Model):
         'max': {'key': 'max', 'type': 'float'},
     }
 
-    def __init__(self, min=None, max=None):
-        super(AdiEmsWebApiCoreDtoDataRange, self).__init__()
-        self.min = min
-        self.max = max
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiCoreDtoDataRange, self).__init__(**kwargs)
+        self.min = kwargs.get('min', None)
+        self.max = kwargs.get('max', None)

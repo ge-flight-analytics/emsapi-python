@@ -27,8 +27,8 @@ class AdiEmsWebApiV2ModelTableauTrusted(Model):
         'site': {'key': 'site', 'type': 'str'},
     }
 
-    def __init__(self, trusted_url=None, url=None, site=None):
-        super(AdiEmsWebApiV2ModelTableauTrusted, self).__init__()
-        self.trusted_url = trusted_url
-        self.url = url
-        self.site = site
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelTableauTrusted, self).__init__(**kwargs)
+        self.trusted_url = kwargs.get('trusted_url', None)
+        self.url = kwargs.get('url', None)
+        self.site = kwargs.get('site', None)

@@ -52,17 +52,17 @@ class AdiEmsWebSharedTableauRestSite(Model):
         'guest_access_enabled': {'key': 'guestAccessEnabled', 'type': 'bool'},
     }
 
-    def __init__(self, id=None, name=None, content_url=None, admin_mode=None, user_quota=None, storage_quota=None, state=None, status_reason=None, revision_history_enabled=None, subscribe_others_enabled=None, revision_limit=None, guest_access_enabled=None):
-        super(AdiEmsWebSharedTableauRestSite, self).__init__()
-        self.id = id
-        self.name = name
-        self.content_url = content_url
-        self.admin_mode = admin_mode
-        self.user_quota = user_quota
-        self.storage_quota = storage_quota
-        self.state = state
-        self.status_reason = status_reason
-        self.revision_history_enabled = revision_history_enabled
-        self.subscribe_others_enabled = subscribe_others_enabled
-        self.revision_limit = revision_limit
-        self.guest_access_enabled = guest_access_enabled
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestSite, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.content_url = kwargs.get('content_url', None)
+        self.admin_mode = kwargs.get('admin_mode', None)
+        self.user_quota = kwargs.get('user_quota', None)
+        self.storage_quota = kwargs.get('storage_quota', None)
+        self.state = kwargs.get('state', None)
+        self.status_reason = kwargs.get('status_reason', None)
+        self.revision_history_enabled = kwargs.get('revision_history_enabled', None)
+        self.subscribe_others_enabled = kwargs.get('subscribe_others_enabled', None)
+        self.revision_limit = kwargs.get('revision_limit', None)
+        self.guest_access_enabled = kwargs.get('guest_access_enabled', None)

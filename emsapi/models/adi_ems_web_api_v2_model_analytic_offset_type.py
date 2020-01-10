@@ -11,8 +11,10 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2ModelAnalyticOffsetType(Model):
     """Class for determining which offsets to sample an analytic at.
 
-    :param type: Determines the way to retrieve samples for an analytic query.
-     Possible values include: 'sampledValues', 'fixedRate'
+    All required parameters must be populated in order to send to Azure.
+
+    :param type: Required. Determines the way to retrieve samples for an
+     analytic query. Possible values include: 'sampledValues', 'fixedRate'
     :type type: str or ~emsapi.models.enum
     :param sampling_rate: Offsets are calculated using this sampling rate when
      using 'FixedRate' sampling type.
@@ -28,7 +30,7 @@ class AdiEmsWebApiV2ModelAnalyticOffsetType(Model):
         'sampling_rate': {'key': 'samplingRate', 'type': 'float'},
     }
 
-    def __init__(self, type, sampling_rate=None):
-        super(AdiEmsWebApiV2ModelAnalyticOffsetType, self).__init__()
-        self.type = type
-        self.sampling_rate = sampling_rate
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelAnalyticOffsetType, self).__init__(**kwargs)
+        self.type = kwargs.get('type', None)
+        self.sampling_rate = kwargs.get('sampling_rate', None)

@@ -11,11 +11,13 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaDatabase(Model):
     """Represents a database type exposed by an EMS installation.
 
-    :param id: The unique string identifier for the database
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The unique string identifier for the database
     :type id: str
-    :param plural_name: A plural display name for the database
+    :param plural_name: Required. A plural display name for the database
     :type plural_name: str
-    :param singular_name: A singular display name for the database
+    :param singular_name: Required. A singular display name for the database
     :type singular_name: str
     """
 
@@ -31,8 +33,8 @@ class AdiEmsWebApiV2DtoSchemaDatabase(Model):
         'singular_name': {'key': 'singularName', 'type': 'str'},
     }
 
-    def __init__(self, id, plural_name, singular_name):
-        super(AdiEmsWebApiV2DtoSchemaDatabase, self).__init__()
-        self.id = id
-        self.plural_name = plural_name
-        self.singular_name = singular_name
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaDatabase, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.plural_name = kwargs.get('plural_name', None)
+        self.singular_name = kwargs.get('singular_name', None)

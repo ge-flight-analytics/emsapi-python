@@ -11,51 +11,54 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoProfileProfileResultsEventRecord(Model):
     """Encapsulates information about an event result stored in the database.
 
-    :param record_number: The unique integer ID of the event in the database
+    All required parameters must be populated in order to send to Azure.
+
+    :param record_number: Required. The unique integer ID of the event in the
+     database
     :type record_number: int
-    :param event_type: The unique ID of the event definition that generated
-     the event
+    :param event_type: Required. The unique ID of the event definition that
+     generated the event
     :type event_type: int
-    :param phase_of_flight: The phase of flight where the event occurred
-     (which is a value from the EMS phase of flight list)
+    :param phase_of_flight: Required. The phase of flight where the event
+     occurred (which is a value from the EMS phase of flight list)
     :type phase_of_flight: int
-    :param severity: The event severity (which is a value from the EMS
-     severity list)
+    :param severity: Required. The event severity (which is a value from the
+     EMS severity list)
     :type severity: int
-    :param status: The status of the event (which is a value from the EMS
-     status list). Typically this defaults to
+    :param status: Required. The status of the event (which is a value from
+     the EMS status list). Typically this defaults to
      0 for new events, but in some data-merge scenarios we need to import a
      non-default value
      from a remote system
     :type status: int
-    :param false_positive: The false positive value for the event (a value
-     from the EMS false positive list).
+    :param false_positive: Required. The false positive value for the event (a
+     value from the EMS false positive list).
      Typically this defaults to 0 for new events, but in some data-merge
      scenarios we
      need to import a non-default value from a remote system
     :type false_positive: int
-    :param start_time: The start offset for the event
+    :param start_time: Required. The start offset for the event
     :type start_time: float
-    :param end_time: The end offset for the event
+    :param end_time: Required. The end offset for the event
     :type end_time: float
-    :param global_measurements: The global event measurement results (defined
-     for all events)
+    :param global_measurements: Required. The global event measurement results
+     (defined for all events)
     :type global_measurements:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultValue]
-    :param global_timepoints: The global event timepoint results (defined for
-     all events)
+    :param global_timepoints: Required. The global event timepoint results
+     (defined for all events)
     :type global_timepoints:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultValue]
-    :param local_measurements: The event-specific measurement results
-     (different for each event type)
+    :param local_measurements: Required. The event-specific measurement
+     results (different for each event type)
     :type local_measurements:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultValue]
-    :param local_timepoints: The event-specific timepoint results (different
-     for each event type)
+    :param local_timepoints: Required. The event-specific timepoint results
+     (different for each event type)
     :type local_timepoints:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultValue]
-    :param comments: The event comments. Usually this is empty, but it's
-     required for some data-merge
+    :param comments: Required. The event comments. Usually this is empty, but
+     it's required for some data-merge
      scenarios.
     :type comments:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultComment]
@@ -93,18 +96,18 @@ class AdiEmsWebApiV2DtoProfileProfileResultsEventRecord(Model):
         'comments': {'key': 'comments', 'type': '[AdiEmsWebApiV2DtoProfileProfileResultComment]'},
     }
 
-    def __init__(self, record_number, event_type, phase_of_flight, severity, status, false_positive, start_time, end_time, global_measurements, global_timepoints, local_measurements, local_timepoints, comments):
-        super(AdiEmsWebApiV2DtoProfileProfileResultsEventRecord, self).__init__()
-        self.record_number = record_number
-        self.event_type = event_type
-        self.phase_of_flight = phase_of_flight
-        self.severity = severity
-        self.status = status
-        self.false_positive = false_positive
-        self.start_time = start_time
-        self.end_time = end_time
-        self.global_measurements = global_measurements
-        self.global_timepoints = global_timepoints
-        self.local_measurements = local_measurements
-        self.local_timepoints = local_timepoints
-        self.comments = comments
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoProfileProfileResultsEventRecord, self).__init__(**kwargs)
+        self.record_number = kwargs.get('record_number', None)
+        self.event_type = kwargs.get('event_type', None)
+        self.phase_of_flight = kwargs.get('phase_of_flight', None)
+        self.severity = kwargs.get('severity', None)
+        self.status = kwargs.get('status', None)
+        self.false_positive = kwargs.get('false_positive', None)
+        self.start_time = kwargs.get('start_time', None)
+        self.end_time = kwargs.get('end_time', None)
+        self.global_measurements = kwargs.get('global_measurements', None)
+        self.global_timepoints = kwargs.get('global_timepoints', None)
+        self.local_measurements = kwargs.get('local_measurements', None)
+        self.local_timepoints = kwargs.get('local_timepoints', None)
+        self.comments = kwargs.get('comments', None)

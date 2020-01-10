@@ -74,17 +74,17 @@ class AdiEmsWebApiV2DtoWeatherTafTafQuery(Model):
         'max_results': {'key': 'maxResults', 'type': 'int'},
     }
 
-    def __init__(self, airport_id=None, airport_icao=None, issue_range_from=None, issue_range_to=None, valid_range_from=None, valid_range_to=None, valid_time=None, visibility_minimum=None, visibility_maximum=None, ceiling_minimum=None, ceiling_maximum=None, max_results=None):
-        super(AdiEmsWebApiV2DtoWeatherTafTafQuery, self).__init__()
-        self.airport_id = airport_id
-        self.airport_icao = airport_icao
-        self.issue_range_from = issue_range_from
-        self.issue_range_to = issue_range_to
-        self.valid_range_from = valid_range_from
-        self.valid_range_to = valid_range_to
-        self.valid_time = valid_time
-        self.visibility_minimum = visibility_minimum
-        self.visibility_maximum = visibility_maximum
-        self.ceiling_minimum = ceiling_minimum
-        self.ceiling_maximum = ceiling_maximum
-        self.max_results = max_results
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherTafTafQuery, self).__init__(**kwargs)
+        self.airport_id = kwargs.get('airport_id', None)
+        self.airport_icao = kwargs.get('airport_icao', None)
+        self.issue_range_from = kwargs.get('issue_range_from', None)
+        self.issue_range_to = kwargs.get('issue_range_to', None)
+        self.valid_range_from = kwargs.get('valid_range_from', None)
+        self.valid_range_to = kwargs.get('valid_range_to', None)
+        self.valid_time = kwargs.get('valid_time', None)
+        self.visibility_minimum = kwargs.get('visibility_minimum', None)
+        self.visibility_maximum = kwargs.get('visibility_maximum', None)
+        self.ceiling_minimum = kwargs.get('ceiling_minimum', None)
+        self.ceiling_maximum = kwargs.get('ceiling_maximum', None)
+        self.max_results = kwargs.get('max_results', None)

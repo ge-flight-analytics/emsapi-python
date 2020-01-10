@@ -34,9 +34,9 @@ class AdiEmsWebApiV2DtoTrajectoryValue(Model):
         'altitude': {'key': 'altitude', 'type': 'float'},
     }
 
-    def __init__(self, offset=None, latitude=None, longitude=None, altitude=None):
-        super(AdiEmsWebApiV2DtoTrajectoryValue, self).__init__()
-        self.offset = offset
-        self.latitude = latitude
-        self.longitude = longitude
-        self.altitude = altitude
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoTrajectoryValue, self).__init__(**kwargs)
+        self.offset = kwargs.get('offset', None)
+        self.latitude = kwargs.get('latitude', None)
+        self.longitude = kwargs.get('longitude', None)
+        self.altitude = kwargs.get('altitude', None)

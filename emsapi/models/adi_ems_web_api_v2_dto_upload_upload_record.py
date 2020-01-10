@@ -68,17 +68,17 @@ class AdiEmsWebApiV2DtoUploadUploadRecord(Model):
         'metadata': {'key': 'metadata', 'type': '{str}'},
     }
 
-    def __init__(self, id=None, type=None, name=None, current_count=None, total_size=None, last_transfer=None, last_processing=None, start_time=None, transfer_finish_time=None, processing_finish_time=None, state=None, metadata=None):
-        super(AdiEmsWebApiV2DtoUploadUploadRecord, self).__init__()
-        self.id = id
-        self.type = type
-        self.name = name
-        self.current_count = current_count
-        self.total_size = total_size
-        self.last_transfer = last_transfer
-        self.last_processing = last_processing
-        self.start_time = start_time
-        self.transfer_finish_time = transfer_finish_time
-        self.processing_finish_time = processing_finish_time
-        self.state = state
-        self.metadata = metadata
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadRecord, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.type = kwargs.get('type', None)
+        self.name = kwargs.get('name', None)
+        self.current_count = kwargs.get('current_count', None)
+        self.total_size = kwargs.get('total_size', None)
+        self.last_transfer = kwargs.get('last_transfer', None)
+        self.last_processing = kwargs.get('last_processing', None)
+        self.start_time = kwargs.get('start_time', None)
+        self.transfer_finish_time = kwargs.get('transfer_finish_time', None)
+        self.processing_finish_time = kwargs.get('processing_finish_time', None)
+        self.state = kwargs.get('state', None)
+        self.metadata = kwargs.get('metadata', None)

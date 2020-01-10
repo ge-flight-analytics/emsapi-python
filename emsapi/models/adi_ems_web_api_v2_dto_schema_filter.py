@@ -12,13 +12,15 @@ class AdiEmsWebApiV2DtoSchemaFilter(Model):
     """Represents the operations and arguments that can be used to filter a data
     source query.
 
-    :param operator: The unique string identifier of the operation to perform.
-     Possible values include: 'isTrue', 'isFalse', 'isNull', 'isNotNull',
-     'and', 'or', 'not', 'in', 'notIn', 'plus', 'minus', 'multiply', 'divide',
-     'modulo', 'equal', 'notEqual', 'lessThan', 'lessThanOrEqual',
-     'greaterThan', 'greaterThanOrEqual', 'betweenInclusive',
-     'betweenLowerExclusive', 'betweenUpperExclusive', 'betweenExclusive',
-     'notBetweenInclusive', 'notBetweenLowerExclusive',
+    All required parameters must be populated in order to send to Azure.
+
+    :param operator: Required. The unique string identifier of the operation
+     to perform. Possible values include: 'isTrue', 'isFalse', 'isNull',
+     'isNotNull', 'and', 'or', 'not', 'in', 'notIn', 'plus', 'minus',
+     'multiply', 'divide', 'modulo', 'equal', 'notEqual', 'lessThan',
+     'lessThanOrEqual', 'greaterThan', 'greaterThanOrEqual',
+     'betweenInclusive', 'betweenLowerExclusive', 'betweenUpperExclusive',
+     'betweenExclusive', 'notBetweenInclusive', 'notBetweenLowerExclusive',
      'notBetweenUpperExclusive', 'notBetweenExclusive', 'integerRangeInclude',
      'integerRangeExclude', 'realRangeInclude', 'realRangeExclude', 'like',
      'notLike', 'allWords', 'anyWords', 'noWords', 'dateRelative',
@@ -28,8 +30,8 @@ class AdiEmsWebApiV2DtoSchemaFilter(Model):
      'dateTimeOnAfter', 'dateQuarterOfYear', 'dateMonthOfYear',
      'dateDayOfWeek', 'dateTimeHourOfDay'
     :type operator: str or ~emsapi.models.enum
-    :param args: An ordered list of arguments to provide the operator. The
-     requirements for the arguments depend on which
+    :param args: Required. An ordered list of arguments to provide the
+     operator. The requirements for the arguments depend on which
      operation is being performed
     :type args: list[~emsapi.models.AdiEmsWebApiV2DtoSchemaFilterArgument]
     """
@@ -44,7 +46,7 @@ class AdiEmsWebApiV2DtoSchemaFilter(Model):
         'args': {'key': 'args', 'type': '[AdiEmsWebApiV2DtoSchemaFilterArgument]'},
     }
 
-    def __init__(self, operator, args):
-        super(AdiEmsWebApiV2DtoSchemaFilter, self).__init__()
-        self.operator = operator
-        self.args = args
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaFilter, self).__init__(**kwargs)
+        self.operator = kwargs.get('operator', None)
+        self.args = kwargs.get('args', None)

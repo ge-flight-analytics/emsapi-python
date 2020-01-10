@@ -20,6 +20,6 @@ class AdiEmsWebApiV2DtoTrajectoryValueArray(Model):
         'values': {'key': 'values', 'type': '[AdiEmsWebApiV2DtoTrajectoryValue]'},
     }
 
-    def __init__(self, values=None):
-        super(AdiEmsWebApiV2DtoTrajectoryValueArray, self).__init__()
-        self.values = values
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoTrajectoryValueArray, self).__init__(**kwargs)
+        self.values = kwargs.get('values', None)

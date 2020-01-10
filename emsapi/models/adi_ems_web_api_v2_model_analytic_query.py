@@ -11,8 +11,10 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2ModelAnalyticQuery(Model):
     """Represents the options used to make up an analytic query.
 
-    :param select: An array specifying the analytics to select and return in
-     query results. Use null or an empty array to
+    All required parameters must be populated in order to send to Azure.
+
+    :param select: Required. An array specifying the analytics to select and
+     return in query results. Use null or an empty array to
      return only offset values
     :type select:
      list[~emsapi.models.AdiEmsWebApiV2ModelAnalyticAnalyticSelect]
@@ -73,15 +75,15 @@ class AdiEmsWebApiV2ModelAnalyticQuery(Model):
         'discretes_as_strings': {'key': 'discretesAsStrings', 'type': 'bool'},
     }
 
-    def __init__(self, select, start=None, end=None, offsets=None, size=None, unsampled_data_mode=None, unsampled_value=None, does_not_exist_value=None, offset_type=None, discretes_as_strings=None):
-        super(AdiEmsWebApiV2ModelAnalyticQuery, self).__init__()
-        self.select = select
-        self.start = start
-        self.end = end
-        self.offsets = offsets
-        self.size = size
-        self.unsampled_data_mode = unsampled_data_mode
-        self.unsampled_value = unsampled_value
-        self.does_not_exist_value = does_not_exist_value
-        self.offset_type = offset_type
-        self.discretes_as_strings = discretes_as_strings
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2ModelAnalyticQuery, self).__init__(**kwargs)
+        self.select = kwargs.get('select', None)
+        self.start = kwargs.get('start', None)
+        self.end = kwargs.get('end', None)
+        self.offsets = kwargs.get('offsets', None)
+        self.size = kwargs.get('size', None)
+        self.unsampled_data_mode = kwargs.get('unsampled_data_mode', None)
+        self.unsampled_value = kwargs.get('unsampled_value', None)
+        self.does_not_exist_value = kwargs.get('does_not_exist_value', None)
+        self.offset_type = kwargs.get('offset_type', None)
+        self.discretes_as_strings = kwargs.get('discretes_as_strings', None)

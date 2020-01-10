@@ -11,10 +11,12 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherTafTafParseOptions(Model):
     """Specifies options to use when calling the TAF parse API.
 
-    :param taf: The raw TAF string to parse
+    All required parameters must be populated in order to send to Azure.
+
+    :param taf: Required. The raw TAF string to parse
     :type taf: str
-    :param issue_date: Date information (in ISO 8601 format) the TAF was
-     issued, since the TAF format doesn't include this
+    :param issue_date: Required. Date information (in ISO 8601 format) the TAF
+     was issued, since the TAF format doesn't include this
      information
     :type issue_date: datetime
     """
@@ -29,7 +31,7 @@ class AdiEmsWebApiV2DtoWeatherTafTafParseOptions(Model):
         'issue_date': {'key': 'issueDate', 'type': 'iso-8601'},
     }
 
-    def __init__(self, taf, issue_date):
-        super(AdiEmsWebApiV2DtoWeatherTafTafParseOptions, self).__init__()
-        self.taf = taf
-        self.issue_date = issue_date
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherTafTafParseOptions, self).__init__(**kwargs)
+        self.taf = kwargs.get('taf', None)
+        self.issue_date = kwargs.get('issue_date', None)

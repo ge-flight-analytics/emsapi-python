@@ -26,8 +26,8 @@ class AdiEmsWebApiV2DtoAnalyticSetAnalyticSet(Model):
         'items': {'key': 'items', 'type': '[AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem]'},
     }
 
-    def __init__(self, name=None, description=None, items=None):
-        super(AdiEmsWebApiV2DtoAnalyticSetAnalyticSet, self).__init__()
-        self.name = name
-        self.description = description
-        self.items = items
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAnalyticSetAnalyticSet, self).__init__(**kwargs)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
+        self.items = kwargs.get('items', None)

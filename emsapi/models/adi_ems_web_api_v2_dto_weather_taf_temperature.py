@@ -29,9 +29,9 @@ class AdiEmsWebApiV2DtoWeatherTafTemperature(Model):
         'minimum': {'key': 'minimum', 'type': 'float'},
     }
 
-    def __init__(self, valid_time=None, surface=None, maximum=None, minimum=None):
-        super(AdiEmsWebApiV2DtoWeatherTafTemperature, self).__init__()
-        self.valid_time = valid_time
-        self.surface = surface
-        self.maximum = maximum
-        self.minimum = minimum
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherTafTemperature, self).__init__(**kwargs)
+        self.valid_time = kwargs.get('valid_time', None)
+        self.surface = kwargs.get('surface', None)
+        self.maximum = kwargs.get('maximum', None)
+        self.minimum = kwargs.get('minimum', None)

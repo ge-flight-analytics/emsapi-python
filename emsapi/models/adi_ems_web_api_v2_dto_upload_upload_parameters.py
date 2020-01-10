@@ -30,7 +30,7 @@ class AdiEmsWebApiV2DtoUploadUploadParameters(Model):
         'url': {'key': 'url', 'type': 'str'},
     }
 
-    def __init__(self, transfer_id=None, url=None):
-        super(AdiEmsWebApiV2DtoUploadUploadParameters, self).__init__()
-        self.transfer_id = transfer_id
-        self.url = url
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadParameters, self).__init__(**kwargs)
+        self.transfer_id = kwargs.get('transfer_id', None)
+        self.url = kwargs.get('url', None)

@@ -11,9 +11,11 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoSchemaFieldGroup(Model):
     """Represents a folder in the data source tree of an EMS installation.
 
-    :param id: The unique string identifier for the field group
+    All required parameters must be populated in order to send to Azure.
+
+    :param id: Required. The unique string identifier for the field group
     :type id: str
-    :param name: The display name for the field group
+    :param name: Required. The display name for the field group
     :type name: str
     :param groups: An ordered list of child groups contained in a field group
     :type groups: list[~emsapi.models.AdiEmsWebApiV2DtoSchemaFieldGroup]
@@ -33,9 +35,9 @@ class AdiEmsWebApiV2DtoSchemaFieldGroup(Model):
         'fields': {'key': 'fields', 'type': '[AdiEmsWebApiV2DtoSchemaField]'},
     }
 
-    def __init__(self, id, name, groups=None, fields=None):
-        super(AdiEmsWebApiV2DtoSchemaFieldGroup, self).__init__()
-        self.id = id
-        self.name = name
-        self.groups = groups
-        self.fields = fields
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoSchemaFieldGroup, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.groups = kwargs.get('groups', None)
+        self.fields = kwargs.get('fields', None)

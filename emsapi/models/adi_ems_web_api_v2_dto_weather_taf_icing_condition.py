@@ -36,8 +36,8 @@ class AdiEmsWebApiV2DtoWeatherTafIcingCondition(Model):
         'maximum': {'key': 'maximum', 'type': 'int'},
     }
 
-    def __init__(self, intensity=None, minimum=None, maximum=None):
-        super(AdiEmsWebApiV2DtoWeatherTafIcingCondition, self).__init__()
-        self.intensity = intensity
-        self.minimum = minimum
-        self.maximum = maximum
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherTafIcingCondition, self).__init__(**kwargs)
+        self.intensity = kwargs.get('intensity', None)
+        self.minimum = kwargs.get('minimum', None)
+        self.maximum = kwargs.get('maximum', None)

@@ -52,14 +52,14 @@ class AdiEmsWebApiV2DtoWeatherMetarMetarQuery(Model):
         'max_results': {'key': 'maxResults', 'type': 'int'},
     }
 
-    def __init__(self, airport_id=None, airport_icao=None, observation_range_from=None, observation_range_to=None, visibility_minimum=None, visibility_maximum=None, ceiling_minimum=None, ceiling_maximum=None, max_results=None):
-        super(AdiEmsWebApiV2DtoWeatherMetarMetarQuery, self).__init__()
-        self.airport_id = airport_id
-        self.airport_icao = airport_icao
-        self.observation_range_from = observation_range_from
-        self.observation_range_to = observation_range_to
-        self.visibility_minimum = visibility_minimum
-        self.visibility_maximum = visibility_maximum
-        self.ceiling_minimum = ceiling_minimum
-        self.ceiling_maximum = ceiling_maximum
-        self.max_results = max_results
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherMetarMetarQuery, self).__init__(**kwargs)
+        self.airport_id = kwargs.get('airport_id', None)
+        self.airport_icao = kwargs.get('airport_icao', None)
+        self.observation_range_from = kwargs.get('observation_range_from', None)
+        self.observation_range_to = kwargs.get('observation_range_to', None)
+        self.visibility_minimum = kwargs.get('visibility_minimum', None)
+        self.visibility_maximum = kwargs.get('visibility_maximum', None)
+        self.ceiling_minimum = kwargs.get('ceiling_minimum', None)
+        self.ceiling_maximum = kwargs.get('ceiling_maximum', None)
+        self.max_results = kwargs.get('max_results', None)

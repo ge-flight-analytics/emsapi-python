@@ -25,7 +25,7 @@ class AdiEmsWebApiV2DtoUploadUploadProcessingFlightStatus(Model):
         'flight_status': {'key': 'flightStatus', 'type': 'str'},
     }
 
-    def __init__(self, flight_record=None, flight_status=None):
-        super(AdiEmsWebApiV2DtoUploadUploadProcessingFlightStatus, self).__init__()
-        self.flight_record = flight_record
-        self.flight_status = flight_status
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoUploadUploadProcessingFlightStatus, self).__init__(**kwargs)
+        self.flight_record = kwargs.get('flight_record', None)
+        self.flight_status = kwargs.get('flight_status', None)

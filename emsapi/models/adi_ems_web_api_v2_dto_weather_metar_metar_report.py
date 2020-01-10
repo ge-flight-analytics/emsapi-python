@@ -11,16 +11,18 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoWeatherMetarMetarReport(Model):
     """Represents an individual METAR report.
 
-    :param unparsed: The unparsed but de-identified METAR string
+    All required parameters must be populated in order to send to Azure.
+
+    :param unparsed: Required. The unparsed but de-identified METAR string
     :type unparsed: str
-    :param airport: The airport that issued the METAR report
+    :param airport: Required. The airport that issued the METAR report
     :type airport: str
     :param issued: The day, hour and minute the METAR was issued. May also
      optionally contain the month and year issued if the
      date contextual information is available
     :type issued: datetime
-    :param is_automatic: Indicates whether the original METAR data was
-     automatically generated
+    :param is_automatic: Required. Indicates whether the original METAR data
+     was automatically generated
     :type is_automatic: bool
     :param wind_direction: The wind direction in degrees or, if wind is
      variable this will be zero
@@ -55,8 +57,8 @@ class AdiEmsWebApiV2DtoWeatherMetarMetarReport(Model):
     :param recent_weather: A list of recently occurring weather phenomenons
     :type recent_weather:
      list[~emsapi.models.AdiEmsWebApiV2DtoWeatherWeatherPhenomenon]
-    :param is_weather_data_valid: Indicates whether all current/recent
-     reported weather phenomenons had valid sensor data
+    :param is_weather_data_valid: Required. Indicates whether all
+     current/recent reported weather phenomenons had valid sensor data
     :type is_weather_data_valid: bool
     :param cloud_conditions: A list of current cloud conditions
     :type cloud_conditions:
@@ -64,7 +66,7 @@ class AdiEmsWebApiV2DtoWeatherMetarMetarReport(Model):
     :param ceiling: The lowest "Broken", "Overcast" or "Vertical Visibility"
      cloud conditions associated with this object
     :type ceiling: ~emsapi.models.AdiEmsWebApiV2DtoWeatherCloudCondition
-    :param is_cloud_data_valid: Indicates whether all reported cloud
+    :param is_cloud_data_valid: Required. Indicates whether all reported cloud
      conditions had valid sensor data
     :type is_cloud_data_valid: bool
     :param max_cloud_height: The maximum height of the base of a visual
@@ -122,30 +124,30 @@ class AdiEmsWebApiV2DtoWeatherMetarMetarReport(Model):
         'flight_match_type': {'key': 'flightMatchType', 'type': 'str'},
     }
 
-    def __init__(self, unparsed, airport, is_automatic, is_weather_data_valid, is_cloud_data_valid, issued=None, wind_direction=None, wind_speed=None, wind_gust_speed=None, wind_direction_variable_start=None, wind_direction_variable_end=None, effective_visibility=None, exact_visibility=None, visibility_qualifier=None, runway_visual_ranges=None, current_weather=None, recent_weather=None, cloud_conditions=None, ceiling=None, max_cloud_height=None, temperature=None, dewpoint=None, pressure=None, runway_conditions=None, flight_match_type=None):
-        super(AdiEmsWebApiV2DtoWeatherMetarMetarReport, self).__init__()
-        self.unparsed = unparsed
-        self.airport = airport
-        self.issued = issued
-        self.is_automatic = is_automatic
-        self.wind_direction = wind_direction
-        self.wind_speed = wind_speed
-        self.wind_gust_speed = wind_gust_speed
-        self.wind_direction_variable_start = wind_direction_variable_start
-        self.wind_direction_variable_end = wind_direction_variable_end
-        self.effective_visibility = effective_visibility
-        self.exact_visibility = exact_visibility
-        self.visibility_qualifier = visibility_qualifier
-        self.runway_visual_ranges = runway_visual_ranges
-        self.current_weather = current_weather
-        self.recent_weather = recent_weather
-        self.is_weather_data_valid = is_weather_data_valid
-        self.cloud_conditions = cloud_conditions
-        self.ceiling = ceiling
-        self.is_cloud_data_valid = is_cloud_data_valid
-        self.max_cloud_height = max_cloud_height
-        self.temperature = temperature
-        self.dewpoint = dewpoint
-        self.pressure = pressure
-        self.runway_conditions = runway_conditions
-        self.flight_match_type = flight_match_type
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoWeatherMetarMetarReport, self).__init__(**kwargs)
+        self.unparsed = kwargs.get('unparsed', None)
+        self.airport = kwargs.get('airport', None)
+        self.issued = kwargs.get('issued', None)
+        self.is_automatic = kwargs.get('is_automatic', None)
+        self.wind_direction = kwargs.get('wind_direction', None)
+        self.wind_speed = kwargs.get('wind_speed', None)
+        self.wind_gust_speed = kwargs.get('wind_gust_speed', None)
+        self.wind_direction_variable_start = kwargs.get('wind_direction_variable_start', None)
+        self.wind_direction_variable_end = kwargs.get('wind_direction_variable_end', None)
+        self.effective_visibility = kwargs.get('effective_visibility', None)
+        self.exact_visibility = kwargs.get('exact_visibility', None)
+        self.visibility_qualifier = kwargs.get('visibility_qualifier', None)
+        self.runway_visual_ranges = kwargs.get('runway_visual_ranges', None)
+        self.current_weather = kwargs.get('current_weather', None)
+        self.recent_weather = kwargs.get('recent_weather', None)
+        self.is_weather_data_valid = kwargs.get('is_weather_data_valid', None)
+        self.cloud_conditions = kwargs.get('cloud_conditions', None)
+        self.ceiling = kwargs.get('ceiling', None)
+        self.is_cloud_data_valid = kwargs.get('is_cloud_data_valid', None)
+        self.max_cloud_height = kwargs.get('max_cloud_height', None)
+        self.temperature = kwargs.get('temperature', None)
+        self.dewpoint = kwargs.get('dewpoint', None)
+        self.pressure = kwargs.get('pressure', None)
+        self.runway_conditions = kwargs.get('runway_conditions', None)
+        self.flight_match_type = kwargs.get('flight_match_type', None)

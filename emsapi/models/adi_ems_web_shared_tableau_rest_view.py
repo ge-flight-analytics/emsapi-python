@@ -25,8 +25,8 @@ class AdiEmsWebSharedTableauRestView(Model):
         'content_url': {'key': 'contentUrl', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, content_url=None):
-        super(AdiEmsWebSharedTableauRestView, self).__init__()
-        self.id = id
-        self.name = name
-        self.content_url = content_url
+    def __init__(self, **kwargs):
+        super(AdiEmsWebSharedTableauRestView, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.content_url = kwargs.get('content_url', None)

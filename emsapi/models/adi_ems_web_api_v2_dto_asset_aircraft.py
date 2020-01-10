@@ -36,10 +36,10 @@ class AdiEmsWebApiV2DtoAssetAircraft(Model):
         'is_approved': {'key': 'isApproved', 'type': 'bool'},
     }
 
-    def __init__(self, id=None, description=None, fleet_ids=None, is_active=None, is_approved=None):
-        super(AdiEmsWebApiV2DtoAssetAircraft, self).__init__()
-        self.id = id
-        self.description = description
-        self.fleet_ids = fleet_ids
-        self.is_active = is_active
-        self.is_approved = is_approved
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAssetAircraft, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.description = kwargs.get('description', None)
+        self.fleet_ids = kwargs.get('fleet_ids', None)
+        self.is_active = kwargs.get('is_active', None)
+        self.is_approved = kwargs.get('is_approved', None)

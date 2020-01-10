@@ -12,17 +12,20 @@ class AdiEmsWebApiV2DtoEmsProfileEmsProfile(Model):
     """Represents an APM (Automated Parameter Measurement) profile in an EMS
     system.
 
-    :param profile_id: The local identifier for a profile
+    All required parameters must be populated in order to send to Azure.
+
+    :param profile_id: Required. The local identifier for a profile
     :type profile_id: int
-    :param profile_guid: The unique identifier of a profile in the system
+    :param profile_guid: Required. The unique identifier of a profile in the
+     system
     :type profile_guid: str
-    :param profile_name: The name of the profile
+    :param profile_name: Required. The name of the profile
     :type profile_name: str
-    :param library: Flag for if a profile is a library profile
+    :param library: Required. Flag for if a profile is a library profile
     :type library: bool
-    :param current_version: The version of the profile
+    :param current_version: Required. The version of the profile
     :type current_version: int
-    :param path: Path to the profile's location
+    :param path: Required. Path to the profile's location
     :type path: str
     """
 
@@ -44,11 +47,11 @@ class AdiEmsWebApiV2DtoEmsProfileEmsProfile(Model):
         'path': {'key': 'path', 'type': 'str'},
     }
 
-    def __init__(self, profile_id, profile_guid, profile_name, library, current_version, path):
-        super(AdiEmsWebApiV2DtoEmsProfileEmsProfile, self).__init__()
-        self.profile_id = profile_id
-        self.profile_guid = profile_guid
-        self.profile_name = profile_name
-        self.library = library
-        self.current_version = current_version
-        self.path = path
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoEmsProfileEmsProfile, self).__init__(**kwargs)
+        self.profile_id = kwargs.get('profile_id', None)
+        self.profile_guid = kwargs.get('profile_guid', None)
+        self.profile_name = kwargs.get('profile_name', None)
+        self.library = kwargs.get('library', None)
+        self.current_version = kwargs.get('current_version', None)
+        self.path = kwargs.get('path', None)

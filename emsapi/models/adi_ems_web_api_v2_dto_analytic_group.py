@@ -26,8 +26,8 @@ class AdiEmsWebApiV2DtoAnalyticGroup(Model):
         'description': {'key': 'description', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, description=None):
-        super(AdiEmsWebApiV2DtoAnalyticGroup, self).__init__()
-        self.id = id
-        self.name = name
-        self.description = description
+    def __init__(self, **kwargs):
+        super(AdiEmsWebApiV2DtoAnalyticGroup, self).__init__(**kwargs)
+        self.id = kwargs.get('id', None)
+        self.name = kwargs.get('name', None)
+        self.description = kwargs.get('description', None)
