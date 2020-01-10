@@ -1,39 +1,46 @@
 import getpass
 import json
-import msrest
 import pandas
 import requests
 import sys
 
 from emsapi import emsapi
-from msrest import authentication
 
 url = "https://ems.efoqa.com/api/"
 user = input('Enter your EFOQA username: ')
 pwd = getpass.getpass(prompt = 'Enter your EFOQA password: ')
 
-# Authenticate with EMS API
-authorizationUrl = url + "token"
-body = "grant_type=password&username=" + user +"&password=" + pwd
-authorizationResponse = requests.post(authorizationUrl, body)
-
-# Describe the results of the test
-if authorizationResponse.ok:
-    print("Successfully authenticated with the EMS API and retrieved a bearer token.")
-else:
-    print("Unable to authenticate with the EMS API.")
-    
-# Set up the autorest session with the basic authentication type using bearer token.
-
-session = authentication.BasicTokenAuthentication(json.loads(authorizationResponse.text))
-client = emsapi(session, url)
+client = emsapi.create(user, pwd, url)
 
 # Print the systems the user has access to in order to demonstrate the API.
 systems = client.ems_system.get_ems_systems()
-
-# Create a list out of the systems list that contains only the information we want.
 sysList = list(map(lambda system: [system.id, system.name, system.description], systems))
 df = pandas.DataFrame(sysList, columns=['id', 'name', 'description'])
 
 print("You have access to the following systems:")
 print(df.head())
+
+# Print the offsets for a parameter of a flight.
+
+# Baro-corrected altitude
+altitudeId = "H4sIAAAAAAAEAG2Q0QuCMBDG34P+B/HdbZVUiApBPQT2kgi9rrn0YM7aZvbnN5JVUvdwfHD34/vu4iPXrbjTs+D7kksDF+DKezRC6ggSvzbmGmHc9z3qF6hVFZ4TMsOnQ5azmjc0AKkNlYz7A/Mm9GusUUkNZa00ijLj+BCTFd6UgApF/XQ68bx4SMHVvkyd1GjX6KytgFER46+FEZBfObOZ2db6eBBJEIlvVGfz4P+LhYRbZ29NyVCzgJD1MgitDIhrrj6+P/h04obj36VPLpuOeVIBAAA="
+
+# A flight that is known to exist
+flightId = 190
+
+# EMS7 - the demo system.
+emsId = 5
+
+# Pull out altitude with 100 samples through the file.
+query = {
+    "select": [
+        {
+            "analyticId": altitudeId
+        }
+    ],
+    "size": 100
+}
+
+# Execute the API call.
+altitude = client.analytic.get_query_results(emsId, flightId, query)
+print(altitude.offsets)

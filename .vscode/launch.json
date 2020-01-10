@@ -27,6 +27,13 @@
                 "--file", "${workspaceFolder}/ems-api.json"
             ],
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: autorest_patch.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/autorest_patch.py",
+            "console": "integratedTerminal"
         }
     ]
 }
