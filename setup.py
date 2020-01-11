@@ -17,7 +17,7 @@ setup(name = 'emsapi',
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License'
         ],
-      url = 'https://github.com/ge-flight-analytics/ems-api-python',
+      url = 'https://github.com/ge-flight-analytics/emsapi-python',
       author = 'GE Flight Analytics',
       author_email = 'AviationAdiSupport@ge.com',
       license = 'MIT',
