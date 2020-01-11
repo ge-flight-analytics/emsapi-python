@@ -68,3 +68,25 @@ class EmsApiTokenAuthentication(authentication.Authentication):
         header = "{} {}".format(self.scheme, self.token['access_token'])
         session.headers['Authorization'] = header
         return session
+    
+class EmsSystemHelper:
+    systems = None
+    
+    @staticmethod
+    def find_id(client, name):
+        # Cache these, they shouldn't change during runtime.
+        if not EmsSystemHelper.systems:
+            EmsSystemHelper.systems = client.ems_system.get_ems_systems()
+        
+        # We don't require an exact match (use find).
+        matching = [s 
+                    for s in EmsSystemHelper.systems 
+                    if s.name.lower().find(name.lower()) > -1]
+
+        # But we do require there to be exactly one match, to avoid ambiguity.
+        if len(matching) == 0:
+            raise ValueError(f"An EMS system was not found with the name {name}")
+        elif len(matching) == 1:
+            return matching[0].id
+        else:
+            raise ValueError(f"More than one EMS system was found with the name {name}")

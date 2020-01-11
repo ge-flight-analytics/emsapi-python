@@ -1,124 +1,80 @@
-# Typings for the EMS API
+# Python Client Library for the EMS API
 
-Strongly-typed bindings are useful when programming against an API because they help to avoid unintentional errors by forcing the existance of a property as well as making the model more discoverable. This readme will detail how to generate typings for use with the EMS API.
+This project is a client library for the EMS API that is generated using [AutoRest](https://github.com/Azure/autorest). It is intended to be a direct mirror of the routes and models exposed by the EMS API. This makes the package suitable for purpose-built projects that want to use the low-level API routes directly with minimal effort.
 
-## Generate strongly typed files
+For data science and exploratory use, consider using the [emsPy](https://github.com/ge-flight-analytics/emspy) package instead.
 
-We use [AutoRest](https://github.com/Azure/autorest) to generate the typing files. Install that package using the instructions in github.
+## Getting Started
 
-*Important*: When running autorest commands, if you encounter npm errors like "Installs platform-specific .NET framework", make sure to run the autorest command after you've (1) cleared your HTTP proxy and (2) are not on a VPN.
-
-*Important*: If you receive an error like:
+### Install via pip
 
 ```bash
-Error: Unable to create directory '/Users/<usr>/.autorest/@microsoft.azure_autorest.typescript@2.3.3/'.
+pip install emsapi
 ```
 
-then you may need to run autorest with sudo the first time in order to install the typescript generator.
+### Create an API client
 
-Autorest has the ability to generate typings in a lot of different languages, but documented below are the languages we are using currently.
+In your code, create an API client object using an endpoint, username, and password:
 
-### Autorest input (OpenAPI/Swagger.json)
+```python
+from emsapi import emsapi
 
-Autorest consumes a swagger.json file to generate typing files. For the EMS API, the file can be accessed in the root of this repository:
-`ems-api.json`
+user = "..."
+password = "..."
+url = "https://ems.efoqa.com/api/"
 
-You can also download the newest copy from the ems api endpoint:
-[EMS API Swagger.json](https://ems.efoqa.com/api/v2/swagger)
-
-
-### python
-
-To use python wrappers, the msrest package must be installed:
-
-```bash
-pip3 install msrest
-pip3 install msrestazure
+client = emsapi.create(user, password, url)
 ```
 
-#### python file generation
+### Retrieve EMS system id
 
-See <https://github.com/Azure/autorest.python> for more information.
+If the EMS system id is not known, it should be retrieved before any further requests:
 
-`Run from the root of ems-api-sdk`
-
-```bash
-autorest --input-file=ems-api.json --python --keep-version-file --output-folder=. --add-credentials --override-client-name=emsapi
+```python
+ems_id = client.find_ems_system_id('ems7-app')
 ```
 
-**NOTE**: The output of using autorest on the EMS API does not handle comments with \N or \U in them. Both of these occur in the output file analytic_operations.py. This seems to be a defect in the autorest generation. I filed an issue here:
-<https://github.com/Azure/autorest.python/issues/84>
+### Access routes on the API client
 
+Different routes are exposed as members of the `client` object created in the previous step. These routes match the sections in the `API Explorer` documentation in the web UI. Most of them need the ems system id (see previous step).
 
-To work around this for the time being, I added a single space between the backslash and the letter manually. Hopefully the autorest guys will come up with a good fix for this and that will not be necessary every time the wrappers are generated.
-
-#### Using the client files
-
-See the file `examples/ge_connection.ipynb` for an example of connecting from a GE machine.
-
-##### Update anaconda
-
-Update all of the dependencies of anaconda if you are using it.
-
-```bash
-conda update --all
+```python
+# The routes exposed by the client:
+client.analytic
+client.analytic_set
+client.asset
+client.database
+client.ems_profile
+client.ems_system
+client.navigation
+client.parameter_set
+client.profile
+client.tableau
+client.trajectory
+client.transfer
+client.upload
+client.weather
 ```
 
-#### Networking setup
+Examples:
 
-The hardest thing in getting these wrappers to work is getting the proxies and SSL certificates
-set up properly on the system. Luckily, this should be a one-time setup and after things work
-then you shouldn't have to muck with the settings any more.
+```python
+# List the root analytic group contents
+groups = client.analytic.get_analytic_group_contents(ems_id)
 
-There are 2 steps for a GE machine. Other corporate networks will be different but may share some
-of the same challenges.
+# Query a specific analytic
+flight = 123
+altitude_id = "H4sIAAAAAAAEAG2Q0QuCMBDG34P+B/HdbZVUiApBPQT2kgi9rrn0YM7aZvbnN5JVUvdwfHD34/vu4iPXrbjTs+D7kksDF+DKezRC6ggSvzbmGmHc9z3qF6hVFZ4TMsOnQ5azmjc0AKkNlYz7A/Mm9GusUUkNZa00ijLj+BCTFd6UgApF/XQ68bx4SMHVvkyd1GjX6KytgFER46+FEZBfObOZ2db6eBBJEIlvVGfz4P+LhYRbZ29NyVCzgJD1MgitDIhrrj6+P/h04obj36VPLpuOeVIBAAA="
 
-##### Proxy (anaconda)
+# Pull out altitude with 100 samples through the file.
+query = {
+    "select": [
+        {
+            "analyticId": altitudeId
+        }
+    ],
+    "size": 100
+}
 
-If you are using anaconda as your Jupyter host, then you'll have to modify the anaconda setup files.
-
-Edit `.condarc` to specify the proxies to use:
-
-```text
-proxy_servers:
-  http: PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
-  https: PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:443
+altitude = client.analytic.get_query_results(ems_id, flight, query)
 ```
-
-For GE employees, there is a little more information provided in [this Yammer ariticle](https://www.yammer.com/ge.com/#/Threads/show?threadId=1183823411&search_origin=global&scoring=linear1Y-prankie-group-private-higher&match=any-exact&search_sort=relevance&page=1&search=%2Bproxy%20%2Bjupyter).
-
-##### Conda validation
-
-One helpful command that will make sure the proxies and certificate paths are correct is to run:
-
-```bash
-./conda info
-```
-
-This command will display error information if, for example, the certificate that was installed above is not accessible.
-
-## Releasing 
-
-Run the following steps to release a new version:
-
-```
-git checkout maaster
-git pull
-pip install -r dev-requirements.txt
-git config --global core.safecrlf false
-bump2version patch
-git push origin master --tags
-python setup.py sdist bdist_wheel
-twine upload dist/*
-```
-
-* Make sure the python dev dependencies are installed by running `pip install -r dev-requirements.txt`
-* Stash or commit any pending changes to the repository
-* On Windows, set `git config --global core.safecrlf false`. You probably want to turn this back on afterwards if it was set to true
-* If this is a feature release, run `bump2version minor`. If this is a bug fix release, run `bump2version patch`
-    * This will increment the version numbers in the repository, commit the changes, and create a new git tag
-* Push the new commit and the tag to github with `git push origin maater --tags`
-* Generate packages using `python setup.py sdist bdist_wheel`
-* Upload to pypi using `twine upload dist/*`
-
- Steps were generated using [this document](https://realpython.com/pypi-publish-python-package/)

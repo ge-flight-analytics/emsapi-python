@@ -138,7 +138,6 @@ class emsapi(SDKClient):
         self.weather = WeatherOperations(
             self._client, self.config, self._serialize, self._deserialize)
 
-
     @staticmethod
     def create(username, password, url='https://ems.efoqa.com/api'):
         """Creates a new instance of EMS API client. This client will automatically manage 
@@ -151,6 +150,15 @@ class emsapi(SDKClient):
         :param url: The EMS API endpoint to connect to (default: {'https://ems.efoqa.com/api'})
         :type url: str
         """
-        from .auth import EmsApiTokenAuthentication
+        from .extensions import EmsApiTokenAuthentication
         session = EmsApiTokenAuthentication(username, password, url)
         return emsapi(session, url)
+
+    def find_ems_system_id(self, name):
+        """Finds the EMS system id for the given name.
+        
+        :param name: The EMS system name to search for.
+        :type name: str
+        """
+        from .extensions import EmsSystemHelper
+        return EmsSystemHelper.find_id(self, name)

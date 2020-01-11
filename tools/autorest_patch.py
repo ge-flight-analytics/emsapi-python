@@ -3,7 +3,6 @@ Run after regenerating the autorest content to update generated files with custo
 """
 
 create_method = '''
-
     @staticmethod
     def create(username, password, url='https://ems.efoqa.com/api'):
         """Creates a new instance of EMS API client. This client will automatically manage 
@@ -16,9 +15,20 @@ create_method = '''
         :param url: The EMS API endpoint to connect to (default: {'https://ems.efoqa.com/api'})
         :type url: str
         """
-        from .auth import EmsApiTokenAuthentication
+        from .extensions import EmsApiTokenAuthentication
         session = EmsApiTokenAuthentication(username, password, url)
         return emsapi(session, url)
+'''
+
+find_method = '''
+    def find_ems_system_id(self, name):
+        """Finds the EMS system id for the given name.
+        
+        :param name: The EMS system name to search for.
+        :type name: str
+        """
+        from .extensions import EmsSystemHelper
+        return EmsSystemHelper.find_id(self, name)
 '''
 
 import os
@@ -28,3 +38,4 @@ client_file = os.path.join(parent_dir, "emsapi", "emsapi.py")
 
 with open(client_file, "a+") as client:
     client.write(create_method)
+    client.write(find_method)
