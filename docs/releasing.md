@@ -11,6 +11,7 @@ bump2version patch
 git push origin master --tags
 python setup.py sdist bdist_wheel
 twine upload dist/*
+rm dist -rf
 ```
 
 * Make sure the python dev dependencies are installed by running `pip install -r dev-requirements.txt`
