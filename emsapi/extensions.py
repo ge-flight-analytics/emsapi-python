@@ -2,6 +2,7 @@ import json
 import requests
 import logging
 
+from emsapi import emsapi
 from datetime import datetime
 from datetime import timedelta
 from msrest import authentication
@@ -70,17 +71,19 @@ class EmsApiTokenAuthentication(authentication.Authentication):
         return session
     
 class EmsSystemHelper:
-    systems = None
+    systems = {}
     
     @staticmethod
-    def find_id(client, name):
-        # Cache these, they shouldn't change during runtime.
-        if not EmsSystemHelper.systems:
-            EmsSystemHelper.systems = client.ems_system.get_ems_systems()
+    def find_id(client: emsapi, name: str):
+        # Cache by base url
+        url = client.config.base_url
+        cached = EmsSystemHelper.systems.get(url)
+        if not cached:
+            EmsSystemHelper.systems[url] = client.ems_system.get_ems_systems()
         
         # We don't require an exact match (use find).
         matching = [s 
-                    for s in EmsSystemHelper.systems 
+                    for s in EmsSystemHelper.systems[url]
                     if s.name.lower().find(name.lower()) > -1]
 
         # But we do require there to be exactly one match, to avoid ambiguity.
