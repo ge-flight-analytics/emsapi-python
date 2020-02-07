@@ -44,3 +44,51 @@ query = {
 # Execute the API call.
 altitude = client.analytic.get_query_results(emsId, flightId, query)
 print(altitude.offsets)
+
+# Find top 20 flight ids with valid takeoff and landing
+query = {
+  "select": [
+    {
+      "fieldId": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.uid]]]",
+      "aggregate": "none"
+    }
+  ],
+  "filter": {
+      "operator": "and",
+      "args": [
+          {
+              "type": "filter",
+              "value": {
+                  "operator": "isTrue",
+                  "args": [
+                      {
+                          "type": "field",
+                          "value": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.exist-takeoff]]]"
+                      }
+                  ]
+              }
+          },
+          {
+              "type": "filter",
+              "value": {
+                  "operator": "isTrue",
+                  "args": [
+                      {
+                          "type": "field",
+                          "value": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.exist-landing]]]"
+                      }
+                  ]
+              }
+          }
+      ]
+  },
+  "groupBy": [],
+  "orderBy": [],
+  "distinct": True,
+  "top": 20,
+  "format": "display"
+}
+
+result = client.database.get_query_results(emsId, '[ems-core][entity-type][foqa-flights]', query)
+pd = pandas.DataFrame(result.rows, columns=['Flight Record'])
+print(pd)
