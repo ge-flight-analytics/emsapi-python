@@ -26,6 +26,7 @@ class EmsApiTokenAuthentication(authentication.Authentication):
         self.url = url
         self.token = None
         self.expiration = None
+        self.logger = logging.getLogger(__name__)
         if not self.url.endswith('/'):
             self.url = self.url + '/'
 
@@ -41,7 +42,7 @@ class EmsApiTokenAuthentication(authentication.Authentication):
             raise EmsApiAuthError("An EMS API authentication error occurred.", e)
         
         if response.ok:
-            logging.info(f"Retrieved new auth token for {self.url}")
+            self.logger.info(f"Retrieved new auth token for {self.url}")
             self.token = json.loads(response.text)
             
             # Subtract 5 seconds from the expiration time to account for long running requests.
