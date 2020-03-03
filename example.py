@@ -104,16 +104,17 @@ print(pd)
 query['top'] = 800
 
 async_result = client.database.start_async_query(emsId, '[ems-core][entity-type][foqa-flights]', query)
-if hasattr(async_result, 'message'):
-    raise ValueError(f"The async query failed: {result.message}")
-    
+if client.is_error(async_result):
+    error = client.get_error_message(async_result)
+    raise ValueError(error)
+
 async_query_id = async_result.id
 start_index = 0
 batch_size = 100
 while True:
     end_index = start_index + (batch_size - 1)
     result = client.database.read_async_query(emsId, '[ems-core][entity-type][foqa-flights]', async_query_id, start_index, end_index)
-    if hasattr(result, 'message'):
+    if client.is_error(result):
         break # Some kind of error occurred
     
     if result.rows and len(result.rows) > 0:

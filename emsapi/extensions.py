@@ -94,3 +94,23 @@ class EmsSystemHelper:
             return matching[0].id
         else:
             raise ValueError(f"More than one EMS system was found with the name {name}")
+        
+class ErrorHelper:
+    
+    @staticmethod
+    def is_error(response) -> bool:
+        """
+        Returns true if the response is an error
+        """
+        return hasattr(response, 'message') and hasattr(response, 'message_detail')
+    
+    @staticmethod
+    def get_error_message(response) -> str:
+        """
+        Returns the error string if the repsonse is an error, or None otherwise.
+        """
+        if not ErrorHelper.is_error(response):
+            return None
+        
+        message = f"{response.message} {response.message_detail}"
+        return message

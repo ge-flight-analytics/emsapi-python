@@ -162,3 +162,13 @@ class emsapi(SDKClient):
         """
         from .extensions import EmsSystemHelper
         return EmsSystemHelper.find_id(self, name)
+
+    def is_error(self, response):
+        """Returns True if the response represents an error"""
+        from .extensions import ErrorHelper
+        return ErrorHelper.is_error(response)
+
+    def get_error_message(self, response):
+        """Returns the error message if there was an error in the request, or None otherwise"""
+        from .extensions import ErrorHelper
+        return ErrorHelper.get_error_message(response)

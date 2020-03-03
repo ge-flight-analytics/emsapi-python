@@ -31,6 +31,20 @@ find_method = '''
         return EmsSystemHelper.find_id(self, name)
 '''
 
+is_error_method = '''
+    def is_error(self, response):
+        """Returns True if the response represents an error"""
+        from .extensions import ErrorHelper
+        return ErrorHelper.is_error(response)
+'''
+
+get_error_message_method = '''
+    def get_error_message(self, response):
+        """Returns the error message if there was an error in the request, or None otherwise"""
+        from .extensions import ErrorHelper
+        return ErrorHelper.get_error_message(response)
+'''
+
 import os
 this_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(this_dir)
@@ -39,3 +53,5 @@ client_file = os.path.join(parent_dir, "emsapi", "emsapi.py")
 with open(client_file, "a+") as client:
     client.write(create_method)
     client.write(find_method)
+    client.write(is_error_method)
+    client.write(get_error_message_method)
