@@ -9,7 +9,7 @@ def requirements():
         return f.read().splitlines()
 
 setup(name = 'emsapi',
-      version = '0.1.1',
+      version = '0.1.2',
       description = 'A Python EMS RESTful API Client/Wrapper',
       long_description=readme(),
       long_description_content_type="text/markdown",
