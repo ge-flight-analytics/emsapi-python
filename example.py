@@ -10,7 +10,10 @@ url = "https://ems.efoqa.com/api/"
 user = input('Enter your EFOQA username: ')
 pwd = getpass.getpass(prompt = 'Enter your EFOQA password: ')
 
+# Set some api connection variables.
 client = emsapi.create(user, pwd, url)
+client.config.connection.timeout = 400
+client.config.retry_policy.retries = 2
 
 # Print the systems the user has access to in order to demonstrate the API.
 systems = client.ems_system.get_ems_systems()
@@ -51,6 +54,10 @@ query = {
     {
       "fieldId": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.uid]]]",
       "aggregate": "none"
+    },
+    {
+      "fieldId": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.exist-takeoff]]]",
+      "aggregate": "none"
     }
   ],
   "filter": {
@@ -90,5 +97,32 @@ query = {
 }
 
 result = client.database.get_query_results(emsId, '[ems-core][entity-type][foqa-flights]', query)
-pd = pandas.DataFrame(result.rows, columns=['Flight Record'])
+pd = pandas.DataFrame(result.rows, columns=['Flight Record', 'Takeoff Exists'])
 print(pd)
+
+# Run the same query using the async query route and include more flights
+query['top'] = 800
+
+async_result = client.database.start_async_query(emsId, '[ems-core][entity-type][foqa-flights]', query)
+if hasattr(async_result, 'message'):
+    raise ValueError(f"The async query failed: {result.message}")
+    
+async_query_id = async_result.id
+start_index = 0
+batch_size = 100
+while True:
+    end_index = start_index + batch_size
+    result = client.database.read_async_query(emsId, '[ems-core][entity-type][foqa-flights]', async_query_id, start_index, end_index)
+    if hasattr(result, 'message'):
+        break # Some kind of error occurred
+    
+    if result.rows and len(result.rows) > 0:
+        for row in result.rows:
+            print(row)
+    
+    if not result.has_more_rows:
+        break
+    
+    start_index = end_index + 1
+    
+client.database.stop_async_query(emsId, '[ems-core][entity-type][foqa-flights]', async_query_id)
