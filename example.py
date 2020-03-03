@@ -111,7 +111,7 @@ async_query_id = async_result.id
 start_index = 0
 batch_size = 100
 while True:
-    end_index = start_index + batch_size
+    end_index = start_index + (batch_size - 1)
     result = client.database.read_async_query(emsId, '[ems-core][entity-type][foqa-flights]', async_query_id, start_index, end_index)
     if hasattr(result, 'message'):
         break # Some kind of error occurred
