@@ -31,7 +31,7 @@ client = emsapi.create(user, password, url)
 If the EMS system id is not known, it should be retrieved before any further requests:
 
 ```python
-ems_id = client.find_ems_system_id('ems7-app')
+ems_id = client.find_ems_system_id('ems-server-name')
 ```
 
 ### Access routes on the API client
@@ -56,7 +56,24 @@ client.upload
 client.weather
 ```
 
-Examples:
+## Examples
+
+### Handling errors
+
+Check for and handle error messages from any route
+
+```python
+import logging
+
+response = client.analytic.get_analytic_group_contents(ems_id)
+if client.is_error(response):
+    message = client.get_error_message(response)
+    logging.error(message)
+```
+
+### Analytic query
+
+Query a time-series parameter for a flight
 
 ```python
 # List the root analytic group contents
@@ -77,4 +94,96 @@ query = {
 }
 
 altitude = client.analytic.get_query_results(ems_id, flight, query)
+```
+
+### Database query
+
+Query and print the top 20 flight ids with a valid takeoff and landing
+
+```python
+query = {
+  "select": [
+    {
+      "fieldId": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.uid]]]",
+      "aggregate": "none"
+    },
+    {
+      "fieldId": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.exist-takeoff]]]",
+      "aggregate": "none"
+    }
+  ],
+  "filter": {
+      "operator": "and",
+      "args": [
+          {
+              "type": "filter",
+              "value": {
+                  "operator": "isTrue",
+                  "args": [
+                      {
+                          "type": "field",
+                          "value": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.exist-takeoff]]]"
+                      }
+                  ]
+              }
+          },
+          {
+              "type": "filter",
+              "value": {
+                  "operator": "isTrue",
+                  "args": [
+                      {
+                          "type": "field",
+                          "value": "[-hub-][field][[[ems-core][entity-type][foqa-flights]][[ems-core][base-field][flight.exist-landing]]]"
+                      }
+                  ]
+              }
+          }
+      ]
+  },
+  "groupBy": [],
+  "orderBy": [],
+  "distinct": True,
+  "top": 20,
+  "format": "display"
+}
+
+result = client.database.get_query_results(ems_id, '[ems-core][entity-type][foqa-flights]', query)
+pd = pandas.DataFrame(result.rows, columns=['Flight Record', 'Takeoff Exists'])
+print(pd)
+```
+
+### Async Database query
+
+Run the same query as above, but with paging for a large number of result rows
+
+```python
+query['top'] = 5000000
+
+db_id = '[ems-core][entity-type][foqa-flights]'
+response = client.database.start_async_query(ems_id, db_id, query)
+if client.is_error(response):
+    error = client.get_error_message(response)
+    raise ValueError(error)
+
+async_query_id = response.id
+try:
+    start_index = 0
+    batch_size = 20000
+    while True:
+        end_index = start_index + (batch_size - 1)
+        read_response = client.database.read_async_query(emsId, db_id, async_query_id, start_index, end_index)
+        if client.is_error(read_response):
+            break # Some kind of error occurred
+        
+        if len(read_response.rows) > 0:
+            for row in read_response.rows:
+                print(row)
+        
+        if not read_response.has_more_rows:
+            break
+        
+        start_index = end_index + 1
+finally:
+    client.database.stop_async_query(emsId, db_id, async_query_id)
 ```
