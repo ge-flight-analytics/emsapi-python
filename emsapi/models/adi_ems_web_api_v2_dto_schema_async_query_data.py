@@ -14,9 +14,9 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryData(Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param rows: Required. An array of JSON string arrays, where each entry is
-     a row in the results set
-    :type rows: list[str]
+    :param rows: Required. An array of arrays representing the resulting data
+     rows of a query. Each inner array represents a single results row
+    :type rows: list[list[object]]
     :param has_more_rows: Required. Whether the query has one or more rows in
      its result set at an index greater than the last row returned
     :type has_more_rows: bool
@@ -28,7 +28,7 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryData(Model):
     }
 
     _attribute_map = {
-        'rows': {'key': 'rows', 'type': '[str]'},
+        'rows': {'key': 'rows', 'type': '[[object]]'},
         'has_more_rows': {'key': 'hasMoreRows', 'type': 'bool'},
     }
 
