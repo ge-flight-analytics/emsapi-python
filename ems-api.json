@@ -5034,10 +5034,13 @@
             "type": "object",
             "properties": {
                 "rows": {
-                    "description": "An array of JSON string arrays, where each entry is a row in the results set",
+                    "description": "An array of arrays representing the resulting data rows of a query. Each inner array represents a single results row",
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/System.Object"
+                        }
                     }
                 },
                 "hasMoreRows": {
