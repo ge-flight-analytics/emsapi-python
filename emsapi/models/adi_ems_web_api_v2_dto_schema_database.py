@@ -19,18 +19,24 @@ class AdiEmsWebApiV2DtoSchemaDatabase(Model):
     :type plural_name: str
     :param singular_name: Required. A singular display name for the database
     :type singular_name: str
+    :param primary_key_fields: Required. The list of primary key fields for
+     the database
+    :type primary_key_fields:
+     list[~emsapi.models.AdiEmsWebApiV2DtoSchemaPrimaryKeyField]
     """
 
     _validation = {
         'id': {'required': True},
         'plural_name': {'required': True},
         'singular_name': {'required': True},
+        'primary_key_fields': {'required': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'plural_name': {'key': 'pluralName', 'type': 'str'},
         'singular_name': {'key': 'singularName', 'type': 'str'},
+        'primary_key_fields': {'key': 'primaryKeyFields', 'type': '[AdiEmsWebApiV2DtoSchemaPrimaryKeyField]'},
     }
 
     def __init__(self, **kwargs):
@@ -38,3 +44,4 @@ class AdiEmsWebApiV2DtoSchemaDatabase(Model):
         self.id = kwargs.get('id', None)
         self.plural_name = kwargs.get('plural_name', None)
         self.singular_name = kwargs.get('singular_name', None)
+        self.primary_key_fields = kwargs.get('primary_key_fields', None)

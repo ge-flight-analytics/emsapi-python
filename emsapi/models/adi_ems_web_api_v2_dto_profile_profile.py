@@ -20,6 +20,11 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
     :type id: str
     :param name: Required. The display name of the profile
     :type name: str
+    :param tree_location: Required. The current location of this profile in
+     the tree as a root-first
+     array of profile groups (only IDs and Names will be filled out)
+    :type tree_location:
+     list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileGroup]
     :param library: Required. Indicates whether the profile is a "library"
      profile
     :type library: bool
@@ -32,6 +37,7 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
         'local_id': {'required': True},
         'id': {'required': True},
         'name': {'required': True},
+        'tree_location': {'required': True},
         'library': {'required': True},
         'current_version': {'required': True},
     }
@@ -40,6 +46,7 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
         'local_id': {'key': 'localId', 'type': 'int'},
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
+        'tree_location': {'key': 'treeLocation', 'type': '[AdiEmsWebApiV2DtoProfileProfileGroup]'},
         'library': {'key': 'library', 'type': 'bool'},
         'current_version': {'key': 'currentVersion', 'type': 'int'},
     }
@@ -49,5 +56,6 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
         self.local_id = kwargs.get('local_id', None)
         self.id = kwargs.get('id', None)
         self.name = kwargs.get('name', None)
+        self.tree_location = kwargs.get('tree_location', None)
         self.library = kwargs.get('library', None)
         self.current_version = kwargs.get('current_version', None)

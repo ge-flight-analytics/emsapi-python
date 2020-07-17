@@ -500,55 +500,61 @@ class AnalyticOperations(object):
         period of time to complete.
         </p>
         <p>Below are some guidelines to consider when using this API.
-        <ul><li>Use the "size" option to return a specified amount of
-        interpolated samples. </li><li>Not specifying a "size" returns all data
-        samples, but you can also use a range of "start" and "end"
+        <ul><li>Use the <code>size</code> option to return a specified amount
+        of interpolated samples. </li><li>Not specifying a <code>size</code>
+        returns all data samples, but you can also use a range of
+        <code>start</code> and <code>end</code>
         values to limit the amount of data returned. You can't use this option
-        with the "unsampledDataMode"
-        option.</li><li>Use the "offsets" option to return data for only a
-        specified set of samples. If an analytic isn't
+        with the <code>unsampledDataMode</code>
+        option.</li><li>Use the <code>offsets</code> option to return data for
+        only a specified set of samples. If an analytic isn't
         sampled at the offset, its interpolated value is returned. You can't
         use this option with the
-        "unsampledDataMode" option.</li><li>Use the "offsetType" option to
-        return values only at sampled locations using the "sampledValues"
-        option or at
-        a specific sampling rate using the "samplingRate" option. Since these
-        options are more complex and can leave
+        <code>unsampledDataMode</code> option.</li><li>Use the
+        <code>offsetType</code> option to return values only at sampled
+        locations using the <code>sampledValues</code> option or at
+        a specific sampling rate using the <code>samplingRate</code> option.
+        Since these options are more complex and can leave
         sample locations with no value (i.e. the analytic isn't sampled at that
         location) or DNE values where the sample
-        "does not exist" you can use the "offsetType" in conjunction with the
-        "unsampledDataMode", the "unsampledValue",
-        and/or the "doesNotExistValue" options. These are explained in greater
-        detail below.</li><li>If you use the "unsampledDataMode" option with
-        "offsetType" you can set how unsampled data is treated
+        <code>does not exist</code> you can use the <code>offsetType</code> in
+        conjunction with the <code>unsampledDataMode</code>, the
+        <code>unsampledValue</code>,
+        and/or the <code>doesNotExistValue</code> options. These are explained
+        in greater detail below.</li><li>If you use the
+        <code>unsampledDataMode</code> option with <code>offsetType</code> you
+        can set how unsampled data is treated
         with one of the following options:
-        <ul><li>"leaveBlank": Leaves any unsampled data locations as blank
-        values. This is the default.</li><li><code>uniquePreviousSample</code>
-        leaves values blank except when there is a previous valid sampled
+        <ul><li><code>leaveBlank</code> Leaves any unsampled data locations as
+        blank values. This is the
+        default.</li><li><code>uniquePreviousSample</code> leaves values blank
+        except when there is a previous valid sampled
         value that was skipped over due to the sampling rate if it is
         unchanged. This can be used to circumvent the
         issue of possibly returning all blank values when the provided sampling
         rate doesn't match the analytic's
-        sampling rate.</li><li>"stairStep": Any unsampled values are filled
-        with the last known sampled value.</li><li>"linearInterpolation": This
-        performs a linear interpolation on the data to calculate a value for
-        unsampled locations.</li><li>"parameterDefault": Some analytics define
+        sampling rate.</li><li><code>stairStep</code> Any unsampled values are
+        filled with the last known sampled
+        value.</li><li><code>linearInterpolation</code> This performs a linear
+        interpolation on the data to calculate a value for unsampled
+        locations.</li><li><code>parameterDefault</code> Some analytics define
         their own default for how to treat unsampled data. This option uses
         that default setting.</li><li><code>previousSample</code> leaves values
         blank except when there is a previous valid sampled
-        value that was skipped over due to the sampling rate (regarless of
+        value that was skipped over due to the sampling rate (regardless of
         change). This can be used to circumvent
         the issue of possibly returning all blank values when the provided
         sampling rate doesn't match the analytic's
         sampling rate or if the values are not changing.</li></ul></li><li>Use
-        the "unsampledValue" to provide your own value to be used for unsampled
-        values. This only applies when using "offsetType" queries.</li><li>Use
-        the "doesNotExistValue" to provide your own value for values that are
-        DNE. This only applies when using "offsetType" queries.</li><li>Use the
-        "discretesAsStrings" to specify whether the values of discrete
-        parameters should be their string representations or their numeric
-        value. This only applies when using "offsetType"
-        queries.</li></ul></p>.
+        the <code>unsampledValue</code> to provide your own value to be used
+        for unsampled values. This only applies when using
+        <code>offsetType</code> queries.</li><li>Use the
+        <code>doesNotExistValue</code> to provide your own value for values
+        that are DNE. This only applies when using <code>offsetType</code>
+        queries.</li><li>Use the <code>discretesAsStrings</code> to specify
+        whether the values of discrete parameters should be their string
+        representations or their numeric value. This only applies when using
+        <code>offsetType</code> queries.</li></ul></p>.
 
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.

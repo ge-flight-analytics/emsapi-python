@@ -26,6 +26,7 @@ try:
     from .adi_ems_web_api_v2_dto_asset_aircraft_py3 import AdiEmsWebApiV2DtoAssetAircraft
     from .adi_ems_web_api_v2_dto_asset_flight_phase_py3 import AdiEmsWebApiV2DtoAssetFlightPhase
     from .adi_ems_web_api_v2_dto_asset_airport_py3 import AdiEmsWebApiV2DtoAssetAirport
+    from .adi_ems_web_api_v2_dto_schema_primary_key_field_py3 import AdiEmsWebApiV2DtoSchemaPrimaryKeyField
     from .adi_ems_web_api_v2_dto_schema_database_py3 import AdiEmsWebApiV2DtoSchemaDatabase
     from .adi_ems_web_api_v2_dto_schema_database_group_py3 import AdiEmsWebApiV2DtoSchemaDatabaseGroup
     from .adi_ems_web_api_v2_dto_schema_field_py3 import AdiEmsWebApiV2DtoSchemaField
@@ -40,6 +41,13 @@ try:
     from .adi_ems_web_api_v2_dto_schema_query_result_py3 import AdiEmsWebApiV2DtoSchemaQueryResult
     from .adi_ems_web_api_v2_dto_schema_async_query_info_py3 import AdiEmsWebApiV2DtoSchemaAsyncQueryInfo
     from .adi_ems_web_api_v2_dto_schema_async_query_data_py3 import AdiEmsWebApiV2DtoSchemaAsyncQueryData
+    from .adi_ems_web_api_v2_dto_schema_column_py3 import AdiEmsWebApiV2DtoSchemaColumn
+    from .adi_ems_web_api_v2_dto_schema_create_py3 import AdiEmsWebApiV2DtoSchemaCreate
+    from .adi_ems_web_api_v2_dto_schema_create_result_py3 import AdiEmsWebApiV2DtoSchemaCreateResult
+    from .adi_ems_web_api_v2_dto_schema_update_py3 import AdiEmsWebApiV2DtoSchemaUpdate
+    from .adi_ems_web_api_v2_dto_schema_update_result_py3 import AdiEmsWebApiV2DtoSchemaUpdateResult
+    from .adi_ems_web_api_v2_dto_schema_delete_py3 import AdiEmsWebApiV2DtoSchemaDelete
+    from .adi_ems_web_api_v2_dto_schema_delete_result_py3 import AdiEmsWebApiV2DtoSchemaDeleteResult
     from .adi_ems_web_api_v2_dto_ems_profile_profile_result_value_py3 import AdiEmsWebApiV2DtoEmsProfileProfileResultValue
     from .adi_ems_web_api_v2_dto_ems_profile_profile_result_comment_py3 import AdiEmsWebApiV2DtoEmsProfileProfileResultComment
     from .adi_ems_web_api_v2_dto_ems_profile_profile_results_event_record_py3 import AdiEmsWebApiV2DtoEmsProfileProfileResultsEventRecord
@@ -61,6 +69,7 @@ try:
     from .adi_ems_web_api_v2_dto_profile_profile_result_value_py3 import AdiEmsWebApiV2DtoProfileProfileResultValue
     from .adi_ems_web_api_v2_dto_profile_profile_result_comment_py3 import AdiEmsWebApiV2DtoProfileProfileResultComment
     from .adi_ems_web_api_v2_dto_profile_profile_results_event_record_py3 import AdiEmsWebApiV2DtoProfileProfileResultsEventRecord
+    from .adi_ems_web_api_v2_dto_profile_processing_information_py3 import AdiEmsWebApiV2DtoProfileProcessingInformation
     from .adi_ems_web_api_v2_dto_profile_profile_results_py3 import AdiEmsWebApiV2DtoProfileProfileResults
     from .adi_ems_web_api_v2_dto_profile_profile_py3 import AdiEmsWebApiV2DtoProfileProfile
     from .adi_ems_web_api_v2_dto_profile_profile_group_py3 import AdiEmsWebApiV2DtoProfileProfileGroup
@@ -124,6 +133,7 @@ except (SyntaxError, ImportError):
     from .adi_ems_web_api_v2_dto_asset_aircraft import AdiEmsWebApiV2DtoAssetAircraft
     from .adi_ems_web_api_v2_dto_asset_flight_phase import AdiEmsWebApiV2DtoAssetFlightPhase
     from .adi_ems_web_api_v2_dto_asset_airport import AdiEmsWebApiV2DtoAssetAirport
+    from .adi_ems_web_api_v2_dto_schema_primary_key_field import AdiEmsWebApiV2DtoSchemaPrimaryKeyField
     from .adi_ems_web_api_v2_dto_schema_database import AdiEmsWebApiV2DtoSchemaDatabase
     from .adi_ems_web_api_v2_dto_schema_database_group import AdiEmsWebApiV2DtoSchemaDatabaseGroup
     from .adi_ems_web_api_v2_dto_schema_field import AdiEmsWebApiV2DtoSchemaField
@@ -138,6 +148,13 @@ except (SyntaxError, ImportError):
     from .adi_ems_web_api_v2_dto_schema_query_result import AdiEmsWebApiV2DtoSchemaQueryResult
     from .adi_ems_web_api_v2_dto_schema_async_query_info import AdiEmsWebApiV2DtoSchemaAsyncQueryInfo
     from .adi_ems_web_api_v2_dto_schema_async_query_data import AdiEmsWebApiV2DtoSchemaAsyncQueryData
+    from .adi_ems_web_api_v2_dto_schema_column import AdiEmsWebApiV2DtoSchemaColumn
+    from .adi_ems_web_api_v2_dto_schema_create import AdiEmsWebApiV2DtoSchemaCreate
+    from .adi_ems_web_api_v2_dto_schema_create_result import AdiEmsWebApiV2DtoSchemaCreateResult
+    from .adi_ems_web_api_v2_dto_schema_update import AdiEmsWebApiV2DtoSchemaUpdate
+    from .adi_ems_web_api_v2_dto_schema_update_result import AdiEmsWebApiV2DtoSchemaUpdateResult
+    from .adi_ems_web_api_v2_dto_schema_delete import AdiEmsWebApiV2DtoSchemaDelete
+    from .adi_ems_web_api_v2_dto_schema_delete_result import AdiEmsWebApiV2DtoSchemaDeleteResult
     from .adi_ems_web_api_v2_dto_ems_profile_profile_result_value import AdiEmsWebApiV2DtoEmsProfileProfileResultValue
     from .adi_ems_web_api_v2_dto_ems_profile_profile_result_comment import AdiEmsWebApiV2DtoEmsProfileProfileResultComment
     from .adi_ems_web_api_v2_dto_ems_profile_profile_results_event_record import AdiEmsWebApiV2DtoEmsProfileProfileResultsEventRecord
@@ -159,6 +176,7 @@ except (SyntaxError, ImportError):
     from .adi_ems_web_api_v2_dto_profile_profile_result_value import AdiEmsWebApiV2DtoProfileProfileResultValue
     from .adi_ems_web_api_v2_dto_profile_profile_result_comment import AdiEmsWebApiV2DtoProfileProfileResultComment
     from .adi_ems_web_api_v2_dto_profile_profile_results_event_record import AdiEmsWebApiV2DtoProfileProfileResultsEventRecord
+    from .adi_ems_web_api_v2_dto_profile_processing_information import AdiEmsWebApiV2DtoProfileProcessingInformation
     from .adi_ems_web_api_v2_dto_profile_profile_results import AdiEmsWebApiV2DtoProfileProfileResults
     from .adi_ems_web_api_v2_dto_profile_profile import AdiEmsWebApiV2DtoProfileProfile
     from .adi_ems_web_api_v2_dto_profile_profile_group import AdiEmsWebApiV2DtoProfileProfileGroup
@@ -223,6 +241,7 @@ __all__ = [
     'AdiEmsWebApiV2DtoAssetAircraft',
     'AdiEmsWebApiV2DtoAssetFlightPhase',
     'AdiEmsWebApiV2DtoAssetAirport',
+    'AdiEmsWebApiV2DtoSchemaPrimaryKeyField',
     'AdiEmsWebApiV2DtoSchemaDatabase',
     'AdiEmsWebApiV2DtoSchemaDatabaseGroup',
     'AdiEmsWebApiV2DtoSchemaField',
@@ -237,6 +256,13 @@ __all__ = [
     'AdiEmsWebApiV2DtoSchemaQueryResult',
     'AdiEmsWebApiV2DtoSchemaAsyncQueryInfo',
     'AdiEmsWebApiV2DtoSchemaAsyncQueryData',
+    'AdiEmsWebApiV2DtoSchemaColumn',
+    'AdiEmsWebApiV2DtoSchemaCreate',
+    'AdiEmsWebApiV2DtoSchemaCreateResult',
+    'AdiEmsWebApiV2DtoSchemaUpdate',
+    'AdiEmsWebApiV2DtoSchemaUpdateResult',
+    'AdiEmsWebApiV2DtoSchemaDelete',
+    'AdiEmsWebApiV2DtoSchemaDeleteResult',
     'AdiEmsWebApiV2DtoEmsProfileProfileResultValue',
     'AdiEmsWebApiV2DtoEmsProfileProfileResultComment',
     'AdiEmsWebApiV2DtoEmsProfileProfileResultsEventRecord',
@@ -258,6 +284,7 @@ __all__ = [
     'AdiEmsWebApiV2DtoProfileProfileResultValue',
     'AdiEmsWebApiV2DtoProfileProfileResultComment',
     'AdiEmsWebApiV2DtoProfileProfileResultsEventRecord',
+    'AdiEmsWebApiV2DtoProfileProcessingInformation',
     'AdiEmsWebApiV2DtoProfileProfileResults',
     'AdiEmsWebApiV2DtoProfileProfile',
     'AdiEmsWebApiV2DtoProfileProfileGroup',

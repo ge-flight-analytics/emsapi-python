@@ -54,6 +54,9 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
     :param second_associated_item_id: The item id of the second associated
      item
     :type second_associated_item_id: int
+    :param is_saved_to_database: A flag describing if a measurement is saved
+     to the database
+    :type is_saved_to_database: bool
     """
 
     _validation = {
@@ -79,6 +82,7 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         'second_associated_item_type': {'key': 'secondAssociatedItemType', 'type': 'str'},
         'second_associated_item_scope': {'key': 'secondAssociatedItemScope', 'type': 'str'},
         'second_associated_item_id': {'key': 'secondAssociatedItemId', 'type': 'int'},
+        'is_saved_to_database': {'key': 'isSavedToDatabase', 'type': 'bool'},
     }
 
     def __init__(self, **kwargs):
@@ -97,3 +101,4 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         self.second_associated_item_type = kwargs.get('second_associated_item_type', None)
         self.second_associated_item_scope = kwargs.get('second_associated_item_scope', None)
         self.second_associated_item_id = kwargs.get('second_associated_item_id', None)
+        self.is_saved_to_database = kwargs.get('is_saved_to_database', None)
