@@ -666,3 +666,209 @@ class DatabaseOperations(object):
 
         return deserialized
     stop_async_query.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/async-query/{queryId}'}
+
+    def run_create(
+            self, ems_system_id, database_id, create, custom_headers=None, raw=False, **operation_config):
+        """Creates one or more new data entities in the database.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to add
+         data entities to.
+        :type database_id: str
+        :param create: The information used to create one or more new data
+         entities.
+        :type create: ~emsapi.models.AdiEmsWebApiV2DtoSchemaCreate
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.run_create.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(create, 'AdiEmsWebApiV2DtoSchemaCreate')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaCreateResult', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    run_create.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/create'}
+
+    def run_update(
+            self, ems_system_id, database_id, update, custom_headers=None, raw=False, **operation_config):
+        """Runs an update query on one or more rows of data in the database.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to
+         update.
+        :type database_id: str
+        :param update: The information used to construct an update query.
+        :type update: ~emsapi.models.AdiEmsWebApiV2DtoSchemaUpdate
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.run_update.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(update, 'AdiEmsWebApiV2DtoSchemaUpdate')
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaUpdateResult', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    run_update.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/update'}
+
+    def run_delete(
+            self, ems_system_id, database_id, delete, custom_headers=None, raw=False, **operation_config):
+        """Deletes one or more existing data entities in the database.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to
+         delete data entities from.
+        :type database_id: str
+        :param delete: The information used to delete one or more data
+         entities.
+        :type delete: ~emsapi.models.AdiEmsWebApiV2DtoSchemaDelete
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.run_delete.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(delete, 'AdiEmsWebApiV2DtoSchemaDelete')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaDeleteResult', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    run_delete.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/delete'}

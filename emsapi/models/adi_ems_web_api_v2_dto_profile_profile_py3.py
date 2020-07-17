@@ -20,6 +20,11 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
     :type id: str
     :param name: Required. The display name of the profile
     :type name: str
+    :param tree_location: Required. The current location of this profile in
+     the tree as a root-first
+     array of profile groups (only IDs and Names will be filled out)
+    :type tree_location:
+     list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileGroup]
     :param library: Required. Indicates whether the profile is a "library"
      profile
     :type library: bool
@@ -32,6 +37,7 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
         'local_id': {'required': True},
         'id': {'required': True},
         'name': {'required': True},
+        'tree_location': {'required': True},
         'library': {'required': True},
         'current_version': {'required': True},
     }
@@ -40,14 +46,16 @@ class AdiEmsWebApiV2DtoProfileProfile(Model):
         'local_id': {'key': 'localId', 'type': 'int'},
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
+        'tree_location': {'key': 'treeLocation', 'type': '[AdiEmsWebApiV2DtoProfileProfileGroup]'},
         'library': {'key': 'library', 'type': 'bool'},
         'current_version': {'key': 'currentVersion', 'type': 'int'},
     }
 
-    def __init__(self, *, local_id: int, id: str, name: str, library: bool, current_version: int, **kwargs) -> None:
+    def __init__(self, *, local_id: int, id: str, name: str, tree_location, library: bool, current_version: int, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoProfileProfile, self).__init__(**kwargs)
         self.local_id = local_id
         self.id = id
         self.name = name
+        self.tree_location = tree_location
         self.library = library
         self.current_version = current_version

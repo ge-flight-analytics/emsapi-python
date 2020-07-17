@@ -21,7 +21,7 @@ class AdiEmsWebApiV2DtoWeatherWeatherPhenomenon(Model):
     :type intensity: str or ~emsapi.models.enum
     :param qualifier: A qualifier for any weather precipitation. Possible
      values include: 'none', 'shallow', 'partial', 'patchy', 'drifting',
-     'blowing', 'freezing', 'showers', 'thunderstorms'
+     'blowing', 'showers', 'thunderstorms', 'freezing'
     :type qualifier: str or ~emsapi.models.enum
     :param precipitation: The type of precipitation that this phenomenon
      represents. Possible values include: 'none', 'drizzle', 'rain', 'snow',

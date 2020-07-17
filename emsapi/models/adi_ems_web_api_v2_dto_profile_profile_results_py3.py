@@ -32,6 +32,10 @@ class AdiEmsWebApiV2DtoProfileProfileResults(Model):
     :param events: Required. The event results detected in the flight
     :type events:
      list[~emsapi.models.AdiEmsWebApiV2DtoProfileProfileResultsEventRecord]
+    :param processing_information: Required. The processing information of the
+     flight
+    :type processing_information:
+     ~emsapi.models.AdiEmsWebApiV2DtoProfileProcessingInformation
     """
 
     _validation = {
@@ -40,6 +44,7 @@ class AdiEmsWebApiV2DtoProfileProfileResults(Model):
         'measurements': {'required': True},
         'timepoints': {'required': True},
         'events': {'required': True},
+        'processing_information': {'required': True},
     }
 
     _attribute_map = {
@@ -48,12 +53,14 @@ class AdiEmsWebApiV2DtoProfileProfileResults(Model):
         'measurements': {'key': 'measurements', 'type': '[AdiEmsWebApiV2DtoProfileProfileResultValue]'},
         'timepoints': {'key': 'timepoints', 'type': '[AdiEmsWebApiV2DtoProfileProfileResultValue]'},
         'events': {'key': 'events', 'type': '[AdiEmsWebApiV2DtoProfileProfileResultsEventRecord]'},
+        'processing_information': {'key': 'processingInformation', 'type': 'AdiEmsWebApiV2DtoProfileProcessingInformation'},
     }
 
-    def __init__(self, *, profile_version: int, parameter_filtering: bool, measurements, timepoints, events, **kwargs) -> None:
+    def __init__(self, *, profile_version: int, parameter_filtering: bool, measurements, timepoints, events, processing_information, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoProfileProfileResults, self).__init__(**kwargs)
         self.profile_version = profile_version
         self.parameter_filtering = parameter_filtering
         self.measurements = measurements
         self.timepoints = timepoints
         self.events = events
+        self.processing_information = processing_information
