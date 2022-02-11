@@ -35,7 +35,9 @@ class EmsApiTokenAuthentication(authentication.Authentication):
         Retrieves a new token for the EMS API.
         """
         authorization_url = self.url + "token"
-        body = "grant_type=password&username=" + self.user +"&password=" + self.password
+        user_encoded = requests.utils.quote(self.user)
+        pass_encoded = requests.utils.quote(self.password)
+        body = "grant_type=password&username=" + user_encoded + "&password=" + pass_encoded
         try:
             response = requests.post(authorization_url, body)
         except requests.RequestException as e:
