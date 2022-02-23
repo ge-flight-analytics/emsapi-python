@@ -26,12 +26,28 @@ url = "https://ems.efoqa.com/api/"
 client = emsapi.create(user, password, url)
 ```
 
+### Set connection settings (optional)
+
+If you need to change any connection settings these will be set on the `config` property of the client. This property supports all configuration supported by autorest (see definition [here](https://github.com/Azure/msrest-for-python/blob/9b67deacc860e10cd95eb968cfa770fe475f7d8e/msrest/configuration.py#L49))
+
+
+```python
+# Add a proxy server for https requests
+client.config.proxies.add("https", "https://my-proxy")
+
+# Do not verify SSL certificates
+client.config.connection.verify = False
+
+# Increase the max retries to 5
+client.config.retry_policy.max_retries = 5
+```
+
 ### Retrieve EMS system id
 
 If the EMS system id is not known, it should be retrieved before any further requests:
 
 ```python
-ems_id = client.find_ems_system_id('ems-server-name')
+ems_id = client.find_ems_system_id("ems-server-name")
 ```
 
 ### Access routes on the API client

@@ -24,11 +24,31 @@ class EmsApiTokenAuthentication(authentication.Authentication):
         self.user = user
         self.password = password
         self.url = url
+        self.config = None
         self.token = None
         self.expiration = None
         self.logger = logging.getLogger(__name__)
         if not self.url.endswith('/'):
             self.url = self.url + '/'
+
+    def set_config(self, config):
+        self.config = config
+
+    def get_proxy(self):
+        if self.config is None:
+            return None
+        if self.config.proxies is None:
+            return None
+        if len(self.config.proxies.proxies) > 0:
+            return self.config.proxies.proxies
+        else:
+            return None
+
+    def should_verify(self):
+        if self.config != None and self.config.connection != None:
+            return self.config.connection.verify
+        else:
+            return True
 
     def set_token(self):
         """
@@ -39,7 +59,9 @@ class EmsApiTokenAuthentication(authentication.Authentication):
         pass_encoded = requests.utils.quote(self.password)
         body = "grant_type=password&username=" + user_encoded + "&password=" + pass_encoded
         try:
-            response = requests.post(authorization_url, body)
+            proxies = self.get_proxy()
+            verify = self.should_verify()
+            response = requests.post(authorization_url, body, proxies=proxies, verify=verify)
         except requests.RequestException as e:
             raise EmsApiAuthError("An EMS API authentication error occurred.", e)
         

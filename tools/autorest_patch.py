@@ -16,8 +16,10 @@ create_method = '''
         :type url: str
         """
         from .extensions import EmsApiTokenAuthentication
-        session = EmsApiTokenAuthentication(username, password, url)
-        return emsapi(session, url)
+        credentials = EmsApiTokenAuthentication(username, password, url)
+        client = emsapi(credentials, url)
+        credentials.set_config(client.config)
+        return client
 '''
 
 find_method = '''

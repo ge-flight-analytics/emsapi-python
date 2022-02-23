@@ -151,8 +151,10 @@ class emsapi(SDKClient):
         :type url: str
         """
         from .extensions import EmsApiTokenAuthentication
-        session = EmsApiTokenAuthentication(username, password, url)
-        return emsapi(session, url)
+        credentials = EmsApiTokenAuthentication(username, password, url)
+        client = emsapi(credentials, url)
+        credentials.set_config(client.config)
+        return client
 
     def find_ems_system_id(self, name):
         """Finds the EMS system id for the given name.
