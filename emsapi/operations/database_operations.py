@@ -10,6 +10,7 @@ from msrest.exceptions import HttpOperationError
 
 from .. import models
 
+import pandas as pd
 
 class DatabaseOperations(object):
     """DatabaseOperations operations.
@@ -872,3 +873,62 @@ class DatabaseOperations(object):
 
         return deserialized
     run_delete.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/delete'}
+
+    def create_from_dataframe(self, ems_system_id, database_id, data, columns_key, max_insert=500, custom_headers=None, raw=False, **operation_config):
+        """Creates data entities in the database from a DataFrame. A key
+         value pair of column names to EMS Field ID must be passed for this
+          to work.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to add
+         data entities to.
+        :type database_id: str
+        :param data: The entries to be created
+        :type data: pandas DataFrame
+        :param columns_key: A lookup dictionaty used to match the data
+         column names to the corresponding EMS Field ID. The keys need to
+         match the data column name and the values need to match the EMS
+         field IDs
+        :type columns_key: dict
+        :param max_insert: the maximum number of rows to insert with each
+         create call. This is used to limit the cahnces of a call timeout
+        :type max_insert: int
+        :return: None
+        :rtype: None
+        """
+        counter = 0
+        while counter < len(data):
+            body = self._generate_create_body(data, columns_key)
+            self.run_create(ems_system_id, database_id, body, custom_headers, raw, operation_config)
+            counter += max_insert
+ 
+
+    def _generate_create_body(self, data, columns_key):
+        """Generates the json body to insert data entities in the database
+         from a DataFrame. A key value pair of column names to EMS Field IDs
+          must be passed for this to work.
+
+        :param data: The entries to be created
+        :type data: pandas DataFrame
+        :param columns_key: A lookup dictionaty used to match the data
+         column names to the corresponding EMS Field ID. The keys need to
+         match the data column name and the values need to match the EMS
+         field IDs
+        :type columns_key: dict
+        :return: json of the body to be used for the create call.
+        :rtype: dict
+        """
+        body = body = {"createColumns": []}
+        for i, row in data.iterrows():
+            body_chunk = []
+            for key,value in row.items():
+                # If the value is NaN or '', we can skip adding. The DB will set these to Null
+                if (pd.isnull(value)) and (not value == ''):
+                    body_chunck_row = {}
+                    body_chunck_row['fieldId'] = columns_key[key]
+                    body_chunck_row['value'] = value
+                    body_chunk.append(body_chunck_row)
+            body['createColumns'].append(body_chunk)
+        return body
