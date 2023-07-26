@@ -26,6 +26,10 @@ class AdiEmsWebApiV2DtoAssetAircraft(Model):
     :type is_active: bool
     :param is_approved: Whether this aircraft has been approved
     :type is_approved: bool
+    :param fdw_enabled: Whether this aircraft is enabled for FDW or not
+    :type fdw_enabled: bool
+    :param odw_enabled: Whether this aircraft is enabled for ODW or not
+    :type odw_enabled: bool
     """
 
     _attribute_map = {
@@ -34,12 +38,16 @@ class AdiEmsWebApiV2DtoAssetAircraft(Model):
         'fleet_ids': {'key': 'fleetIds', 'type': '[int]'},
         'is_active': {'key': 'isActive', 'type': 'bool'},
         'is_approved': {'key': 'isApproved', 'type': 'bool'},
+        'fdw_enabled': {'key': 'fdwEnabled', 'type': 'bool'},
+        'odw_enabled': {'key': 'odwEnabled', 'type': 'bool'},
     }
 
-    def __init__(self, *, id: int=None, description: str=None, fleet_ids=None, is_active: bool=None, is_approved: bool=None, **kwargs) -> None:
+    def __init__(self, *, id: int=None, description: str=None, fleet_ids=None, is_active: bool=None, is_approved: bool=None, fdw_enabled: bool=None, odw_enabled: bool=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoAssetAircraft, self).__init__(**kwargs)
         self.id = id
         self.description = description
         self.fleet_ids = fleet_ids
         self.is_active = is_active
         self.is_approved = is_approved
+        self.fdw_enabled = fdw_enabled
+        self.odw_enabled = odw_enabled

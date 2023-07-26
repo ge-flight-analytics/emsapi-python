@@ -11,26 +11,31 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoNavigationNavigationProcedure(Model):
     """Various pieces of information associated with a procedure.
 
-    :param id: The unique identiifer for this procedure.
+    :param id: The unique identifier for this procedure
     :type id: int
+    :param display_name: The String description formatted for display
+     purposes.
+     This should match what's displayed in the Approach Viewer
+    :type display_name: str
     :param cycle_date: A text value representing the cycle date of the
-     procedure.
+     procedure
     :type cycle_date: str
     :param emergency_safe_altitude: The emergency safe altitude of the
-     procedure.
+     procedure
     :type emergency_safe_altitude: float
-    :param string: A text identifier of the procedure.
+    :param string: A text identifier of the procedure
     :type string: str
-    :param transitional_altitude: The transition altitude of the procedure.
+    :param transitional_altitude: The transition altitude of the procedure
     :type transitional_altitude: float
-    :param transitional_level: The transition level of the procedure.
+    :param transitional_level: The transition level of the procedure
     :type transitional_level: float
-    :param type: The type of the procedure.
+    :param type: The type of the procedure
     :type type: str
     """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
         'cycle_date': {'key': 'cycleDate', 'type': 'str'},
         'emergency_safe_altitude': {'key': 'emergencySafeAltitude', 'type': 'float'},
         'string': {'key': 'string', 'type': 'str'},
@@ -39,9 +44,10 @@ class AdiEmsWebApiV2DtoNavigationNavigationProcedure(Model):
         'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self, *, id: int=None, cycle_date: str=None, emergency_safe_altitude: float=None, string: str=None, transitional_altitude: float=None, transitional_level: float=None, type: str=None, **kwargs) -> None:
+    def __init__(self, *, id: int=None, display_name: str=None, cycle_date: str=None, emergency_safe_altitude: float=None, string: str=None, transitional_altitude: float=None, transitional_level: float=None, type: str=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoNavigationNavigationProcedure, self).__init__(**kwargs)
         self.id = id
+        self.display_name = display_name
         self.cycle_date = cycle_date
         self.emergency_safe_altitude = emergency_safe_altitude
         self.string = string

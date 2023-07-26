@@ -333,7 +333,7 @@ class AnalyticOperations(object):
     get_flight_analytic_info.metadata = {'url': '/v2/ems-systems/{emsSystemId}/flights/{flightId}/analytics'}
 
     def get_analytic_group_contents(
-            self, ems_system_id, analytic_group_id=None, category=None, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, analytic_group_id=None, category=None, include_metadata=None, custom_headers=None, raw=False, **operation_config):
         """Retrieves the contents of an analytic group, which is a hierarchical
         tree structure used to organize analytics.
 
@@ -352,6 +352,10 @@ class AnalyticOperations(object):
          full set of values exposed by the backing EMS system. Possible values
          include: 'full', 'physical', 'logical'
         :type category: str
+        :param include_metadata: A flag to determine if the route should
+         return metadata on analytics. If not specified, metadata is not
+         returned.
+        :type include_metadata: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -375,6 +379,8 @@ class AnalyticOperations(object):
             query_parameters['analyticGroupId'] = self._serialize.query("analytic_group_id", analytic_group_id, 'str')
         if category is not None:
             query_parameters['category'] = self._serialize.query("category", category, 'str')
+        if include_metadata is not None:
+            query_parameters['includeMetadata'] = self._serialize.query("include_metadata", include_metadata, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -406,7 +412,7 @@ class AnalyticOperations(object):
     get_analytic_group_contents.metadata = {'url': '/v2/ems-systems/{emsSystemId}/analytic-groups'}
 
     def get_flight_analytic_group_contents(
-            self, ems_system_id, flight_id, analytic_group_id=None, category=None, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, flight_id, analytic_group_id=None, category=None, include_metadata=None, custom_headers=None, raw=False, **operation_config):
         """Retrieves the contents of an analytic group, which is a hierarchical
         tree structure used to organize analytics.
 
@@ -433,6 +439,10 @@ class AnalyticOperations(object):
          full set of values exposed by the backing EMS system. Possible values
          include: 'full', 'physical', 'logical'
         :type category: str
+        :param include_metadata: A flag to determine if the route should
+         return metadata on analytics. If not specified, metadata is not
+         returned.
+        :type include_metadata: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -457,6 +467,8 @@ class AnalyticOperations(object):
             query_parameters['analyticGroupId'] = self._serialize.query("analytic_group_id", analytic_group_id, 'str')
         if category is not None:
             query_parameters['category'] = self._serialize.query("category", category, 'str')
+        if include_metadata is not None:
+            query_parameters['includeMetadata'] = self._serialize.query("include_metadata", include_metadata, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -512,9 +524,10 @@ class AnalyticOperations(object):
         use this option with the
         <code>unsampledDataMode</code> option.</li><li>Use the
         <code>offsetType</code> option to return values only at sampled
-        locations using the <code>sampledValues</code> option or at
-        a specific sampling rate using the <code>samplingRate</code> option.
-        Since these options are more complex and can leave
+        locations using the <code>sampledValues</code> type or at
+        a specific sampling rate using the <code>fixedRate</code> type along
+        with the <code>samplingRate</code> value. Since these options are more
+        complex and can leave
         sample locations with no value (i.e. the analytic isn't sampled at that
         location) or DNE values where the sample
         <code>does not exist</code> you can use the <code>offsetType</code> in
@@ -704,3 +717,137 @@ class AnalyticOperations(object):
 
         return deserialized
     get_metadata.metadata = {'url': '/v2/ems-systems/{emsSystemId}/flights/{flightId}/analytics/metadata'}
+
+    def get_metadata1(
+            self, ems_system_id, analytic_id, custom_headers=None, raw=False, **operation_config):
+        """Returns analytic metadata.
+
+        The list of other properties
+        returned are specific to each analytic but may include:
+        <ul><li>Basic\Comments</li><li>Basic\Description</li><li>Information\Comments</li><li>Information\Description</li><li>Information\\UID</li><li>Parameter\Abbreviation</li><li>Parameter\Constant</li><li>Parameter\ID</li><li>Parameter\\Name</li><li>Value\Is
+        Discrete</li><li>Value\Operational Rate Max</li><li>Value\Physical
+        Range Min</li><li>Value\\Units</li><li>Value\Wraps</li></ul>.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param analytic_id: The analytic ID (wrapped in double quotes) for
+         which metadata is retrieved. These
+         identifiers are typically obtained from nodes in an analytic group
+         tree.
+        :type analytic_id:
+         ~emsapi.models.AdiEmsWebApiV2ModelAnalyticAnalyticId
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.get_metadata1.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(analytic_id, 'AdiEmsWebApiV2ModelAnalyticAnalyticId')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoMetadata', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_metadata1.metadata = {'url': '/v2/ems-systems/{emsSystemId}/analytics/metadata'}
+
+    def create_formula(
+            self, ems_system_id, formula, custom_headers=None, raw=False, **operation_config):
+        """Creates a new formula analytic.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param formula: Information needed to create the formula analytic.
+        :type formula: ~emsapi.models.AdiEmsWebApiV2DtoAnalyticFormula
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.create_formula.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(formula, 'AdiEmsWebApiV2DtoAnalyticFormula')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoAnalyticInfo', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    create_formula.metadata = {'url': '/v2/ems-systems/{emsSystemId}/analytics/formula'}

@@ -19,6 +19,8 @@ class AdiEmsWebApiV2DtoAnalyticInfo(Model):
     :type description: str
     :param units: The units of the analytic
     :type units: str
+    :param metadata: The metadata of the analytic, if requested
+    :type metadata: list[~emsapi.models.AdiEmsWebApiV2DtoMetadataItem]
     """
 
     _attribute_map = {
@@ -26,11 +28,13 @@ class AdiEmsWebApiV2DtoAnalyticInfo(Model):
         'name': {'key': 'name', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'units': {'key': 'units', 'type': 'str'},
+        'metadata': {'key': 'metadata', 'type': '[AdiEmsWebApiV2DtoMetadataItem]'},
     }
 
-    def __init__(self, *, id: str=None, name: str=None, description: str=None, units: str=None, **kwargs) -> None:
+    def __init__(self, *, id: str=None, name: str=None, description: str=None, units: str=None, metadata=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoAnalyticInfo, self).__init__(**kwargs)
         self.id = id
         self.name = name
         self.description = description
         self.units = units
+        self.metadata = metadata

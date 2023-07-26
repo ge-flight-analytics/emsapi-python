@@ -11,29 +11,29 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoNavigationNavigationAirport(Model):
     """Information about a single airport.
 
-    :param id: The unique identifier for this airport.
+    :param id: The unique identifier for this airport
     :type id: int
-    :param name: The name of the airport.
+    :param name: The name of the airport
     :type name: str
     :param ata_code: The ATA (FAA) code is the US-specific 3-letter identifier
      (e.g. ORD)
     :type ata_code: str
-    :param city: The city of the airport.
+    :param city: The city of the airport
     :type city: str
-    :param country: The country of the airport.
+    :param country: The country of the airport
     :type country: str
-    :param ems_code: The airport code as it should be displayed by EMS apps.
+    :param ems_code: The airport code as it should be displayed by EMS apps
     :type ems_code: str
     :param icao_code: The ICAO code is the international 4-letter identifier
-     (e.g. KORD).
+     (e.g. KORD)
     :type icao_code: str
-    :param latitude: The latitude of the airport.
+    :param latitude: The latitude of the airport
     :type latitude: float
-    :param longitude: The longitude of the airport.
+    :param longitude: The longitude of the airport
     :type longitude: float
     :param altitude: The altitude of the airport
     :type altitude: float
-    :param magnetic_variation: The magnetic variation of the airport.
+    :param magnetic_variation: The magnetic variation of the airport
     :type magnetic_variation: float
     :param type: The type of airport (e.g. civil, military)
     :type type: str

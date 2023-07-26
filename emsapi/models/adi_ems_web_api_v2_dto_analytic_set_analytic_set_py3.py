@@ -11,11 +11,11 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoAnalyticSetAnalyticSet(Model):
     """Encapsulates the data that defines an AnalyticSet.
 
-    :param name: The name of the AnalyticSet.
+    :param name: The name of the AnalyticSet
     :type name: str
-    :param description: An optional description of the ParameterSet.
+    :param description: An optional description of the AnalyticSet.
     :type description: str
-    :param items: An array of the analytics contained in the AnalyticSet.
+    :param items: An array of the analytics contained in the AnalyticSet
     :type items:
      list[~emsapi.models.AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem]
     """

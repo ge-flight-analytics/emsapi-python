@@ -21,6 +21,14 @@ class AdiEmsWebApiV2DtoSchemaField(Model):
     :type type: str or ~emsapi.models.enum
     :param name: Required. The display name for the field
     :type name: str
+    :param path: An ordered list of groupIds that make up the path to this
+     field, excluding the root group.
+     The last groupId is the parent group of this field
+    :type path: list[str]
+    :param display_path: An ordered list of group names that make up the path
+     to this field, excluding the root group.
+     The last entry is the parent group of this field
+    :type display_path: list[str]
     """
 
     _validation = {
@@ -33,10 +41,14 @@ class AdiEmsWebApiV2DtoSchemaField(Model):
         'id': {'key': 'id', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
+        'path': {'key': 'path', 'type': '[str]'},
+        'display_path': {'key': 'displayPath', 'type': '[str]'},
     }
 
-    def __init__(self, *, id: str, type, name: str, **kwargs) -> None:
+    def __init__(self, *, id: str, type, name: str, path=None, display_path=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoSchemaField, self).__init__(**kwargs)
         self.id = id
         self.type = type
         self.name = name
+        self.path = path
+        self.display_path = display_path

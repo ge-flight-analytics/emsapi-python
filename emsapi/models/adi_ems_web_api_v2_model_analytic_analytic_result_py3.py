@@ -18,6 +18,9 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticResult(Model):
     :param analytic_id: Required. The unique string identifier of the analytic
      queried
     :type analytic_id: str
+    :param alias: The (optional) custom name of the analytic that produced
+     these results
+    :type alias: str
     :param values: Required. The array of analytic values corresponding to
      offsets specified in the query result
     :type values: list[object]
@@ -34,12 +37,14 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticResult(Model):
 
     _attribute_map = {
         'analytic_id': {'key': 'analyticId', 'type': 'str'},
+        'alias': {'key': 'alias', 'type': 'str'},
         'values': {'key': 'values', 'type': '[object]'},
         'error': {'key': 'error', 'type': 'str'},
     }
 
-    def __init__(self, *, analytic_id: str, values, error: str=None, **kwargs) -> None:
+    def __init__(self, *, analytic_id: str, values, alias: str=None, error: str=None, **kwargs) -> None:
         super(AdiEmsWebApiV2ModelAnalyticAnalyticResult, self).__init__(**kwargs)
         self.analytic_id = analytic_id
+        self.alias = alias
         self.values = values
         self.error = error

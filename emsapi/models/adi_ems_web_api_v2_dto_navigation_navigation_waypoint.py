@@ -11,38 +11,38 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoNavigationNavigationWaypoint(Model):
     """Various pieces of information associated with a waypoint.
 
-    :param id: The unique identifier of the waypoint.
+    :param id: The unique identifier of the waypoint
     :type id: int
-    :param airport_id: The airport id for the waypoint, if any.
+    :param airport_id: The airport id for the waypoint, if any
     :type airport_id: int
-    :param country_code: The country code of the waypoint.
+    :param country_code: The country code of the waypoint
     :type country_code: str
-    :param type: The type of the waypoint.
+    :param type: The type of the waypoint
     :type type: str
-    :param name: The name of the waypoint.
+    :param name: The name of the waypoint
     :type name: str
-    :param icao_code: The ICAO code of the waypoint.
+    :param icao_code: The ICAO code of the waypoint
     :type icao_code: str
-    :param usage_code: The usage code of the waypoint.
+    :param usage_code: The usage code of the waypoint
     :type usage_code: str
-    :param latitude: The latitude of the waypoint.
+    :param latitude: The latitude of the waypoint
     :type latitude: float
-    :param longitude: The longitude of the waypoint.
+    :param longitude: The longitude of the waypoint
     :type longitude: float
     :param magnetic_variance: The magnetic variance from true north at the
-     waypoint.
+     waypoint
     :type magnetic_variance: float
-    :param navaid_id: The id of the associated naviad, if any.
+    :param navaid_id: The id of the associated navaid, if any
     :type navaid_id: int
     :param colocation_flag: Flag indicating whether or not the waypoint is
-     colocated with the navaid.
+     colocated with the navaid
     :type colocation_flag: bool
     :param navaid_bearing: The magnetic bearing from the navaid to the
-     waypoint.
+     waypoint
     :type navaid_bearing: float
-    :param navaid_distance: The distance from the navaid to the waypoint.
+    :param navaid_distance: The distance from the navaid to the waypoint
     :type navaid_distance: float
-    :param dafif_id: The DAFIF text identifier of the waypoint.
+    :param dafif_id: The DAFIF text identifier of the waypoint
     :type dafif_id: str
     """
 

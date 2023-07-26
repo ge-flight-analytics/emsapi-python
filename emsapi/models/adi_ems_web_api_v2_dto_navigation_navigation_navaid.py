@@ -11,50 +11,50 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoNavigationNavigationNavaid(Model):
     """Various pieces of information associated with a waypoint.
 
-    :param id: The unique identifier of the navaid.
+    :param id: The unique identifier of the navaid
     :type id: int
-    :param callsign: The radio callsign of the navaid.
+    :param callsign: The radio callsign of the navaid
     :type callsign: str
-    :param type: The navaid type.
+    :param type: The navaid type
     :type type: str
-    :param country_code: The navaid's country code.
+    :param country_code: The navaid's country code
     :type country_code: str
-    :param state_code: The navaid's state code.
+    :param state_code: The navaid's state code
     :type state_code: int
-    :param name: The official name of the navaid.
+    :param name: The official name of the navaid
     :type name: str
-    :param frequency: The radio frequency of the navaid.
+    :param frequency: The radio frequency of the navaid
     :type frequency: float
     :param usage_code: The airspace structure in which the navaid is utilized
      (e.g. high, low, terminal, etc.)
     :type usage_code: str
-    :param channel: The navaid's radio channel.
+    :param channel: The navaid's radio channel
     :type channel: str
     :param radio_class_code: The radio class code of the navaid (e.g.
      low-power NDB, high-power NDB, etc)
     :type radio_class_code: str
-    :param range: The effective range of the navaid in nautical miles.
+    :param range: The effective range of the navaid in nautical miles
     :type range: float
-    :param latitude: The latitude of the navaid.
+    :param latitude: The latitude of the navaid
     :type latitude: float
-    :param longitude: The longitude of the navaid.
+    :param longitude: The longitude of the navaid
     :type longitude: float
-    :param elevation: The navaid's elevation.
+    :param elevation: The navaid's elevation
     :type elevation: float
     :param magnetic_variance: The magnetic varation from true north at the
-     navaid.
+     navaid
     :type magnetic_variance: float
     :param dme_latitude: The latitude of the DME equipment colocated with the
-     navaid, if any.
+     navaid, if any
     :type dme_latitude: float
     :param dme_longitude: The longitude of the DME equipment colocated with
-     the navaid, if any.
+     the navaid, if any
     :type dme_longitude: float
     :param dme_elevation: The elevation of the DME equipment colocated with
-     the navaid, if any.
+     the navaid, if any
     :type dme_elevation: float
     :param associated_airport: The airport code of the associated airport, if
-     any.
+     any
     :type associated_airport: str
     :param status: The status of the navaid (e.g. in service, out of service,
      etc.)

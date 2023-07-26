@@ -25,12 +25,17 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryInfo(Model):
      the order of columns in the resulting data rows.
     :type header:
      list[~emsapi.models.AdiEmsWebApiV2DtoSchemaQueryResultHeader]
+    :param tracking_batch_id: If query tracking options were specified as part
+     of the query, this is the batch id that may be used to roll
+     back tracking after query results have been returned
+    :type tracking_batch_id: str
     """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'inactivity_timeout': {'key': 'inactivityTimeout', 'type': 'int'},
         'header': {'key': 'header', 'type': '[AdiEmsWebApiV2DtoSchemaQueryResultHeader]'},
+        'tracking_batch_id': {'key': 'trackingBatchId', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
@@ -38,3 +43,4 @@ class AdiEmsWebApiV2DtoSchemaAsyncQueryInfo(Model):
         self.id = kwargs.get('id', None)
         self.inactivity_timeout = kwargs.get('inactivity_timeout', None)
         self.header = kwargs.get('header', None)
+        self.tracking_batch_id = kwargs.get('tracking_batch_id', None)

@@ -11,135 +11,134 @@ from msrest.serialization import Model
 class AdiEmsWebApiV2DtoNavigationNavigationRunway(Model):
     """Various pieces of information associated with a runway.
 
-    :param id: The unique identifier for the runway.
+    :param id: The unique identifier for the runway
     :type id: int
-    :param airport_id: The unique identifier of the airport for this runway.
+    :param airport_id: The unique identifier of the airport for this runway
     :type airport_id: int
-    :param string: A text value associated with the runway.
+    :param string: A text value associated with the runway
     :type string: str
-    :param length: The length of the runway.
+    :param length: The length of the runway
     :type length: float
-    :param width: The width of the runway.
+    :param width: The width of the runway
     :type width: float
     :param opposite_id: The dafif id of the reciprocal runway (i.e. landing in
-     the opposite direction on this runway).
+     the opposite direction on this runway)
     :type opposite_id: int
-    :param is_parallel: Whether the runway is parallel.
+    :param is_parallel: Whether the runway is parallel
     :type is_parallel: bool
     :param heading_true: The true heading of the runway
     :type heading_true: float
-    :param heading_magnetic: The magnetic heading of the runway.
+    :param heading_magnetic: The magnetic heading of the runway
     :type heading_magnetic: float
-    :param takeoff_distance: The takeoff distance of the runway.
+    :param takeoff_distance: The takeoff distance of the runway
     :type takeoff_distance: float
-    :param landing_distance: The landing distance of the runway.
+    :param landing_distance: The landing distance of the runway
     :type landing_distance: float
-    :param latitude_start: The runway's starting latitude.
+    :param latitude_start: The runway's starting latitude
     :type latitude_start: float
-    :param latitude_end: The runway's ending latitude.
+    :param latitude_end: The runway's ending latitude
     :type latitude_end: float
-    :param longitude_start: The runway's starting longitude.
+    :param longitude_start: The runway's starting longitude
     :type longitude_start: float
-    :param longitude_end: The runway's ending longitude.
+    :param longitude_end: The runway's ending longitude
     :type longitude_end: float
-    :param altitude_start: The runway's starting altitude.
+    :param altitude_start: The runway's starting altitude
     :type altitude_start: float
-    :param altitude_end: The runway's ending altitude.
+    :param altitude_end: The runway's ending altitude
     :type altitude_end: float
-    :param slope: The slope of the runway.
+    :param slope: The slope of the runway
     :type slope: float
     :param threshold_displaced: The threshold displaced value associated with
-     the runway.
+     the runway
     :type threshold_displaced: float
     :param threshold_latitude: The threshold latitude value associated with
-     the runway.
+     the runway
     :type threshold_latitude: float
     :param threshold_longitude: The threshold longitude value associated with
-     the runway.
+     the runway
     :type threshold_longitude: float
     :param threshold_elevation: The threshold elevation value associated with
-     the runway.
+     the runway
     :type threshold_elevation: float
     :param threshold_cross_height: The threshold crossheight value associated
-     with the runway.
+     with the runway
     :type threshold_cross_height: float
     :param threshold_to_glideslope_distance: The threshold to glideslope
-     distance associated with the runway.
+     distance associated with the runway
     :type threshold_to_glideslope_distance: float
-    :param lighting: Bitflags indicating the available lighting for the
-     runway.
+    :param lighting: Bitflags indicating the available lighting for the runway
     :type lighting: str
     :param glideslope_angle: The glideslope angle value associated with the
-     runway.
+     runway
     :type glideslope_angle: float
     :param glideslope_latitude: The glideslope latitude value associated with
-     the runway.
+     the runway
     :type glideslope_latitude: float
     :param glideslope_longitude: The glideslope longitude value associated
-     with the runway.
+     with the runway
     :type glideslope_longitude: float
     :param glideslope_altitude: The glideslope altitude value associated with
-     the runway.
+     the runway
     :type glideslope_altitude: float
     :param localizer_width: The localizer width value associated with the
-     runway.
+     runway
     :type localizer_width: float
-    :param localizer_navaid: The navaid id of the localizer navaid.
+    :param localizer_navaid: The navaid id of the localizer navaid
     :type localizer_navaid: int
     :param localizer_frequency: The localizer frequency value associated with
-     the runway.
+     the runway
     :type localizer_frequency: float
     :param backcourse_localizer_frequency: The backcourse localizer frequency
-     value associated with the runway.
+     value associated with the runway
     :type backcourse_localizer_frequency: float
-    :param ils_bearing_course: The magnetic heading to fly the ILS.
+    :param ils_bearing_course: The magnetic heading to fly the ILS
     :type ils_bearing_course: float
-    :param dme_navaid: The navid id of the localizer dme.
+    :param dme_navaid: The navid id of the localizer dme
     :type dme_navaid: int
     :param dme_bias: The DME bias for the runway (the distance in NM from the
-     DME to the landing threshold).
+     DME to the landing threshold)
     :type dme_bias: float
     :param inner_marker_latitude: The inner marker latitude value associated
-     with the runway.
+     with the runway
     :type inner_marker_latitude: float
     :param inner_marker_longitude: The inner marker longitude value associated
-     with the runway.
+     with the runway
     :type inner_marker_longitude: float
     :param inner_marker_altitude: The inner marker altitude value associated
-     with the runway.
+     with the runway
     :type inner_marker_altitude: float
-    :param middle_marker_navaid: The navaid id of the middle marker, if any.
+    :param middle_marker_navaid: The navaid id of the middle marker, if any
     :type middle_marker_navaid: int
     :param middle_marker_latitude: The middle marker latitude value associated
-     with the runway.
+     with the runway
     :type middle_marker_latitude: float
     :param middle_marker_longitude: The middle marker longitude value
-     associated with the runway.
+     associated with the runway
     :type middle_marker_longitude: float
     :param middle_marker_altitude: The middle marker altitude value associated
-     with the runway.
+     with the runway
     :type middle_marker_altitude: float
-    :param outer_marker_navaid: The navaid id of the outer marker, if any.
+    :param outer_marker_navaid: The navaid id of the outer marker, if any
     :type outer_marker_navaid: float
     :param outer_marker_latitude: The outer marker latitude value associated
-     with the runway.
+     with the runway
     :type outer_marker_latitude: float
     :param outer_marker_longitude: The outer marker longitude value associated
-     with the runway.
+     with the runway
     :type outer_marker_longitude: float
     :param outer_marker_altitude: The outer marker altitude value associated
-     with the runway.
+     with the runway
     :type outer_marker_altitude: float
-    :param locator_navaid: The navaid id of the compass locator, if any.
+    :param locator_navaid: The navaid id of the compass locator, if any
     :type locator_navaid: int
     :param locator_latitude: The locator latitude value associated with the
-     runway.
+     runway
     :type locator_latitude: float
     :param locator_longitude: The locator longitude value associated with the
-     runway.
+     runway
     :type locator_longitude: float
     :param locator_altitude: The locator altitude value associated with the
-     runway.
+     runway
     :type locator_altitude: float
     """
 

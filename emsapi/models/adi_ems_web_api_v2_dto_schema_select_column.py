@@ -26,6 +26,10 @@ class AdiEmsWebApiV2DtoSchemaSelectColumn(Model):
      This will override the query's display value. Possible values include:
      'none', 'display'
     :type format: str or ~emsapi.models.enum
+    :param alias: An optional name to use to represent this this column of
+     data (vs the default display
+     name of the field)
+    :type alias: str
     """
 
     _validation = {
@@ -36,6 +40,7 @@ class AdiEmsWebApiV2DtoSchemaSelectColumn(Model):
         'field_id': {'key': 'fieldId', 'type': 'str'},
         'aggregate': {'key': 'aggregate', 'type': 'str'},
         'format': {'key': 'format', 'type': 'str'},
+        'alias': {'key': 'alias', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
@@ -43,3 +48,4 @@ class AdiEmsWebApiV2DtoSchemaSelectColumn(Model):
         self.field_id = kwargs.get('field_id', None)
         self.aggregate = kwargs.get('aggregate', None)
         self.format = kwargs.get('format', None)
+        self.alias = kwargs.get('alias', None)

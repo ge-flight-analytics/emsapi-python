@@ -57,6 +57,10 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
     :param is_saved_to_database: A flag describing if a measurement is saved
      to the database
     :type is_saved_to_database: bool
+    :param comments: The comments on the object.
+    :type comments: str
+    :param properties: Additional metadata on the object.
+    :type properties: ~emsapi.models.AdiEmsWebApiV2DtoMetadata
     """
 
     _validation = {
@@ -83,6 +87,8 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         'second_associated_item_scope': {'key': 'secondAssociatedItemScope', 'type': 'str'},
         'second_associated_item_id': {'key': 'secondAssociatedItemId', 'type': 'int'},
         'is_saved_to_database': {'key': 'isSavedToDatabase', 'type': 'bool'},
+        'comments': {'key': 'comments', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': 'AdiEmsWebApiV2DtoMetadata'},
     }
 
     def __init__(self, **kwargs):
@@ -102,3 +108,5 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         self.second_associated_item_scope = kwargs.get('second_associated_item_scope', None)
         self.second_associated_item_id = kwargs.get('second_associated_item_id', None)
         self.is_saved_to_database = kwargs.get('is_saved_to_database', None)
+        self.comments = kwargs.get('comments', None)
+        self.properties = kwargs.get('properties', None)

@@ -26,6 +26,10 @@ class AdiEmsWebApiV2DtoAssetAircraft(Model):
     :type is_active: bool
     :param is_approved: Whether this aircraft has been approved
     :type is_approved: bool
+    :param fdw_enabled: Whether this aircraft is enabled for FDW or not
+    :type fdw_enabled: bool
+    :param odw_enabled: Whether this aircraft is enabled for ODW or not
+    :type odw_enabled: bool
     """
 
     _attribute_map = {
@@ -34,6 +38,8 @@ class AdiEmsWebApiV2DtoAssetAircraft(Model):
         'fleet_ids': {'key': 'fleetIds', 'type': '[int]'},
         'is_active': {'key': 'isActive', 'type': 'bool'},
         'is_approved': {'key': 'isApproved', 'type': 'bool'},
+        'fdw_enabled': {'key': 'fdwEnabled', 'type': 'bool'},
+        'odw_enabled': {'key': 'odwEnabled', 'type': 'bool'},
     }
 
     def __init__(self, **kwargs):
@@ -43,3 +49,5 @@ class AdiEmsWebApiV2DtoAssetAircraft(Model):
         self.fleet_ids = kwargs.get('fleet_ids', None)
         self.is_active = kwargs.get('is_active', None)
         self.is_approved = kwargs.get('is_approved', None)
+        self.fdw_enabled = kwargs.get('fdw_enabled', None)
+        self.odw_enabled = kwargs.get('odw_enabled', None)

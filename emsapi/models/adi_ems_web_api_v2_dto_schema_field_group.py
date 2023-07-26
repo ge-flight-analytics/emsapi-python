@@ -19,6 +19,14 @@ class AdiEmsWebApiV2DtoSchemaFieldGroup(Model):
     :type name: str
     :param groups: An ordered list of child groups contained in a field group
     :type groups: list[~emsapi.models.AdiEmsWebApiV2DtoSchemaFieldGroup]
+    :param path: An ordered list of groupIds that make up the path to this
+     group, excluding the root group.
+     The last groupId is the parent group of this group
+    :type path: list[str]
+    :param display_path: An ordered list of group names that make up the path
+     to this group, excluding the root group.
+     The last entry is the parent group of this group
+    :type display_path: list[str]
     :param fields: An ordered list of child fields contained in a field group
     :type fields: list[~emsapi.models.AdiEmsWebApiV2DtoSchemaField]
     """
@@ -32,6 +40,8 @@ class AdiEmsWebApiV2DtoSchemaFieldGroup(Model):
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'groups': {'key': 'groups', 'type': '[AdiEmsWebApiV2DtoSchemaFieldGroup]'},
+        'path': {'key': 'path', 'type': '[str]'},
+        'display_path': {'key': 'displayPath', 'type': '[str]'},
         'fields': {'key': 'fields', 'type': '[AdiEmsWebApiV2DtoSchemaField]'},
     }
 
@@ -40,4 +50,6 @@ class AdiEmsWebApiV2DtoSchemaFieldGroup(Model):
         self.id = kwargs.get('id', None)
         self.name = kwargs.get('name', None)
         self.groups = kwargs.get('groups', None)
+        self.path = kwargs.get('path', None)
+        self.display_path = kwargs.get('display_path', None)
         self.fields = kwargs.get('fields', None)

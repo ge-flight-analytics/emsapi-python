@@ -13,27 +13,30 @@ class AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem(Model):
     set.
 
     :param chart_index: The index of the chart that this analytic info belongs
-     to, or null if no index specified.
+     to, or null if no index specified
     :type chart_index: int
+    :param chart_size: The size of the chart or null if not specified.
+     Possible values: [Normal, Small]
+    :type chart_size: str
     :param analytic: The analytic that is represented by this analytic set
-     item.
+     item
     :type analytic: ~emsapi.models.AdiEmsWebApiV2DtoAnalyticInfo
     :param custom_name: The custom name the user specified for the item, or
-     null if not-specified.
+     null if not-specified
     :type custom_name: str
     :param color: The color to use for the line in hexadecimal color
-     specification "#RRGGBB", or null if no color specified.
+     specification "#RRGGBB", or null if no color specified
     :type color: str
     :param custom_range: Optional override for the vertical scale for an
-     analytic.
+     analytic
     :type custom_range: ~emsapi.models.AdiEmsWebApiCoreDtoDataRange
     :param custom_digits_after_decimal: Optional override for the number of
-     digits to display.
+     digits to display
     :type custom_digits_after_decimal: int
-    :param line_width: Optional value from 1 to 5 for the width of the line.
+    :param line_width: Optional value from 1 to 5 for the width of the line
     :type line_width: int
     :param display_sample_marker: Optional value specifying whether the
-     parrmeter should display shapes to indicate the sampled values.
+     parameter should display shapes to indicate the sampled values
     :type display_sample_marker: bool
     :param sample_marker_shape: If set, describes the shape to use for the
      sampled values.
@@ -42,10 +45,19 @@ class AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem(Model):
     :param line_style: If set, describes the line style to use when drawing.
      Possible values: [Dash, Dot, DashDot, DashDotDot, Solid]
     :type line_style: str
+    :param parameter_filtering_mode: Whether parameter filtering mode should
+     be enabled for this item or not.
+     possible values: [Default, Enabled, Disabled]
+    :type parameter_filtering_mode: str
+    :param interpolation_mode: The way in which the data should be
+     interpolated.
+     Possible values: [Default, StairStep, Continuous]
+    :type interpolation_mode: str
     """
 
     _attribute_map = {
         'chart_index': {'key': 'chartIndex', 'type': 'int'},
+        'chart_size': {'key': 'chartSize', 'type': 'str'},
         'analytic': {'key': 'analytic', 'type': 'AdiEmsWebApiV2DtoAnalyticInfo'},
         'custom_name': {'key': 'customName', 'type': 'str'},
         'color': {'key': 'color', 'type': 'str'},
@@ -55,11 +67,14 @@ class AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem(Model):
         'display_sample_marker': {'key': 'displaySampleMarker', 'type': 'bool'},
         'sample_marker_shape': {'key': 'sampleMarkerShape', 'type': 'str'},
         'line_style': {'key': 'lineStyle', 'type': 'str'},
+        'parameter_filtering_mode': {'key': 'parameterFilteringMode', 'type': 'str'},
+        'interpolation_mode': {'key': 'interpolationMode', 'type': 'str'},
     }
 
-    def __init__(self, *, chart_index: int=None, analytic=None, custom_name: str=None, color: str=None, custom_range=None, custom_digits_after_decimal: int=None, line_width: int=None, display_sample_marker: bool=None, sample_marker_shape: str=None, line_style: str=None, **kwargs) -> None:
+    def __init__(self, *, chart_index: int=None, chart_size: str=None, analytic=None, custom_name: str=None, color: str=None, custom_range=None, custom_digits_after_decimal: int=None, line_width: int=None, display_sample_marker: bool=None, sample_marker_shape: str=None, line_style: str=None, parameter_filtering_mode: str=None, interpolation_mode: str=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem, self).__init__(**kwargs)
         self.chart_index = chart_index
+        self.chart_size = chart_size
         self.analytic = analytic
         self.custom_name = custom_name
         self.color = color
@@ -69,3 +84,5 @@ class AdiEmsWebApiV2DtoAnalyticSetAnalyticSetItem(Model):
         self.display_sample_marker = display_sample_marker
         self.sample_marker_shape = sample_marker_shape
         self.line_style = line_style
+        self.parameter_filtering_mode = parameter_filtering_mode
+        self.interpolation_mode = interpolation_mode

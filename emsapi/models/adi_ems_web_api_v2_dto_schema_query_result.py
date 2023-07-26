@@ -24,8 +24,12 @@ class AdiEmsWebApiV2DtoSchemaQueryResult(Model):
     :type rows: list[list[object]]
     :param is_partial_result: Required. Indicates whether the rows returned
      are a partial query result because the maximum amount of rows that can
-     be returned has been reached.
+     be returned has been reached
     :type is_partial_result: bool
+    :param tracking_batch_id: If query tracking options were specified as part
+     of the query, this is the batch id that may be used to roll
+     back tracking after query results have been returned
+    :type tracking_batch_id: str
     """
 
     _validation = {
@@ -38,6 +42,7 @@ class AdiEmsWebApiV2DtoSchemaQueryResult(Model):
         'header': {'key': 'header', 'type': '[AdiEmsWebApiV2DtoSchemaQueryResultHeader]'},
         'rows': {'key': 'rows', 'type': '[[object]]'},
         'is_partial_result': {'key': 'isPartialResult', 'type': 'bool'},
+        'tracking_batch_id': {'key': 'trackingBatchId', 'type': 'str'},
     }
 
     def __init__(self, **kwargs):
@@ -45,3 +50,4 @@ class AdiEmsWebApiV2DtoSchemaQueryResult(Model):
         self.header = kwargs.get('header', None)
         self.rows = kwargs.get('rows', None)
         self.is_partial_result = kwargs.get('is_partial_result', None)
+        self.tracking_batch_id = kwargs.get('tracking_batch_id', None)

@@ -9,7 +9,7 @@ from msrest.serialization import Model
 
 
 class AdiEmsWebApiV2DtoSchemaCreateResult(Model):
-    """Represents the result of an update.
+    """Represents the result of a create.
 
     All required parameters must be populated in order to send to Azure.
 

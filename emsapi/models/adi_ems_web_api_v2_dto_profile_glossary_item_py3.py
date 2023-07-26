@@ -57,6 +57,10 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
     :param is_saved_to_database: A flag describing if a measurement is saved
      to the database
     :type is_saved_to_database: bool
+    :param comments: The comments on the object.
+    :type comments: str
+    :param properties: Additional metadata on the object.
+    :type properties: ~emsapi.models.AdiEmsWebApiV2DtoMetadata
     """
 
     _validation = {
@@ -83,9 +87,11 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         'second_associated_item_scope': {'key': 'secondAssociatedItemScope', 'type': 'str'},
         'second_associated_item_id': {'key': 'secondAssociatedItemId', 'type': 'int'},
         'is_saved_to_database': {'key': 'isSavedToDatabase', 'type': 'bool'},
+        'comments': {'key': 'comments', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': 'AdiEmsWebApiV2DtoMetadata'},
     }
 
-    def __init__(self, *, record_type, scope, item_id: int, logical_id: str, name: str, event_type_id: int=None, data_type=None, units: str=None, first_associated_item_type=None, first_associated_item_scope=None, first_associated_item_id: int=None, second_associated_item_type=None, second_associated_item_scope=None, second_associated_item_id: int=None, is_saved_to_database: bool=None, **kwargs) -> None:
+    def __init__(self, *, record_type, scope, item_id: int, logical_id: str, name: str, event_type_id: int=None, data_type=None, units: str=None, first_associated_item_type=None, first_associated_item_scope=None, first_associated_item_id: int=None, second_associated_item_type=None, second_associated_item_scope=None, second_associated_item_id: int=None, is_saved_to_database: bool=None, comments: str=None, properties=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoProfileGlossaryItem, self).__init__(**kwargs)
         self.record_type = record_type
         self.scope = scope
@@ -102,3 +108,5 @@ class AdiEmsWebApiV2DtoProfileGlossaryItem(Model):
         self.second_associated_item_scope = second_associated_item_scope
         self.second_associated_item_id = second_associated_item_id
         self.is_saved_to_database = is_saved_to_database
+        self.comments = comments
+        self.properties = properties

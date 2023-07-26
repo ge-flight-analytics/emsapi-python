@@ -37,9 +37,13 @@ class AdiEmsWebApiV2DtoProfileProfileResultsEventRecord(Model):
      scenarios we
      need to import a non-default value from a remote system
     :type false_positive: int
-    :param start_time: Required. The start offset for the event
+    :param start_time: The start offset for the event.
+     This can be null for computed events where the timepoint or interval
+     aren't set or don't resolve
     :type start_time: float
-    :param end_time: Required. The end offset for the event
+    :param end_time: The end offset for the event.
+     This can be null for computed events where the timepoint or interval
+     aren't set or don't resolve
     :type end_time: float
     :param global_measurements: Required. The global event measurement results
      (defined for all events)
@@ -71,8 +75,6 @@ class AdiEmsWebApiV2DtoProfileProfileResultsEventRecord(Model):
         'severity': {'required': True},
         'status': {'required': True},
         'false_positive': {'required': True},
-        'start_time': {'required': True},
-        'end_time': {'required': True},
         'global_measurements': {'required': True},
         'global_timepoints': {'required': True},
         'local_measurements': {'required': True},
@@ -96,7 +98,7 @@ class AdiEmsWebApiV2DtoProfileProfileResultsEventRecord(Model):
         'comments': {'key': 'comments', 'type': '[AdiEmsWebApiV2DtoProfileProfileResultComment]'},
     }
 
-    def __init__(self, *, record_number: int, event_type: int, phase_of_flight: int, severity: int, status: int, false_positive: int, start_time: float, end_time: float, global_measurements, global_timepoints, local_measurements, local_timepoints, comments, **kwargs) -> None:
+    def __init__(self, *, record_number: int, event_type: int, phase_of_flight: int, severity: int, status: int, false_positive: int, global_measurements, global_timepoints, local_measurements, local_timepoints, comments, start_time: float=None, end_time: float=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoProfileProfileResultsEventRecord, self).__init__(**kwargs)
         self.record_number = record_number
         self.event_type = event_type

@@ -16,7 +16,7 @@ class AdiEmsWebApiV2DtoProfileProcessingInformation(Model):
     :param processing_state: Required. The state of the processing.
     :type processing_state: str
     :param processed_date: Required. The date and time that the processing
-     occured (UTC).
+     occurred (UTC).
     :type processed_date: datetime
     :param retry_count: Required. The retry count.
     :type retry_count: int

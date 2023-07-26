@@ -16,6 +16,9 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticSelect(Model):
     :param analytic_id: Required. The unique string identifier of the analytic
      to select in a query
     :type analytic_id: str
+    :param alias: An optional, custom name to associate with the analytic in
+     the query results
+    :type alias: str
     """
 
     _validation = {
@@ -24,8 +27,10 @@ class AdiEmsWebApiV2ModelAnalyticAnalyticSelect(Model):
 
     _attribute_map = {
         'analytic_id': {'key': 'analyticId', 'type': 'str'},
+        'alias': {'key': 'alias', 'type': 'str'},
     }
 
-    def __init__(self, *, analytic_id: str, **kwargs) -> None:
+    def __init__(self, *, analytic_id: str, alias: str=None, **kwargs) -> None:
         super(AdiEmsWebApiV2ModelAnalyticAnalyticSelect, self).__init__(**kwargs)
         self.analytic_id = analytic_id
+        self.alias = alias

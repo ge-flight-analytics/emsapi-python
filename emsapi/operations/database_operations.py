@@ -105,7 +105,7 @@ class DatabaseOperations(object):
     get_database_group.metadata = {'url': '/v2/ems-systems/{emsSystemId}/database-groups'}
 
     def get_field_group(
-            self, ems_system_id, database_id, group_id=None, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, database_id, group_id=None, ignore_index=None, custom_headers=None, raw=False, **operation_config):
         """Returns a field group with a matching ID containing only its immediate
         children in a hierarchical tree used
         to organize fields.
@@ -128,6 +128,10 @@ class DatabaseOperations(object):
          to return. If not
          specified, the contents of the root group are returned.
         :type group_id: str
+        :param ignore_index: If specified as True, the API will not attempt to
+         use a pre-built index to
+         answer the request.
+        :type ignore_index: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -150,6 +154,8 @@ class DatabaseOperations(object):
         query_parameters = {}
         if group_id is not None:
             query_parameters['groupId'] = self._serialize.query("group_id", group_id, 'str')
+        if ignore_index is not None:
+            query_parameters['ignoreIndex'] = self._serialize.query("ignore_index", ignore_index, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -252,8 +258,8 @@ class DatabaseOperations(object):
         return deserialized
     get_field.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/fields/{fieldId}'}
 
-    def get_fields(
-            self, ems_system_id, database_id, search=None, field_group_id=None, include_profiles=None, max_results=None, custom_headers=None, raw=False, **operation_config):
+    def search_fields(
+            self, ems_system_id, database_id, search, field_group_id=None, include_profiles=None, max_results=None, custom_headers=None, raw=False, **operation_config):
         """Returns all the fields matching the specified search options.
 
         This API will return fields matching your search options. If no fields
@@ -265,20 +271,14 @@ class DatabaseOperations(object):
         :param database_id: The unique identifier of the database containing
          fields to return.
         :type database_id: str
-        :param search: An optional field name search string used to match
-         fields to return.
+        :param search: The search terms to look for, separated by commas.
         :type search: str
-        :param field_group_id: The optional parent field group ID whose
-         contents to search.
+        :param field_group_id: Deprecated; do not use this option.
         :type field_group_id: str
-        :param include_profiles: An optional setting to indicate whether to
-         search fields in profiles. By
-         default, this is false since including profile fields will
-         significantly increase search time.
+        :param include_profiles: Deprecated; do not use this option.
         :type include_profiles: bool
-        :param max_results: The maximum number of fields to return. This
-         defaults to 200 fields.
-         If this is set to 0 all the results will be returned.
+        :param max_results: The maximum number of fields to return (default =
+         10), with a maximum of 1000.
         :type max_results: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -291,7 +291,7 @@ class DatabaseOperations(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_fields.metadata['url']
+        url = self.search_fields.metadata['url']
         path_format_arguments = {
             'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
             'databaseId': self._serialize.url("database_id", database_id, 'str')
@@ -300,8 +300,7 @@ class DatabaseOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        if search is not None:
-            query_parameters['search'] = self._serialize.query("search", search, 'str')
+        query_parameters['search'] = self._serialize.query("search", search, 'str')
         if field_group_id is not None:
             query_parameters['fieldGroupId'] = self._serialize.query("field_group_id", field_group_id, 'str')
         if include_profiles is not None:
@@ -336,10 +335,81 @@ class DatabaseOperations(object):
             return client_raw_response
 
         return deserialized
+    search_fields.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/fields'}
+
+    def get_fields(
+            self, ems_system_id, database_id, query, custom_headers=None, raw=False, **operation_config):
+        """Returns information about multiple database fields matching the input
+        ids.
+
+        Fields are elements in an EMS system that can be queried for results.
+        For more details on how to query for
+        results, see the "query" resource below.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database
+         containing a fields to return.
+        :type database_id: str
+        :param query: A query that lists the fields to return information for.
+        :type query: ~emsapi.models.AdiEmsWebApiV2DtoSchemaFieldInfoQuery
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.get_fields.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(query, 'AdiEmsWebApiV2DtoSchemaFieldInfoQuery')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaFieldInfo', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
     get_fields.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/fields'}
 
     def get_query_results(
-            self, ems_system_id, database_id, query, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, database_id, query, enable_any_database_fields=None, custom_headers=None, raw=False, **operation_config):
         """Queries a database for information, composing the query with
         information provided in the specified
         query structure.
@@ -360,7 +430,24 @@ class DatabaseOperations(object):
         more complex querying operations
         including: filtering, grouping, and sorting (by value). These
         operations are specified by the query model
-        you provide the API.</p>.
+        you provide the API.</p>
+        <p>One thing to be aware of when creating a query and choosing the
+        fields is that there are special fields
+        for comment logs. These fields' results are represented as strings, but
+        are more complex under the covers in
+        that they represent a 1-to-many relationship. Thus the single string
+        result is a concatenation of the many results.
+        Also in order for this type of query to execute it must meet certain
+        criteria or it will return a 400 Bad Request.
+        First the comment log field must be associated with the entity type of
+        the database being queried. For example
+        if you are querying for the Data Quality Comment field which is a
+        flight-based field the database has to be the
+        FDW flight database. Second the query must include the primary key
+        field(s) for the database that is being queried.
+        The primary key field(s) can be found using the database-groups
+        endpoint.
+        </p>.
 
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.
@@ -371,6 +458,13 @@ class DatabaseOperations(object):
         :param query: The information used to construct a query for which
          results are returned.
         :type query: ~emsapi.models.AdiEmsWebApiV2DtoSchemaQuery
+        :param enable_any_database_fields: If true, the field identifiers in
+         the query can come from any database,
+         not just the provided database. For example, if you have a field
+         identifier for the flight id from the flight database,
+         but want to make a request to an event database, you could use that
+         same field identifier.
+        :type enable_any_database_fields: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -391,6 +485,8 @@ class DatabaseOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if enable_any_database_fields is not None:
+            query_parameters['enableAnyDatabaseFields'] = self._serialize.query("enable_any_database_fields", enable_any_database_fields, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -428,7 +524,7 @@ class DatabaseOperations(object):
     get_query_results.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/query'}
 
     def start_async_query(
-            self, ems_system_id, database_id, query, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, database_id, query, enable_any_database_fields=None, custom_headers=None, raw=False, **operation_config):
         """Creates a query on a database using the provided query structure and
         returns an ID that can be used to
         fetch result data through other async-query routes.
@@ -451,7 +547,24 @@ class DatabaseOperations(object):
         more complex querying operations
         including: filtering, grouping, and sorting (by value). These
         operations are specified by the query model
-        you provide the API.</p>.
+        you provide the API.</p>
+        <p>One thing to be aware of when creating a query and choosing the
+        fields is that there are special fields
+        for comment logs. These fields' results are represented as strings, but
+        are more complex under-the-covers in
+        that they represent a 1-to-many relationship. Thus the single string
+        result is a concatenation of the many results.
+        Also in order for this type of query to execute it must meet certain
+        criteria or it will return a 400 Bad Request.
+        First the comment log field must be associated with the entity type of
+        the database being queried. For example
+        if you are querying for the Data Quality Comment field which is a
+        flight-based field the database has to be the
+        FDW flight database. Second the query must include the primary key
+        field(s) for the database that is being queried.
+        The primary key field(s) can be found using the database-groups
+        endpoint.
+        </p>.
 
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.
@@ -461,6 +574,13 @@ class DatabaseOperations(object):
         :type database_id: str
         :param query: The information used to construct a query.
         :type query: ~emsapi.models.AdiEmsWebApiV2DtoSchemaQuery
+        :param enable_any_database_fields: If true, the field identifiers in
+         the query can come from any database,
+         not just the provided database. For example, if you have a field
+         identifier for the flight id from the flight database,
+         but want to make a request to an event database, you could use that
+         same field identifier.
+        :type enable_any_database_fields: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -481,6 +601,8 @@ class DatabaseOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if enable_any_database_fields is not None:
+            query_parameters['enableAnyDatabaseFields'] = self._serialize.query("enable_any_database_fields", enable_any_database_fields, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -518,7 +640,7 @@ class DatabaseOperations(object):
     start_async_query.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/async-query'}
 
     def read_async_query(
-            self, ems_system_id, database_id, query_id, start, end, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, database_id, query_id, start, end, wait_if_not_ready=None, custom_headers=None, raw=False, **operation_config):
         """Returns rows between (inclusive) the start and end indexes from the
         async query with the given ID.
 
@@ -530,6 +652,8 @@ class DatabaseOperations(object):
         calls to this route and use
         the "hasMoreRows" flag to determine if the returned rows are the last
         rows in the query's result set.
+        You can ask if the query has finished before fetching rows, it is
+        useful when having large queries to avoid timeouts.
 
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.
@@ -544,6 +668,11 @@ class DatabaseOperations(object):
         :type start: int
         :param end: The zero-based index of the last row to return.
         :type end: int
+        :param wait_if_not_ready: Optional param to indicate if the request
+         should wait until the async query has finished.
+         If not selected, the default behavior is to wait until the processing
+         is finished.
+        :type wait_if_not_ready: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -567,6 +696,8 @@ class DatabaseOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if wait_if_not_ready is not None:
+            query_parameters['waitIfNotReady'] = self._serialize.query("wait_if_not_ready", wait_if_not_ready, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -578,13 +709,15 @@ class DatabaseOperations(object):
         request = self._client.get(url, query_parameters, header_parameters)
         response = self._client.send(request, stream=False, **operation_config)
 
-        if response.status_code not in [200, 400, 401, 404, 503]:
+        if response.status_code not in [200, 202, 400, 401, 404, 503]:
             raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
         if response.status_code == 200:
             deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaAsyncQueryData', response)
+        if response.status_code == 202:
+            deserialized = self._deserialize('AdiEmsWebApiCoreModelSchemaQueryResultStatus', response)
         if response.status_code == 400:
             deserialized = self._deserialize('AdiEmsWebApiModelError', response)
         if response.status_code == 401:
@@ -736,6 +869,75 @@ class DatabaseOperations(object):
         return deserialized
     run_create.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/create'}
 
+    def run_insert(
+            self, ems_system_id, database_id, insert, custom_headers=None, raw=False, **operation_config):
+        """Inserts one or more new data entities in the database.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to add
+         data entities to.
+        :type database_id: str
+        :param insert: The information used to insert one or more new data
+         entities.
+        :type insert: ~emsapi.models.AdiEmsWebApiV2DtoSchemaInsert
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.run_insert.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(insert, 'AdiEmsWebApiV2DtoSchemaInsert')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaCreateResult', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    run_insert.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/insert'}
+
     def run_update(
             self, ems_system_id, database_id, update, custom_headers=None, raw=False, **operation_config):
         """Runs an update query on one or more rows of data in the database.
@@ -872,3 +1074,293 @@ class DatabaseOperations(object):
 
         return deserialized
     run_delete.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/delete'}
+
+    def create_comment(
+            self, ems_system_id, database_id, comment_field_id, new_comment, custom_headers=None, raw=False, **operation_config):
+        """Adds a new comment to the provided comment field.
+
+        The field identifier must be a comment log field (e.g. Event Review
+        Comments) and the field must exist on the database.
+        This means that to add an Event Review Comment the database ID must
+        match the APM profile database for the Event you
+        are adding the comment to. The EntityIdentifier values provided in the
+        query body are used to identify which entity (e.g. Event) the
+        comment should be added to and these EntityIdentifier values must match
+        the order of the primary keys and should uniquely identify a
+        single entity. The EntityIdentifier is an array since some entity types
+        have compound primary keys (multiple values). This field will
+        only ever represent a single entity.
+
+        :param ems_system_id: The unique identifier of the EMS system.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database that the
+         comment field is on.
+        :type database_id: str
+        :param comment_field_id: The unique identifier of a comment field
+         where the comment will be added.
+        :type comment_field_id: str
+        :param new_comment: The new comment context.
+        :type new_comment: ~emsapi.models.AdiEmsWebApiV2DtoSchemaNewComment
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: AdiEmsWebApiModelError or ClientRawResponse if raw=true
+        :rtype: ~emsapi.models.AdiEmsWebApiModelError or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.create_comment.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str'),
+            'commentFieldId': self._serialize.url("comment_field_id", comment_field_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(new_comment, 'AdiEmsWebApiV2DtoSchemaNewComment')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [204, 400, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    create_comment.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/comments/{commentFieldId}'}
+
+    def rollback_tracked_query(
+            self, ems_system_id, database_id, rollback_info, custom_headers=None, raw=False, **operation_config):
+        """Rolls back a specific tracked query that occurred in the past.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to
+         query.
+        :type database_id: str
+        :param rollback_info: Information about the tracked query and batch id
+         required for rollback.
+        :type rollback_info:
+         ~emsapi.models.AdiEmsWebApiV2DtoSchemaTrackedQueryRollback
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.rollback_tracked_query.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(rollback_info, 'AdiEmsWebApiV2DtoSchemaTrackedQueryRollback')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [204, 401, 404, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 204:
+            deserialized = self._deserialize('object', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    rollback_tracked_query.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/query-tracking/rollback'}
+
+    def delete_tracked_query(
+            self, ems_system_id, database_id, query_name, custom_headers=None, raw=False, **operation_config):
+        """Deletes a tracked query by name.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database to
+         query.
+        :type database_id: str
+        :param query_name: The name of the tracked query to delete.
+        :type query_name: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.delete_tracked_query.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str'),
+            'queryName': self._serialize.url("query_name", query_name, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.delete(url, query_parameters, header_parameters)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [204, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 204:
+            deserialized = self._deserialize('object', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    delete_tracked_query.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/query-tracking/delete/{queryName}'}
+
+    def transform_query(
+            self, ems_system_id, database_id, transform_input, custom_headers=None, raw=False, **operation_config):
+        """Transforms the given EMS database query based on a specified
+        transformation type (e.g. 'add auto filters').
+
+        Event queries should generally exclude events marked as false positive,
+        profile measurements should
+        exclude flights not yet processed by that profile, etc.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param database_id: The unique identifier of the EMS database being
+         queried.
+        :type database_id: str
+        :param transform_input: The input query query transformation
+         information.
+        :type transform_input:
+         ~emsapi.models.AdiEmsWebApiV2DtoSchemaQueryTransform
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.transform_query.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'databaseId': self._serialize.url("database_id", database_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(transform_input, 'AdiEmsWebApiV2DtoSchemaQueryTransform')
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters, header_parameters, body_content)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 401, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoSchemaQuery', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    transform_query.metadata = {'url': '/v2/ems-systems/{emsSystemId}/databases/{databaseId}/query-transform'}

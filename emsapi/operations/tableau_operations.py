@@ -31,7 +31,7 @@ class TableauOperations(object):
         self.config = config
 
     def get_trusted(
-            self, site=None, custom_headers=None, raw=False, **operation_config):
+            self, site=None, tableau_server=None, custom_headers=None, raw=False, **operation_config):
         """Returns a Tableau "trusted" URL that consumers can use to gain access
         to Tableau content.
 
@@ -44,6 +44,11 @@ class TableauOperations(object):
          trusted URL. If not specified, the
          default site is used.
         :type site: str
+        :param tableau_server: The absolute URL of the Tableau Server for
+         which to return a trusted URL. If
+         not specified, the Tableau Server configured for the EMS API server is
+         used.
+        :type tableau_server: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -61,6 +66,8 @@ class TableauOperations(object):
         query_parameters = {}
         if site is not None:
             query_parameters['site'] = self._serialize.query("site", site, 'str')
+        if tableau_server is not None:
+            query_parameters['tableauServer'] = self._serialize.query("tableau_server", tableau_server, 'str')
 
         # Construct headers
         header_parameters = {}

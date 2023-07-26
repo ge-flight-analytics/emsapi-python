@@ -31,7 +31,7 @@ class NavigationOperations(object):
         self.config = config
 
     def get_airports(
-            self, ems_system_id, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, release_id=None, custom_headers=None, raw=False, **operation_config):
         """Returns the list of active airports from the system.
 
         Each EMS system has a list of active airports, which are actually in
@@ -43,6 +43,9 @@ class NavigationOperations(object):
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.
         :type ems_system_id: int
+        :param release_id: The DAFIF release identifier to load the airports
+         from. If not specified the latest release is used.
+        :type release_id: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -62,6 +65,8 @@ class NavigationOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if release_id is not None:
+            query_parameters['releaseId'] = self._serialize.query("release_id", release_id, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -93,7 +98,7 @@ class NavigationOperations(object):
     get_airports.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/airports'}
 
     def get_runways(
-            self, ems_system_id, airport_id, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, airport_id, release_id=None, custom_headers=None, raw=False, **operation_config):
         """Returns information on the runways connected to an airport.
 
         Each airport is associated with one or more runways.
@@ -104,6 +109,9 @@ class NavigationOperations(object):
         :type ems_system_id: int
         :param airport_id: The airport ID, obtained from the "airports" route.
         :type airport_id: int
+        :param release_id: The DAFIF release identifier to load the runways
+         from. If not specified the latest release is used.
+        :type release_id: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -124,6 +132,8 @@ class NavigationOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if release_id is not None:
+            query_parameters['releaseId'] = self._serialize.query("release_id", release_id, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -155,7 +165,7 @@ class NavigationOperations(object):
     get_runways.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/airports/{airportId}/runways'}
 
     def get_procedures(
-            self, ems_system_id, airport_id, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, airport_id, release_id=None, custom_headers=None, raw=False, **operation_config):
         """Returns information on the procedures connected to an airport.
 
         Each airport is associated with one or more procedures, specifying how
@@ -167,6 +177,9 @@ class NavigationOperations(object):
         :type ems_system_id: int
         :param airport_id: The airport ID, obtained from the "airports" route.
         :type airport_id: int
+        :param release_id: The DAFIF release identifier to load the procedures
+         from. If not specified the latest release is used.
+        :type release_id: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -187,6 +200,8 @@ class NavigationOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if release_id is not None:
+            query_parameters['releaseId'] = self._serialize.query("release_id", release_id, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -218,7 +233,7 @@ class NavigationOperations(object):
     get_procedures.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/airports/{airportId}/procedures'}
 
     def get_procedure_segments(
-            self, ems_system_id, procedure_id, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, procedure_id, release_id=None, custom_headers=None, raw=False, **operation_config):
         """Returns information on the segments of procedures connected to an
         airport.
 
@@ -233,6 +248,9 @@ class NavigationOperations(object):
         :param procedure_id: The procedure ID, obtained from the "procedures"
          route.
         :type procedure_id: int
+        :param release_id: The DAFIF release identifier to load the segments
+         from. If not specified the latest release is used.
+        :type release_id: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -253,6 +271,8 @@ class NavigationOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if release_id is not None:
+            query_parameters['releaseId'] = self._serialize.query("release_id", release_id, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -284,7 +304,7 @@ class NavigationOperations(object):
     get_procedure_segments.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/procedures/{procedureId}/segments'}
 
     def get_waypoint(
-            self, ems_system_id, waypoint_id, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, waypoint_id, release_id=None, custom_headers=None, raw=False, **operation_config):
         """Returns information on a waypoint.
 
         Waypoints are referenced from procedures obtained from the "procedures"
@@ -297,6 +317,9 @@ class NavigationOperations(object):
         :param waypoint_id: The waypoint ID, obtained from the "procedures"
          route.
         :type waypoint_id: int
+        :param release_id: The DAFIF release identifier to load the waypoints
+         from. If not specified the latest release is used.
+        :type release_id: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -317,6 +340,8 @@ class NavigationOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if release_id is not None:
+            query_parameters['releaseId'] = self._serialize.query("release_id", release_id, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -348,7 +373,7 @@ class NavigationOperations(object):
     get_waypoint.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/waypoints/{waypointId}'}
 
     def get_navaid(
-            self, ems_system_id, navaid_id, custom_headers=None, raw=False, **operation_config):
+            self, ems_system_id, navaid_id, release_id=None, custom_headers=None, raw=False, **operation_config):
         """Returns information on a navaid.
 
         Navaids are referenced from procedures obtained from the "procedures"
@@ -360,6 +385,9 @@ class NavigationOperations(object):
         :type ems_system_id: int
         :param navaid_id: The navaid ID, obtained from the "procedures" route.
         :type navaid_id: int
+        :param release_id: The DAFIF release identifier to load the navaids
+         from. If not specified the latest release is used.
+        :type release_id: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -380,6 +408,8 @@ class NavigationOperations(object):
 
         # Construct parameters
         query_parameters = {}
+        if release_id is not None:
+            query_parameters['releaseId'] = self._serialize.query("release_id", release_id, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -409,3 +439,102 @@ class NavigationOperations(object):
 
         return deserialized
     get_navaid.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/navaids/{navaidId}'}
+
+    def get_flight_procedures(
+            self, ems_system_id, flight_id, type=None, runway_id_override=None, include_all=None, custom_headers=None, raw=False, **operation_config):
+        """[In Development] Gets the navigation procedures for a specific flight.
+
+        This gets the flight procedures such as Departure, Approach, and
+        Arrival for the flights
+        airports and runways.
+        This endpoint is currently in development which means that it is
+        subject to change at any point in time.
+        Current limitations and expected changes:
+        - EMS currently only detects Approaches, with Arrivals being added.
+        Identifiers for these will be added
+        as more work is done.
+        - Go Around procedures are not currently included.
+
+        :param ems_system_id: The unique identifier of the system containing
+         the EMS data.
+        :type ems_system_id: int
+        :param flight_id: The flight record identifier whose navigation
+         procedures are returned.
+        :type flight_id: int
+        :param type: The type of procedure to get for the flight. For
+         {Adi.Ems.Web.Api.V2.Dto.Navigation.NavigationProcedureType.All}
+         all procedure types will be included. Possible values include: 'all',
+         'arrival', 'departure', 'approach'
+        :type type: str
+        :param runway_id_override: If provided this runway Id will be used for
+         getting procedures rather
+         than the flight's identified runway. This must be a valid runway Id
+         for the flight's airport.
+         This cannot be provided with the includeAll parameter and cannot be
+         used with the
+         {Adi.Ems.Web.Api.V2.Dto.Navigation.NavigationProcedureType.All} type.
+        :type runway_id_override: int
+        :param include_all: If true, include all potential procedures of the
+         specified type for the airport instead of just the procedures
+         for the identified runway. This can not be used with the
+         runwayIdOverride parameter.
+        :type include_all: bool
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.get_flight_procedures.metadata['url']
+        path_format_arguments = {
+            'emsSystemId': self._serialize.url("ems_system_id", ems_system_id, 'int'),
+            'flightId': self._serialize.url("flight_id", flight_id, 'int')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if type is not None:
+            query_parameters['type'] = self._serialize.query("type", type, 'str')
+        if runway_id_override is not None:
+            query_parameters['runwayIdOverride'] = self._serialize.query("runway_id_override", runway_id_override, 'int')
+        if include_all is not None:
+            query_parameters['includeAll'] = self._serialize.query("include_all", include_all, 'bool')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Accept'] = 'application/json'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters, header_parameters)
+        response = self._client.send(request, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 401, 404, 503]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdiEmsWebApiV2DtoNavigationNavigationFlightProcedures', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 401:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+        if response.status_code == 503:
+            deserialized = self._deserialize('AdiEmsWebApiModelError', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_flight_procedures.metadata = {'url': '/v2/ems-systems/{emsSystemId}/navigation/flights/{flightId}/procedures'}

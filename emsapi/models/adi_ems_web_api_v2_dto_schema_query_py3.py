@@ -28,6 +28,12 @@ class AdiEmsWebApiV2DtoSchemaQuery(Model):
     :type order_by: list[~emsapi.models.AdiEmsWebApiV2DtoSchemaOrderByColumn]
     :param filter: A filter used to narrow the query results
     :type filter: ~emsapi.models.AdiEmsWebApiV2DtoSchemaFilter
+    :param tracking: Additional options that may be provided to enable
+     querying for only new or updated data. If not specified
+     no special tracking will be performed for the query and all records
+     matching the filter criteria will be
+     returned
+    :type tracking: ~emsapi.models.AdiEmsWebApiV2DtoSchemaQueryTracking
     :param format: Value formatting that should be performed on results values
      before returning. If not specified, no results
      formatting is performed. This can be overridden by specifying a value for
@@ -56,17 +62,19 @@ class AdiEmsWebApiV2DtoSchemaQuery(Model):
         'group_by': {'key': 'groupBy', 'type': '[AdiEmsWebApiV2DtoSchemaGroupByColumn]'},
         'order_by': {'key': 'orderBy', 'type': '[AdiEmsWebApiV2DtoSchemaOrderByColumn]'},
         'filter': {'key': 'filter', 'type': 'AdiEmsWebApiV2DtoSchemaFilter'},
+        'tracking': {'key': 'tracking', 'type': 'AdiEmsWebApiV2DtoSchemaQueryTracking'},
         'format': {'key': 'format', 'type': 'str'},
         'distinct': {'key': 'distinct', 'type': 'bool'},
         'top': {'key': 'top', 'type': 'int'},
     }
 
-    def __init__(self, *, select, group_by=None, order_by=None, filter=None, format=None, distinct: bool=None, top: int=None, **kwargs) -> None:
+    def __init__(self, *, select, group_by=None, order_by=None, filter=None, tracking=None, format=None, distinct: bool=None, top: int=None, **kwargs) -> None:
         super(AdiEmsWebApiV2DtoSchemaQuery, self).__init__(**kwargs)
         self.select = select
         self.group_by = group_by
         self.order_by = order_by
         self.filter = filter
+        self.tracking = tracking
         self.format = format
         self.distinct = distinct
         self.top = top

@@ -32,7 +32,7 @@ class AdiEmsWebApiV2DtoParameterSetParameterSetItem(Model):
     :param line_width: Optional value from 1 to 5 for the width of the line.
     :type line_width: int
     :param display_sample_marker: Optional value specifying whether the
-     parrmeter should display shapes to indicate the sampled values.
+     parameter should display shapes to indicate the sampled values.
     :type display_sample_marker: bool
     :param sample_marker_shape: If set, describes the shape to use for the
      sampled values.

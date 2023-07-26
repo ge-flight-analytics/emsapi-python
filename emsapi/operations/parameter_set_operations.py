@@ -32,7 +32,7 @@ class ParameterSetOperations(object):
 
     def get_parameter_sets(
             self, ems_system_id, group_id=None, custom_headers=None, raw=False, **operation_config):
-        """Returns a collection of parameter sets' information.
+        """[DEPRECATED] Returns a collection of parameter sets' information.
 
         :param ems_system_id: The unique identifier of the system containing
          the EMS data.
