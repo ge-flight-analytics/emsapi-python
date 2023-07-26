@@ -192,3 +192,40 @@ class emsapi(SDKClient):
             self._client, self.config, self._serialize, self._deserialize)
         self.weather = WeatherOperations(
             self._client, self.config, self._serialize, self._deserialize)
+
+    @staticmethod
+    def create(username, password, url):
+        """Creates a new instance of EMS API client. This client will automatically manage 
+        API tokens for the given username/password.
+        
+        :param username: The username to use for authentication.
+        :type username: str
+        :param password: The password to use for authentication.
+        :type password: str
+        :param url: The EMS API endpoint to connect to. This should include the /api part at the end of the URL.
+        :type url: str
+        """
+        from .extensions import EmsApiTokenAuthentication
+        credentials = EmsApiTokenAuthentication(username, password, url)
+        client = emsapi(credentials, url)
+        credentials.set_config(client.config)
+        return client
+
+    def find_ems_system_id(self, name):
+        """Finds the EMS system id for the given name.
+        
+        :param name: The EMS system name to search for.
+        :type name: str
+        """
+        from .extensions import EmsSystemHelper
+        return EmsSystemHelper.find_id(self, name)
+
+    def is_error(self, response):
+        """Returns True if the response represents an error"""
+        from .extensions import ErrorHelper
+        return ErrorHelper.is_error(response)
+
+    def get_error_message(self, response):
+        """Returns the error message if there was an error in the request, or None otherwise"""
+        from .extensions import ErrorHelper
+        return ErrorHelper.get_error_message(response)
