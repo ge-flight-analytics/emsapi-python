@@ -1,4 +1,4 @@
 bump2version==0.5.11
 twine==4.0.2
-setuptools==44.0.0
+setuptools==65.5.1
 -r requirements.txt
